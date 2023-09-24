@@ -98,6 +98,13 @@ public class AprilTagVision extends LinearOpMode {
 
     }   // end method runOpMode()
 
+
+    public void startVision(){ initAprilTag();}
+    public void closeVision(){ visionPortal.close();}
+    public int getAprilTagID(){
+         return telemetryAprilTag();
+    }
+
     /**
      * Initialize the AprilTag processor.
      */
@@ -160,7 +167,7 @@ public class AprilTagVision extends LinearOpMode {
     /**
      * Add telemetry about AprilTag detections.
      */
-    private void telemetryAprilTag() {
+    private int telemetryAprilTag() {
 
         List<AprilTagDetection> currentDetections = aprilTag.getDetections();
         telemetry.addData("# AprilTags Detected", currentDetections.size());
@@ -169,12 +176,14 @@ public class AprilTagVision extends LinearOpMode {
         for (AprilTagDetection detection : currentDetections) {
             if (detection.metadata != null) {
                 telemetry.addLine(String.format("\n==== (ID %d) %s", detection.id, detection.metadata.name));
-                telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (inch)", detection.ftcPose.x, detection.ftcPose.y, detection.ftcPose.z));
-                telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detection.ftcPose.pitch, detection.ftcPose.roll, detection.ftcPose.yaw));
-                telemetry.addLine(String.format("RBE %6.1f %6.1f %6.1f  (inch, deg, deg)", detection.ftcPose.range, detection.ftcPose.bearing, detection.ftcPose.elevation));
+                return detection.id;
+//                telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (inch)", detection.ftcPose.x, detection.ftcPose.y, detection.ftcPose.z));
+//                telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detection.ftcPose.pitch, detection.ftcPose.roll, detection.ftcPose.yaw));
+//                telemetry.addLine(String.format("RBE %6.1f %6.1f %6.1f  (inch, deg, deg)", detection.ftcPose.range, detection.ftcPose.bearing, detection.ftcPose.elevation));
             } else {
                 telemetry.addLine(String.format("\n==== (ID %d) Unknown", detection.id));
                 telemetry.addLine(String.format("Center %6.0f %6.0f   (pixels)", detection.center.x, detection.center.y));
+                return 0;
             }
         }   // end for() loop
 
