@@ -42,6 +42,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+import org.openftc.easyopencv.OpenCvCamera;
+import org.openftc.easyopencv.OpenCvCameraFactory;
+import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.openftc.easyopencv.OpenCvWebcam;
 
 import java.util.List;
 
@@ -72,17 +76,35 @@ public class AprilTagVision extends LinearOpMode {
      */
     private VisionPortal visionPortal;
 
+    private visiontest2 vision = new visiontest2(telemetry);
+    OpenCvWebcam camera;
     @Override
     public void runOpMode() {
 
 
-        initAprilTag();
+        //initAprilTag();
 
-        // Wait for the DS start button to be touched.
-        while(!isStarted()){
+        WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        camera = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
+        camera.setPipeline(vision);
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+            @Override
+            public void onOpened() {
+                camera.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
+            }
+
+            @Override
+            public void onError(int errorCode) {
+
+            }
+        });
+       /* while(!isStarted()){
             telemetryAprilTag();
             telemetry.update();
         }
+        */
+
         //compare x value to determine where to put pixel
 
 
