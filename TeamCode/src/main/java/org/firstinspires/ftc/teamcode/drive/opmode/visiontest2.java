@@ -15,6 +15,8 @@ public class visiontest2 extends OpenCvPipeline {
     public enum Location {
         Leftt,
         Rightt,
+
+        Centerr,
         Not_Found
     }
     private Location location;
@@ -25,6 +27,10 @@ public class visiontest2 extends OpenCvPipeline {
     static final Rect right = new Rect(
             new Point(140, 35),
             new Point(200, 75));
+
+    static final Rect center = new Rect(
+            new Point (100, 35),
+            new Point (160, 75));
 
     static double Percent_Color_Threshhold = 0.4;
 
@@ -41,19 +47,26 @@ public class visiontest2 extends OpenCvPipeline {
         Core.inRange(mat, lowHSV, highHSV, mat);
         Mat leftside = mat.submat(left);
         Mat rightside = mat.submat(right);
+        Mat centerside = mat.submat(center);
+
 
         double leftValue = Core.sumElems(leftside).val[0] / left.area() / 255;
         double rightValue = Core.sumElems(leftside).val[0] / right.area() / 255;
+        double centerValue = Core.sumElems(centerside).val[0] /center.area() /255;
 
         leftside.release();
         rightside.release();
+        centerside.release();
         telemetry.addData("Left raw value", (int) Core.sumElems(leftside).val[0]);
         telemetry.addData("Right raw value", (int) Core.sumElems(rightside).val[0]);
         telemetry.addData("Left percentage", Math.round(leftValue * 100) + "%");
         telemetry.addData("Right percentage", Math.round(rightValue * 100) + "%");
+        telemetry.addData("Center raw value", (int) Core.sumElems(centerside).val[0]);
+        telemetry.addData("Center percentage", Math.round(centerValue * 100) + "%");
 
         boolean stoneleft = leftValue > Percent_Color_Threshhold;
         boolean stoneright = rightValue > Percent_Color_Threshhold;
+        boolean stonecenter = centerValue > Percent_Color_Threshhold;
 
         if (stoneleft && stoneright) {//not found
         }
@@ -61,6 +74,10 @@ public class visiontest2 extends OpenCvPipeline {
             if (stoneleft) {
                 //right
             location = Location.Rightt;
+            if (stonecenter) {
+                //center
+                location = Location.Centerr;
+            }
             } else {
                 //left
                 location = Location.Leftt;
@@ -72,6 +89,7 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 
             Imgproc.rectangle(mat, left, location == Location.Leftt? colorSkystone: colorstone);
             Imgproc.rectangle(mat, right, location == Location.Rightt? colorSkystone: colorstone);
+         Imgproc.rectangle(mat, center, location == Location.Centerr? colorSkystone: colorstone);
 
             return mat;
         }
