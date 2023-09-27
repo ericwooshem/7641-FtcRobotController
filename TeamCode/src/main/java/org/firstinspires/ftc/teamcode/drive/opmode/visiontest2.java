@@ -12,8 +12,14 @@ import org.openftc.easyopencv.OpenCvPipeline;
 public class visiontest2 extends OpenCvPipeline {
     Telemetry telemetry;
     Mat mat = new Mat();
+    public enum Location {
+        Leftt,
+        Rightt,
+        Not_Found
+    }
+    private Location location;
     static final Rect left = new Rect(
-            new Point(60,35),
+            new Point(60, 35),
             new Point(120, 75));
 
     static final Rect right = new Rect(
@@ -21,11 +27,13 @@ public class visiontest2 extends OpenCvPipeline {
             new Point(200, 75));
 
     static double Percent_Color_Threshhold = 0.4;
-}
-    public visiontest2(Telemetry t) {telemetry = t; }
+
+    public visiontest2(Telemetry t) {
+        telemetry = t;
+    }
 
     @Override
-    public Mat processFrame (Mat input) {
+    public Mat processFrame(Mat input) {
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
         Scalar lowHSV = new Scalar(23, 50, 70);
         Scalar highHSV = new Scalar(32, 255, 255);
@@ -34,15 +42,32 @@ public class visiontest2 extends OpenCvPipeline {
         Mat leftside = mat.submat(left);
         Mat rightside = mat.submat(right);
 
-        double leftValue = Core.sumElems(leftside).val[0] / left.area() /255;
-        double rightValue = Core.sumElems(leftside).val[0] / right.area() /255;
+        double leftValue = Core.sumElems(leftside).val[0] / left.area() / 255;
+        double rightValue = Core.sumElems(leftside).val[0] / right.area() / 255;
 
         leftside.release();
         rightside.release();
         telemetry.addData("Left raw value", (int) Core.sumElems(leftside).val[0]);
         telemetry.addData("Right raw value", (int) Core.sumElems(rightside).val[0]);
-        telemetry.addData("Left percentage", Math.round(leftValue*100)+ "%");
-        telemetry.addData("Right percentage", Math.round(rightValue*100)+ "%");
+        telemetry.addData("Left percentage", Math.round(leftValue * 100) + "%");
+        telemetry.addData("Right percentage", Math.round(rightValue * 100) + "%");
+
+        boolean stoneleft = leftValue > Percent_Color_Threshhold;
+        boolean stoneright = rightValue > Percent_Color_Threshhold;
+
+        if (stoneleft && stoneright) {//not found}
+            location = Location.Not_Found;
+            if (stoneleft) {
+                //right
+            location = Location.Rightt;
+            } else {
+                //left
+                location = Location.Leftt;
+            }
+
+        }
 
     }
+
 }
+
