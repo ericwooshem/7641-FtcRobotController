@@ -55,20 +55,16 @@ public class visiontest2 extends OpenCvPipeline {
         boolean stoneleft = leftValue > Percent_Color_Threshhold;
         boolean stoneright = rightValue > Percent_Color_Threshhold;
 
-        if (stoneleft && stoneright) {
-            location = Location.Not_Found;//not found
+        if (stoneleft && stoneright) {//not found
         }
-        else if (stoneleft) {
-            //right
+            location = Location.Not_Found;
+            if (stoneleft) {
+                //right
             location = Location.Rightt;
-        }
-        else {
+            } else {
                 //left
-            location = Location.Leftt;
-        }
-        telemetry.addData("location", location);
-        telemetry.update();
-
+                location = Location.Leftt;
+            }
 Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 
             Scalar colorstone = new Scalar (255,0,0);
