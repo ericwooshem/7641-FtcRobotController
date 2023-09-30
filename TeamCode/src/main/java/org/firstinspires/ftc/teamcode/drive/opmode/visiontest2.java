@@ -20,16 +20,16 @@ public class visiontest2 extends OpenCvPipeline {
     }
     private Location location;
     static final Rect left = new Rect(
-            new Point(60, 35),
-            new Point(120, 75));
+            new Point(50, 35),
+            new Point(150, 75));
 
     static final Rect right = new Rect(
-            new Point(140, 35),
-            new Point(200, 75));
+            new Point(200, 35),
+            new Point(250, 75));
 
     static final Rect center = new Rect(
-            new Point(200, 35),
-            new Point(300, 75));
+            new Point(300, 35),
+            new Point(450, 75));
 
     static double Percent_Color_Threshhold = 0.4;
 
