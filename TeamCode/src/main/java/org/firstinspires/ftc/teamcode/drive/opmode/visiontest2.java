@@ -64,20 +64,20 @@ public class visiontest2 extends OpenCvPipeline {
         boolean stoneright = rightValue > Percent_Color_Threshhold;
         boolean stonecenter = centerValue > Percent_Color_Threshhold;
 
-        if (stoneleft && stoneright) {
-            location = Location.Not_Found;//not found
-        }
-        else if (stoneleft) {
-            //right
-            location = Location.Rightt;
+        if (stoneleft) {
+            //left
+            location = Location.Leftt;
         }
         else if (stonecenter) {
-            //right
+            //center
             location = Location.Centerr;
         }
-        else {
-                //left
-            location = Location.Leftt;
+        else if(stoneright){
+                //right
+            location = Location.Rightt;
+        }
+        else{
+          location = Location.Not_Found;
         }
         telemetry.addData("location", location);
         telemetry.update();
