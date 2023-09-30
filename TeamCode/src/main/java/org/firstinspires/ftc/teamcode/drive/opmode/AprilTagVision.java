@@ -100,6 +100,7 @@ public class AprilTagVision extends LinearOpMode {
 
             }
         });
+
        /* while(!isStarted()){
             telemetryAprilTag();
             telemetry.update();
@@ -107,24 +108,19 @@ public class AprilTagVision extends LinearOpMode {
         */
 
         //compare x value to determine where to put pixel
-
-
-
-
         waitForStart();
+        camera.stopStreaming();
         //code for moving
         //more code for ,oving
         //code until the purple pixel placement
-//        timer.reset();
-//        tagID = 0;
-//        tagX = 0;
-//        tagY = 0;
-//        while(telemetryAprilTag()==0 || timer.seconds()<1){
-//            telemetryAprilTag();
-//        }
-
-        // Save more CPU resources when camera is no longer needed.
-      //  visionPortal.close();
+        timer.reset();
+        tagID = 0;
+        tagX = 0;
+        tagY = 0;
+        while(telemetryAprilTag()==0 || timer.seconds()<1){
+            telemetryAprilTag();
+        }
+        visionPortal.close();
 
     }   // end method runOpMode()
 
