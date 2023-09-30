@@ -15,6 +15,7 @@ public class visiontest2 extends OpenCvPipeline {
     public enum Location {
         Leftt,
         Rightt,
+        Centerr,
         Not_Found
     }
     private Location location;
@@ -25,6 +26,10 @@ public class visiontest2 extends OpenCvPipeline {
     static final Rect right = new Rect(
             new Point(140, 35),
             new Point(200, 75));
+
+    static final Rect center = new Rect(
+            new Point(200, 35),
+            new Point(300, 75));
 
     static double Percent_Color_Threshhold = 0.4;
 
@@ -41,9 +46,12 @@ public class visiontest2 extends OpenCvPipeline {
         Core.inRange(mat, lowHSV, highHSV, mat);
         Mat leftside = mat.submat(left);
         Mat rightside = mat.submat(right);
+        Mat centerside = mat.submat(center);
 
         double leftValue = Core.sumElems(leftside).val[0] / left.area() / 255;
-        double rightValue = Core.sumElems(leftside).val[0] / right.area() / 255;
+        double rightValue = Core.sumElems(rightside).val[0] / right.area() / 255;
+        double centerValue = Core.sumElems(centerside).val[0] / right.area() / 255;
+
 
         leftside.release();
         rightside.release();
@@ -54,6 +62,7 @@ public class visiontest2 extends OpenCvPipeline {
 
         boolean stoneleft = leftValue > Percent_Color_Threshhold;
         boolean stoneright = rightValue > Percent_Color_Threshhold;
+        boolean stonecenter = centerValue > Percent_Color_Threshhold;
 
         if (stoneleft && stoneright) {
             location = Location.Not_Found;//not found
@@ -61,6 +70,10 @@ public class visiontest2 extends OpenCvPipeline {
         else if (stoneleft) {
             //right
             location = Location.Rightt;
+        }
+        else if (stonecenter) {
+            //right
+            location = Location.Centerr;
         }
         else {
                 //left
@@ -76,6 +89,7 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 
             Imgproc.rectangle(mat, left, location == Location.Leftt? colorSkystone: colorstone);
             Imgproc.rectangle(mat, right, location == Location.Rightt? colorSkystone: colorstone);
+            Imgproc.rectangle(mat, center, location == Location.Centerr? colorSkystone: colorstone);
 
             return mat;
         }
