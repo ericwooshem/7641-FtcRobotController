@@ -82,7 +82,7 @@ public class AprilTagVision extends LinearOpMode {
     public void runOpMode() {
 
 
-        //initAprilTag();
+        initAprilTag();
 
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
