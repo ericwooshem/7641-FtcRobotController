@@ -94,6 +94,7 @@ public class AprilTagVision extends LinearOpMode {
                 camera.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
             }
 
+
             @Override
             public void onError(int errorCode) {
 
@@ -123,7 +124,7 @@ public class AprilTagVision extends LinearOpMode {
 //        }
 
         // Save more CPU resources when camera is no longer needed.
-        visionPortal.close();
+      //  visionPortal.close();
 
     }   // end method runOpMode()
 
