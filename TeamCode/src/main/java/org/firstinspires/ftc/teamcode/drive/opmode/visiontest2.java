@@ -59,6 +59,8 @@ public class visiontest2 extends OpenCvPipeline {
         telemetry.addData("Right raw value", (int) Core.sumElems(rightside).val[0]);
         telemetry.addData("Left percentage", Math.round(leftValue * 100) + "%");
         telemetry.addData("Right percentage", Math.round(rightValue * 100) + "%");
+        telemetry.addData("Center percentage", Math.round(centerValue * 100) + "%");
+        telemetry.addData("Center percentage", Math.round(centerValue * 100) + "%");
 
         boolean stoneleft = leftValue > Percent_Color_Threshhold;
         boolean stoneright = rightValue > Percent_Color_Threshhold;
