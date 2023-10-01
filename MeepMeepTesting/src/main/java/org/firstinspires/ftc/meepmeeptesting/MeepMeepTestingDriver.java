@@ -14,12 +14,14 @@ public class MeepMeepTestingDriver {
 
 
 
-    public  static  MeepMeepTestingTemplate mapToClass (String s, MeepMeep meepMeep){
-        if(s.equals("1")){
+    public  static   MeepMeepTestingTemplate mapToClass (String s, MeepMeep meepMeep){
+        if("1".equals(s)){
             return (new BlueRightAutonOption1(meepMeep));
         }
 
-        return null ;
+        return null;
+
+
     }
 
     public static void main(String[] args) {
