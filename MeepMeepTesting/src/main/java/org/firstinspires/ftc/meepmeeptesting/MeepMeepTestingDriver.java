@@ -15,9 +15,11 @@ public class MeepMeepTestingDriver {
 
 
     public  static   MeepMeepTestingTemplate mapToClass (String s, MeepMeep meepMeep){
+        System.out.println(s);
         if("1".equals(s)){
             return (new BlueRightAutonOption1(meepMeep));
         }
+
 
         return null;
 
