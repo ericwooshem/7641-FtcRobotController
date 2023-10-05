@@ -84,7 +84,7 @@ public class AprilTagVision extends LinearOpMode {
 
         initAprilTag();
 
-        WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
+        /*WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
         camera.setPipeline(vision);
@@ -100,6 +100,8 @@ public class AprilTagVision extends LinearOpMode {
 
             }
         });
+        */
+
 
        /* while(!isStarted()){
             telemetryAprilTag();
