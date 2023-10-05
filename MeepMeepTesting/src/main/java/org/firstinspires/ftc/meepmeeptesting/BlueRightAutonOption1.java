@@ -7,10 +7,10 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 
 public class BlueRightAutonOption1 extends MeepMeepTestingTemplate{
     BlueRightAutonOption1(MeepMeep meepMeep){
-        super();
+        super(meepMeep);
 
     }
-    public  void moveOnPath(MeepMeep meepMeep)  {
+    public  void moveOnPath()  {
         myDefaultBot = this.buildBot(meepMeep);
         this.myBot = myDefaultBot.followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(-70, -34, 0))
@@ -22,6 +22,8 @@ public class BlueRightAutonOption1 extends MeepMeepTestingTemplate{
                                 .forward(24)
                                 .strafeLeft(4)
                                 .build()
-                );    }
+                );
+    }
+
 
 }

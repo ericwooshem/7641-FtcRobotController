@@ -28,6 +28,7 @@ class MeepMeepTestingTemplate {
     protected DefaultBotBuilder myDefaultBot;
 
     public RoadRunnerBotEntity getRobot(){
+        System.out.println(this.myBot);
         return this.myBot;
     }
     public DefaultBotBuilder buildBot(MeepMeep meepMeep){
