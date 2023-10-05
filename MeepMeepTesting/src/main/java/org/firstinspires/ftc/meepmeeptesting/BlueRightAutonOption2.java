@@ -11,5 +11,18 @@ public class BlueRightAutonOption2 extends MeepMeepTestingTemplate{
 
     }
     public void moveOnPath() {
+        myDefaultBot = this.buildBot(meepMeep);
+        this.myBot = myDefaultBot.followTrajectorySequence(drive ->
+                drive.trajectorySequenceBuilder(new Pose2d(-70, -34, 0))
+                        .forward(62)
+                        .strafeRight(24)
+                        .strafeLeft(96)
+                        .back(24)
+                        .strafeLeft(10)
+                        .turn(Math.toRadians(270))
+                        .build()
+        );
+
+
     }
 }
