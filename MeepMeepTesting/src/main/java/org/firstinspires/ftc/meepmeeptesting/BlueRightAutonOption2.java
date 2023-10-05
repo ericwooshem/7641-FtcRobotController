@@ -7,9 +7,9 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 
 public class BlueRightAutonOption2 extends MeepMeepTestingTemplate{
     BlueRightAutonOption2(MeepMeep meepMeep){
-        super();
+        super(meepMeep);
 
     }
-    public void moveOnPath(MeepMeep meepMeep) {
+    public void moveOnPath() {
     }
 }
