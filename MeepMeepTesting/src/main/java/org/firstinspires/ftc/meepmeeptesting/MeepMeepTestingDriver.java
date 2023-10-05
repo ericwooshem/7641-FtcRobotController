@@ -23,7 +23,7 @@ public class MeepMeepTestingDriver {
             return (new BlueRightAutonOption1(meepMeep));
         }
         else if ("2".equals(s)){
-
+            return (new BlueRightAutonOption2(meepMeep));
         }
 
 

@@ -21,6 +21,7 @@ public class BlueRightAutonOption1 extends MeepMeepTestingTemplate{
                                 .strafeLeft(80)
                                 .forward(24)
                                 .strafeLeft(4)
+                                .turn(Math.toRadians(270))
                                 .build()
                 );
     }
