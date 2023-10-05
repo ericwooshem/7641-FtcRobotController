@@ -82,9 +82,14 @@ public class AprilTagVision extends LinearOpMode {
     public void runOpMode() {
 
 
-        initAprilTag();
+//        initAprilTag();
+//        while(!isStarted()){
+//            telemetryAprilTag();
+//            telemetry.update();
+//        }
 
-        /*WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
+
+        WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
         camera.setPipeline(vision);
@@ -100,28 +105,31 @@ public class AprilTagVision extends LinearOpMode {
 
             }
         });
-        */
 
 
-       /* while(!isStarted()){
-            telemetryAprilTag();
-            telemetry.update();
-        }
-        */
+
+
 
         //compare x value to determine where to put pixel
         waitForStart();
         camera.stopStreaming();
+//        camera = null;
+
+        sleep(100);
+        telemetry.addData("e",12);
+        telemetry.update();
+
+
         //code for moving
         //more code for ,oving
         //code until the purple pixel placement
-        timer.reset();
-        tagID = 0;
-        tagX = 0;
-        tagY = 0;
-        while(telemetryAprilTag()==0 || timer.seconds()<1){
+
+        initAprilTag();
+//        timer.reset();
+        while(telemetryAprilTag()==0){
             telemetryAprilTag();
         }
+
         visionPortal.close();
 
     }   // end method runOpMode()
