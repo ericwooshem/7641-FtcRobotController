@@ -37,7 +37,7 @@ public class MecanumArcadeDrive extends LinearOpMode{
 
             frontLeftMotor.setPower(frontLeftPower);
             backLeftMotor.setPower(backLeftPower);
-            frontLeftMotor.setPower(frontLeftPower);
+            frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
         }
 
