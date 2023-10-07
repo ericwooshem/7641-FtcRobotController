@@ -16,14 +16,16 @@ public class MeepMeepTestingDriver {
 
 
     public  static   MeepMeepTestingTemplate mapToClass (String s, MeepMeep meepMeep){
-        System.out.println("Number: " + s);
-        if("1".equals(s)){
-            System.out.println("In option 1");
 
-            return (new BlueRightAutonOption1(meepMeep));
-        }
-        else if ("2".equals(s)){
-            return (new BlueRightAutonOption2(meepMeep));
+        switch (s){
+            case "1":
+                return (new BlueRightAutonOption1(meepMeep));
+            case "2":
+                return (new BlueRightAutonOption2(meepMeep));
+            case "3":
+                return (new BlueLeftAutonOption1(meepMeep));
+            case "4":
+                return (new BlueLeftAutonOption2(meepMeep));
         }
 
 
@@ -33,24 +35,17 @@ public class MeepMeepTestingDriver {
     }
 
     public static void main(String[] args) {
-        // Declare a MeepMeep instance
-        // With a field size of 800 pixels
+
         MeepMeep meepMeep = new MeepMeep(800);
-        // Decide which template to run
 
 
         MeepMeepTestingTemplate m = MeepMeepTestingDriver.mapToClass(args[0], meepMeep);
-        System.out.println(args[0]);
-
         m.moveOnPath();
 
-        // Run that template
 
-        // Set field image
         Image img = null;
 
         RoadRunnerBotEntity myBot = m.getRobot();
-        System.out.println(myBot);
         try {
             img = ImageIO.read(new File("/Users/rahulkalra/AndroidStudioProjects/FtcRobotController/road-runner-quickstart/MeepTEst/lib/src/main/java/org/firstinspires/ftc/lib/field-2023-official.png"));
         } catch (IOException e) {
