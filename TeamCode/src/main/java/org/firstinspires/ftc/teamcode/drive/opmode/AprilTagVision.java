@@ -139,6 +139,9 @@ public class AprilTagVision extends LinearOpMode {
      */
     private void initAprilTag() {
 
+        telemetry.addLine("0");
+        telemetry.update();
+
         // Create the AprilTag processor.
         aprilTag = new AprilTagProcessor.Builder()
             .setDrawAxes(false)
@@ -156,6 +159,8 @@ public class AprilTagVision extends LinearOpMode {
             // ... these parameters are fx, fy, cx, cy.
 
             .build();
+        telemetry.addLine("1");
+        telemetry.update();
 
         // Create the vision portal by using a builder.
         VisionPortal.Builder builder = new VisionPortal.Builder();
@@ -166,6 +171,8 @@ public class AprilTagVision extends LinearOpMode {
         } else {
             builder.setCamera(BuiltinCameraDirection.BACK);
         }
+        telemetry.addLine("2");
+        telemetry.update();
 
         // Choose a camera resolution. Not all cameras support all resolutions.
         //builder.setCameraResolution(new Size(640, 480));
@@ -186,6 +193,8 @@ public class AprilTagVision extends LinearOpMode {
 
         // Build the Vision Portal, using the above settings.
         visionPortal = builder.build();
+        telemetry.addLine("3");
+        telemetry.update();
 
         // Disable or re-enable the aprilTag processor at any time.
         //visionPortal.setProcessorEnabled(aprilTag, true);
