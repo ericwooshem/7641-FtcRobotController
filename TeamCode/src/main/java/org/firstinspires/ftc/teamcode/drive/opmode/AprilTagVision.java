@@ -129,7 +129,7 @@ public class AprilTagVision extends LinearOpMode {
 
         initAprilTag();
 //        timer.reset();
-        while(telemetryAprilTag()==0&&opModeIsActive()){
+        while(telemetryAprilTag()==0&&opModeIsActive()){//delete the left argument for it to show detection, currently it exits when it sees a valid apriltag
             telemetryAprilTag();
             telemetry.update();
         }
