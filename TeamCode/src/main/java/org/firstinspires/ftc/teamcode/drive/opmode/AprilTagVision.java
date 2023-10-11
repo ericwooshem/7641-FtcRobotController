@@ -112,10 +112,13 @@ public class AprilTagVision extends LinearOpMode {
 
         //compare x value to determine where to put pixel
         waitForStart();
-        camera.stopStreaming();
-//        camera = null;
+        //camera.closeCameraDeviceAsync();
+        //camera.stopStreaming();
+        //camera.stopStreaming();
+        camera.closeCameraDevice();
+//        camera = null
 
-        sleep(100);
+        //sleep(100);
         telemetry.addData("e",12);
         telemetry.update();
 
@@ -126,11 +129,17 @@ public class AprilTagVision extends LinearOpMode {
 
         initAprilTag();
 //        timer.reset();
-        while(telemetryAprilTag()==0){
+        while(telemetryAprilTag()==0&&opModeIsActive()){
             telemetryAprilTag();
+            telemetry.update();
         }
 
         visionPortal.close();
+        /*while(opModeIsActive())
+        {
+            telemetry.addData("didnt fail", true);
+            telemetry.update();
+        }*/
 
     }   // end method runOpMode()
 
