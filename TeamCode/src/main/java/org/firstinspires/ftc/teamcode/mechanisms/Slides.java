@@ -28,13 +28,18 @@ public class Slides {
                       double gamepad2_left_stick_x,
                       double gamepad1_right_stick_x,
                       double gamepad2_right_stick_y) {
-
+        DcMotor rightSlidesMotor = hardwareMap.dcMotor.get("rightSlidesMotor");
+        DcMotor leftSlidesMotor = hardwareMap.dcMotor.get("leftSlidesMotor");
 
         double target = 0;
         double difference = 0;
-        DcMotor rightSlidesMotor = hardwareMap.dcMotor.get("rightSlidesMotor");
-        DcMotor leftSlidesMotor = hardwareMap.dcMotor.get("leftSlidesMotor");
-        double initpos = (rightSlidesMotor.getCurrentPosition() + leftSlidesMotor.getCurrentPosition()) / 2;
+        double current_pos_right = rightSlidesMotor.getCurrentPosition();
+        double current_pos_left = leftSlidesMotor.getCurrentPosition();
+        double rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
+        double leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
+
+        double initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
+
         rightSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -43,16 +48,18 @@ public class Slides {
         double x = gamepad2_left_stick_x;
         double rx = gamepad1_right_stick_x;
         double g2ry = gamepad2_right_stick_y;
+        double current_pos_LplusR = current_pos_left + current_pos_right;
+
+
         target -= g2ry * 5;
 
         checkButtonPress(target, button_keyname);
 
 
-        double current_pos_right = rightSlidesMotor.getCurrentPosition();
-        double current_pos_left = leftSlidesMotor.getCurrentPosition();
-        difference = target - (current_pos_left + current_pos_right) / 2 - initpos;
-        telemetry.addData("Pos:", (current_pos_left + current_pos_right) / 2 - initpos);
+        difference = target - (current_pos_LplusR) / 2 - initPosition;
+        telemetry.addData("Pos:", (current_pos_LplusR) / 2 - initPosition);
         telemetry.update();
+
         difference = difference * 0.01;
         leftSlidesMotor.setPower(difference);
         rightSlidesMotor.setPower(difference);
