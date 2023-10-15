@@ -4,11 +4,16 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.har
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class Slides {
-
+    DcMotor rightSlidesMotor;
+    DcMotor leftSlidesMotor;
+    public Slides(HardwareMap hwmap){
+        rightSlidesMotor = hwmap.get(DcMotor.class, "rightSlidesMotor");
+        leftSlidesMotor = hwmap.get(DcMotor.class, "leftSlidesMotor");
+    }
    
     public void checkButtonPress(double target, char button_keyname) {
 
@@ -27,9 +32,7 @@ public class Slides {
 
     public void slide(char button_keyname,
                       double gamepad2_left_stick_x,
-                      double gamepad2_right_stick_y,
-                      DcMotor rightSlidesMotor,
-                      DcMotor leftSlidesMotor
+                      double gamepad2_right_stick_y
     ) {
 
 
