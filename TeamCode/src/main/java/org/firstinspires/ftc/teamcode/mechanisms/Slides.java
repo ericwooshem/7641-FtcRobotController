@@ -2,12 +2,14 @@ package org.firstinspires.ftc.teamcode.mechanisms;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+
+
 public class Slides {
+
+   
     public void checkButtonPress(double target, char button_keyname) {
 
         if (target < 0) {
@@ -28,8 +30,8 @@ public class Slides {
                       double gamepad2_left_stick_x,
                       double gamepad1_right_stick_x,
                       double gamepad2_right_stick_y) {
-        DcMotor rightSlidesMotor = hardwareMap.dcMotor.get("rightSlidesMotor");
-        DcMotor leftSlidesMotor = hardwareMap.dcMotor.get("leftSlidesMotor");
+        DcMotor rightSlidesMotor = hardwareMap.get(DcMotor.class, "rightSlidesMotor");
+        DcMotor leftSlidesMotor = hardwareMap.get(DcMotor.class, "leftSlidesMotor");
 
         double target = 0;
         double difference = 0;
