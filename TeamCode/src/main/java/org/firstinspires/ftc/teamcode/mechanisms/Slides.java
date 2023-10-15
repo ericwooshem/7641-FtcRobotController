@@ -26,9 +26,7 @@ public class Slides {
     }
 
     public void slide(char button_keyname,
-                      double gamepad1_left_stick_y,
                       double gamepad2_left_stick_x,
-                      double gamepad1_right_stick_x,
                       double gamepad2_right_stick_y) {
         DcMotor rightSlidesMotor = hardwareMap.get(DcMotor.class, "rightSlidesMotor");
         DcMotor leftSlidesMotor = hardwareMap.get(DcMotor.class, "leftSlidesMotor");
@@ -46,9 +44,7 @@ public class Slides {
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
-        double y = -(gamepad1_left_stick_y);
         double x = gamepad2_left_stick_x;
-        double rx = gamepad1_right_stick_x;
         double g2ry = gamepad2_right_stick_y;
         double current_pos_LplusR = current_pos_left + current_pos_right;
 
