@@ -36,7 +36,6 @@ public class MecanumArcadeDrive extends LinearOpMode {
         backRightMotor.setPower(backRightPower);
     }
     public void checkButtonPress(){
-        Intake intake = new Intake();
         Spatula spatula  = new Spatula();
         Drone drone = new Drone();
 
