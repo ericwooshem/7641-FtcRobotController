@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.mechanisms.Drone;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
@@ -35,7 +36,6 @@ public class MecanumArcadeDrive extends LinearOpMode {
         backRightMotor.setPower(backRightPower);
     }
     public void checkButtonPress(){
-        Slides slidelift = new Slides();
         Intake intake = new Intake();
         Spatula spatula  = new Spatula();
         Drone drone = new Drone();
