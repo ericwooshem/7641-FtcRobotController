@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.mechanisms.Slides;
 
 @TeleOp(name = "SlidesTest")
-public class SlidesTest extends LinearOpMode {
+public class    SlidesTest extends LinearOpMode {
 
     Slides slidelift= new Slides();
 
