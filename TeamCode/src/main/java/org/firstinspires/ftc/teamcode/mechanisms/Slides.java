@@ -27,9 +27,11 @@ public class Slides {
 
     public void slide(char button_keyname,
                       double gamepad2_left_stick_x,
-                      double gamepad2_right_stick_y) {
-        DcMotor rightSlidesMotor = hardwareMap.get(DcMotor.class, "rightSlidesMotor");
-        DcMotor leftSlidesMotor = hardwareMap.get(DcMotor.class, "leftSlidesMotor");
+                      double gamepad2_right_stick_y,
+                      DcMotor rightSlidesMotor,
+                      DcMotor leftSlidesMotor
+    ) {
+
 
         double target = 0;
         double difference = 0;

@@ -42,7 +42,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
 
         double x = gamepad2.left_stick_x;
         double g2ry = gamepad2.right_stick_y;
-
+/*
         if (gamepad2.a){
             slidelift.slide('a', x,g2ry);
             telemetry.addData("Button", "a");
@@ -64,7 +64,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
         }
         else if(gamepad2.left_bumper) {
 
-        }
+        }*/
 
     }
     @Override

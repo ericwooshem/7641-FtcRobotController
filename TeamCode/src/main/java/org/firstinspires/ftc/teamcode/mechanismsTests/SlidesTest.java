@@ -1,12 +1,16 @@
 package org.firstinspires.ftc.teamcode.mechanismsTests;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
 import android.transition.Slide;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 import org.firstinspires.ftc.teamcode.mechanisms.Slides;
 
-@TeleOp(name = "BlueRightAutonOption1")
+@TeleOp(name = "SlidesTest")
 public class SlidesTest extends LinearOpMode {
 
     Slides slidelift= new Slides();
@@ -19,7 +23,8 @@ public class SlidesTest extends LinearOpMode {
         if (isStopRequested()) return;
         while (opModeIsActive()){
             telemetry.addData("Start", 1);
-
+            DcMotor rightSlidesMotor = hardwareMap.get(DcMotor.class, "rightSlidesMotor");
+            DcMotor leftSlidesMotor = hardwareMap.get(DcMotor.class, "leftSlidesMotor");
             double x = gamepad2.left_stick_x;
             double g2ry = gamepad2.right_stick_y;
 
@@ -29,17 +34,17 @@ public class SlidesTest extends LinearOpMode {
 
 
             if (gamepad2.a){
-                slidelift.slide('a', x,g2ry);
+                slidelift.slide('a', x,g2ry, rightSlidesMotor, leftSlidesMotor);
                 telemetry.addData("Button", "a");
 
             }
             else if (gamepad2.x){
-                slidelift.slide('x' ,x,g2ry);
+                slidelift.slide('x' ,x,g2ry, rightSlidesMotor, leftSlidesMotor);
                 telemetry.addData("Button", "x");
 
             }
             else if (gamepad2.y){
-                slidelift.slide('y' ,x,g2ry);
+                slidelift.slide('y' ,x,g2ry, rightSlidesMotor, leftSlidesMotor);
                 telemetry.addData("Button", "y");
 
             }
