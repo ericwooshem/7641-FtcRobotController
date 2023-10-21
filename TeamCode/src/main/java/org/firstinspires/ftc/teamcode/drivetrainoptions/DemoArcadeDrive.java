@@ -16,7 +16,7 @@ public class DemoArcadeDrive extends LinearOpMode {
         DcMotor frontLeftMotor = hardwareMap.get(DcMotor.class,"frontLeftMotor");
         DcMotor frontRightMotor = hardwareMap.get(DcMotor.class,"frontRightMotor");
 
-        frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
@@ -25,13 +25,13 @@ public class DemoArcadeDrive extends LinearOpMode {
         while (opModeIsActive()) {
 
 
-            //double y = -gamepad2.right_stick_y;
-            double linearx = gamepad2.left_stick_y;
-            double rotationx = -gamepad2.right_stick_x;
+            //double y = -gamepad1.right_stick_y;
+            double linearx = gamepad1.right_stick_y;
+            double rotationx = -gamepad1.left_stick_x;
 
            // double demominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-            double frontLeftPower = (0.5*linearx-0.3*rotationx);
-            double frontRightPower = (0.5*linearx+0.3*rotationx);
+            double frontLeftPower = (0.4*linearx-0.3*rotationx);
+            double frontRightPower = (0.4*linearx+0.3*rotationx);
 
 
             frontLeftMotor.setPower(frontLeftPower);
