@@ -70,10 +70,10 @@ public class MecanumArcadeDrive extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-        DcMotor backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        DcMotor frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+        DcMotor frontLeftMotor = hardwareMap.get(DcMotor.class,"frontLeftMotor");
+        DcMotor backLeftMotor = hardwareMap.get(DcMotor.class,"backLeftMotor");
+        DcMotor frontRightMotor = hardwareMap.get(DcMotor.class,"frontRightMotor");
+        DcMotor backRightMotor = hardwareMap.get(DcMotor.class,"backRightMotor");
 
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
