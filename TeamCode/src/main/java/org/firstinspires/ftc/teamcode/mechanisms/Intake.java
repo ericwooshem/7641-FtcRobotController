@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
 
+import androidx.annotation.NonNull;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
@@ -8,6 +10,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.util.Encoder;
+
 
 public class Intake {
 
@@ -18,8 +21,11 @@ public class Intake {
     //add more for more stacks
 
     DcMotor Intake;
+
+
     Servo Intakelift;
     public Intake(HardwareMap HWMap){
+
         Intake = HWMap.get(DcMotor.class, "Intake");
         Intakelift = HWMap.get(Servo.class, "IntakeServo");
     }
