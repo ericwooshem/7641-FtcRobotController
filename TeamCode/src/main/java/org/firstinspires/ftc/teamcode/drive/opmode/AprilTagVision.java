@@ -124,7 +124,7 @@ public class AprilTagVision extends LinearOpMode {
 
 
         //code for moving
-        //more code for ,oving
+        //more code for moving
         //code until the purple pixel placement
 
         initAprilTag();
