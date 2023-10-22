@@ -81,7 +81,7 @@ public class AprilTagVision extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        vision.setDetectedColor("red"); //red or blue, VERY IMPORTANT FOR VISION
+        vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
 
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
