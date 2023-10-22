@@ -38,7 +38,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
         Slides slidelift = new Slides(hardwareMap);
         Intake intake = new Intake(hardwareMap);
         Spatula spatula  = new Spatula();
-        Drone drone = new Drone();
+        Drone drone = new Drone(hardwareMap);
 
         double x = gamepad2.left_stick_x;
         double g2ry = gamepad2.right_stick_y;
@@ -60,7 +60,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
 
         }
         else if(gamepad2.left_trigger > 0){
-
+                drone.Shooter(....)
         }
         else if(gamepad2.left_bumper) {
 
