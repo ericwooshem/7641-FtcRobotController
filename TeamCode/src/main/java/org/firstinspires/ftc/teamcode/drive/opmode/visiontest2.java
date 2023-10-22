@@ -43,19 +43,26 @@ public class visiontest2 extends OpenCvPipeline {
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
         Scalar lowHSV;
         Scalar highHSV;
+
+        telemetry.addData("Color detecting: ", detectedColor);
         if(detectedColor.equals("red")){
-            lowHSV = new Scalar(0, 100, 100);
+            lowHSV = new Scalar(-10, 50, 50);
             highHSV = new Scalar(10, 255, 255);
+            telemetry.addData("e",0);
         }
         else if(detectedColor.equals("blue")){
-            lowHSV = new Scalar(190, 100, 100);
-            highHSV = new Scalar(220, 255, 255);
+            lowHSV = new Scalar(90, 50, 50);
+            highHSV = new Scalar(110, 255, 255);
+            telemetry.addData("e",1);
         }
         else{ //default to red
-            lowHSV = new Scalar(0, 100, 100);
+            lowHSV = new Scalar(-10, 50, 50);
             highHSV = new Scalar(10, 255, 255);
+            telemetry.addData("e",2);
         }
-        
+
+
+
         Core.inRange(mat, lowHSV, highHSV, mat);
         Mat leftside = mat.submat(left);
         Mat rightside = mat.submat(right);

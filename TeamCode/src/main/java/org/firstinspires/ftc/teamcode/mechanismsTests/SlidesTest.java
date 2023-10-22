@@ -34,17 +34,17 @@ public class SlidesTest extends LinearOpMode {
 
 
             if (gamepad2.a){
-                slidelift.slide('a', x,g2ry);
+              //  slidelift.slide('a', x,g2ry);
                 telemetry.addData("Button", "a");
 
             }
             else if (gamepad2.x){
-                slidelift.slide('x' ,x,g2ry);
+              //  slidelift.slide('x' ,x,g2ry);
                 telemetry.addData("Button", "x");
 
             }
             else if (gamepad2.y){
-                slidelift.slide('y' ,x,g2ry);
+             //   slidelift.slide('y' ,x,g2ry);
                 telemetry.addData("Button", "y");
 
             }
