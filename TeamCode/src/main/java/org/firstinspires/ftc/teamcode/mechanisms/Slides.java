@@ -49,12 +49,11 @@ public class Slides {
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
-        double x = gamepad2_left_stick_x;
-        double g2ry = gamepad2_right_stick_y;
+
         double current_pos_LplusR = current_pos_left + current_pos_right;
 
 
-        target -= g2ry * 5;
+
 
         checkButtonPress(target, button_keyname);
 
