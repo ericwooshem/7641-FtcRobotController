@@ -81,13 +81,7 @@ public class AprilTagVision extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-
-//        initAprilTag();
-//        while(!isStarted()){
-//            telemetryAprilTag();
-//            telemetry.update();
-//        }
-
+        vision.setDetectedColor("red"); //red or blue, VERY IMPORTANT FOR VISION
 
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -112,13 +106,9 @@ public class AprilTagVision extends LinearOpMode {
 
         //compare x value to determine where to put pixel
         waitForStart();
-        //camera.closeCameraDeviceAsync();
-        //camera.stopStreaming();
-        //camera.stopStreaming();
-        camera.closeCameraDevice();
-//        camera = null
 
-        //sleep(100);
+        camera.closeCameraDevice();
+
         telemetry.addData("e",12);
         telemetry.update();
 
@@ -128,7 +118,6 @@ public class AprilTagVision extends LinearOpMode {
         //code until the purple pixel placement
 
         initAprilTag();
-//        timer.reset();
         while(telemetryAprilTag()==0&&opModeIsActive()){//delete the left argument for it to show detection, currently it exits when it sees a valid apriltag
             telemetryAprilTag();
             telemetry.update();

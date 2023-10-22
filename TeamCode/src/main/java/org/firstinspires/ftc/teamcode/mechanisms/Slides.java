@@ -9,8 +9,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class Slides {
-    DcMotor rightSlidesMotor;
-    DcMotor leftSlidesMotor;
+    private DcMotor rightSlidesMotor;
+    private DcMotor leftSlidesMotor;
+
+    private int target;
     public Slides(HardwareMap hwmap){
         rightSlidesMotor = hwmap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = hwmap.get(DcMotor.class, "leftSlidesMotor");
@@ -31,41 +33,32 @@ public class Slides {
         }
     }
 
-    public void slide(char button_keyname,
-                      double gamepad2_left_stick_x,
-                      double gamepad2_right_stick_y
-    ) {
+    public void slide() {
 
 
-        double target = 0;
-        double difference = 0;
-        double current_pos_right = rightSlidesMotor.getCurrentPosition();
-        double current_pos_left = leftSlidesMotor.getCurrentPosition();
-        double rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
-        double leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
 
-        double initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
+        double initPosition = 0;//(rightCurrentPosition + leftCurrentPosition) / 2;
 
         rightSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
 
-        double current_pos_LplusR = current_pos_left + current_pos_right;
+        double current_pos_LplusR = 0;//current_pos_left + current_pos_right;
 
 
 
 
-        checkButtonPress(target, button_keyname);
+        //checkButtonPress(target, button_keyname);
 
 
-        difference = target - (current_pos_LplusR) / 2 - initPosition;
+       // difference = target - (current_pos_LplusR) / 2 - initPosition;
         telemetry.addData("Pos:", (current_pos_LplusR) / 2 - initPosition);
         telemetry.update();
 
-        difference = difference * 0.01;
-        leftSlidesMotor.setPower(difference);
-        rightSlidesMotor.setPower(difference);
+       // difference = difference * 0.01;
+        //leftSlidesMotor.setPower(difference);
+        //rightSlidesMotor.setPower(difference);
     }
 
 }

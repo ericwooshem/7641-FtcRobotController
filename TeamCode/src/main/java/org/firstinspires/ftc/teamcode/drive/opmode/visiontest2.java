@@ -11,6 +11,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 public class visiontest2 extends OpenCvPipeline {
     Telemetry telemetry;
+    private String detectedColor;
     Mat mat = new Mat();
     public enum Location {
         Leftt,
@@ -40,9 +41,21 @@ public class visiontest2 extends OpenCvPipeline {
     @Override
     public Mat processFrame(Mat input) {
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
-        Scalar lowHSV = new Scalar(23, 50, 70);
-        Scalar highHSV = new Scalar(32, 255, 255);
-
+        Scalar lowHSV;
+        Scalar highHSV;
+        if(detectedColor.equals("red")){
+            lowHSV = new Scalar(0, 100, 100);
+            highHSV = new Scalar(10, 255, 255);
+        }
+        else if(detectedColor.equals("blue")){
+            lowHSV = new Scalar(190, 100, 100);
+            highHSV = new Scalar(220, 255, 255);
+        }
+        else{ //default to red
+            lowHSV = new Scalar(0, 100, 100);
+            highHSV = new Scalar(10, 255, 255);
+        }
+        
         Core.inRange(mat, lowHSV, highHSV, mat);
         Mat leftside = mat.submat(left);
         Mat rightside = mat.submat(right);
@@ -95,9 +108,13 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 
             return mat;
         }
-public Location getLocation() {
+        public Location getLocation() {
             return location;
-
         }
+
+        public void setDetectedColor(String color){
+            this.detectedColor = color;
+        }
+
     }
 
