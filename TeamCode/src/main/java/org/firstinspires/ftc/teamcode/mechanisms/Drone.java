@@ -13,11 +13,14 @@ public class Drone{
     public Drone(HardwareMap HWMap) {
         Shooter = HWMap.get(Servo.class, "IntakeServo");
         Shooter.setPosition(0);
+        //Holds rubber band in place after manually put in by someone and code starts
 
     }
 
     public void Shooter() {
         Shooter.setPosition(1);
+        /*When a certain control is pressed (TBD), the servo will move, moving the rubber band,
+        which will launch the servo*\
     }
 
 
