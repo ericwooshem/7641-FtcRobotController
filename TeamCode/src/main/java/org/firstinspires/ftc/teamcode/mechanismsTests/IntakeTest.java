@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 public class IntakeTest extends LinearOpMode{
     Intake intake = new Intake(hardwareMap);
 
-
+    @Override
     public void runOpMode() throws InterruptedException{
 
         waitForStart();

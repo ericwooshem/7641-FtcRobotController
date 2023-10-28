@@ -24,27 +24,19 @@ public class SlidesTest extends LinearOpMode {
 
         if (isStopRequested()) return;
         while (opModeIsActive()){
-            telemetry.addData("Start", 1);
-            double x = gamepad2.left_stick_x;
-            double g2ry = gamepad2.right_stick_y;
-
-            telemetry.addData("Gamepad 2 (x): " ,x);
-            telemetry.addData("Gamepad 2 (g2ry): " ,g2ry);
-
-
 
             if (gamepad2.a){
-              //  slidelift.slide('a', x,g2ry);
+                slidelift.slide('a');
                 telemetry.addData("Button", "a");
 
             }
             else if (gamepad2.x){
-              //  slidelift.slide('x' ,x,g2ry);
+                slidelift.slide('x' );
                 telemetry.addData("Button", "x");
 
             }
             else if (gamepad2.y){
-             //   slidelift.slide('y' ,x,g2ry);
+                slidelift.slide('y');
                 telemetry.addData("Button", "y");
 
             }
