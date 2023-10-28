@@ -7,19 +7,15 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
-
-public class Slides {
-    private DcMotor rightSlidesMotor;
-    private DcMotor leftSlidesMotor;
-
-    private int target = 0;
-
-    public Slides(HardwareMap hwmap){
+public class SlidesOld {
+    DcMotor rightSlidesMotor;
+    DcMotor leftSlidesMotor;
+    public SlidesOld(HardwareMap hwmap){
         rightSlidesMotor = hwmap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = hwmap.get(DcMotor.class, "leftSlidesMotor");
     }
-   
-    public void checkButtonPress(double targetslides, char button_keyname) {
+
+    public void checkButtonPress(double target, char button_keyname) {
 
         if (target < 0) {
             target = 0;
@@ -34,14 +30,18 @@ public class Slides {
         }
     }
 
-    public void slide(char button_keyname) {
+    public void slide(char button_keyname,
+                      double gamepad2_left_stick_x,
+                      double gamepad2_right_stick_y
+    ) {
+
 
         double target = 0;
+        double difference = 0;
         double current_pos_right = rightSlidesMotor.getCurrentPosition();
         double current_pos_left = leftSlidesMotor.getCurrentPosition();
         double rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
         double leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
-
 
         double initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
 
@@ -49,16 +49,17 @@ public class Slides {
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
-
+        double x = gamepad2_left_stick_x;
+        double g2ry = gamepad2_right_stick_y;
         double current_pos_LplusR = current_pos_left + current_pos_right;
 
 
-
+        target -= g2ry * 5;
 
         checkButtonPress(target, button_keyname);
 
 
-        double difference = target - (current_pos_LplusR) / 2 - initPosition;
+        difference = target - (current_pos_LplusR) / 2 - initPosition;
         telemetry.addData("Pos:", (current_pos_LplusR) / 2 - initPosition);
         telemetry.update();
 

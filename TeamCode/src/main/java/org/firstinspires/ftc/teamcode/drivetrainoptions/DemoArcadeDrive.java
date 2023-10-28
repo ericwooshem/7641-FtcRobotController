@@ -6,6 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
+
+/* This file was for the demo drivetrain that we used in the  outreach event on the October 21st 2023*/
+
 @TeleOp
 public class DemoArcadeDrive extends LinearOpMode {
 

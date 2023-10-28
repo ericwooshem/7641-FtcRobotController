@@ -14,10 +14,13 @@ import org.firstinspires.ftc.teamcode.mechanisms.Spatula;
 @TeleOp
 public class MecanumArcadeDrive extends LinearOpMode {
 
-    public void driveTrain(DcMotor frontLeftMotor,
-                           DcMotor backLeftMotor,
-                           DcMotor frontRightMotor,
-                           DcMotor backRightMotor){
+    /*
+        This function is where all of the drivetrain movement is.
+        In specific the movement is like getting the joystick
+        values and executing it to make it move in t hat direction
+    */
+    public void driveTrain(DcMotor frontLeftMotor, DcMotor backLeftMotor,
+                           DcMotor frontRightMotor, DcMotor backRightMotor){
 
         double y = -gamepad1.left_stick_y;
         double x = gamepad1.left_stick_x;
@@ -34,6 +37,10 @@ public class MecanumArcadeDrive extends LinearOpMode {
         frontRightMotor.setPower(frontRightPower);
         backRightMotor.setPower(backRightPower);
     }
+
+    /* It checks the button press from the controller.
+    It has a lot of if statements to check for the appropriate action from the controller.
+    This function will have all of the mechanism modules called and use the functions from it. */
     public void checkButtonPress(){
         Slides slidelift = new Slides(hardwareMap);
         Intake intake = new Intake(hardwareMap);
@@ -42,7 +49,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
 
         double x = gamepad2.left_stick_x;
         double g2ry = gamepad2.right_stick_y;
-/*
+        /*
         if (gamepad2.a){
             slidelift.slide('a', x,g2ry);
             telemetry.addData("Button", "a");

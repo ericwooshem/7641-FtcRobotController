@@ -28,6 +28,8 @@ public class Intake {
 
         Intake = HWMap.get(DcMotor.class, "Intake");
         Intakelift = HWMap.get(Servo.class, "IntakeServo");
+
+        
     }
 
     public void spin(String direction){ //spin forward or reverse, if none then stop
