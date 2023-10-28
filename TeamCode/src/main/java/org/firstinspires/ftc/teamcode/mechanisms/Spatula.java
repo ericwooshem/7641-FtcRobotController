@@ -20,15 +20,19 @@ public class Spatula {
 
     public void Spin(double power) { //-1<=x<=1
         PixelSpinner.setPower(power);
+        //Spins pixel into and outside of slot depending on power
     }
     public void slotForward() {
         RightSpatula.setPosition(0.7);
         LeftSpatula.setPosition(0.7);
+
+        //Bring the slot closer to the backdrop and orients it the right way, so the pixel can fall out
     }
 
     public void slotReset() {
         RightSpatula.setPosition(0);
         LeftSpatula.setPosition(0);
+        //Brings slot back next to the intake, so the slot can store the newly intaked pixels
     }
 }
 
