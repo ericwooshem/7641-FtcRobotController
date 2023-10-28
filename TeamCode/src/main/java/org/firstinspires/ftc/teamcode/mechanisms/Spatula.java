@@ -18,20 +18,15 @@ public class Spatula {
         LeftSpatula.setPosition(0);
     }
 
-    public void Spin() {
-        PixelSpinner.setPower(1);
+    public void Spin(double power) { //-1<=x<=1
+        PixelSpinner.setPower(power);
     }
-
-    public void Outtake() {
-        PixelSpinner.setPower(-1);
-    }
-
-    public void TurnSlot() {
+    public void slotForward() {
         RightSpatula.setPosition(0.7);
         LeftSpatula.setPosition(0.7);
     }
 
-    public void SlotBack() {
+    public void slotReset() {
         RightSpatula.setPosition(0);
         LeftSpatula.setPosition(0);
     }
