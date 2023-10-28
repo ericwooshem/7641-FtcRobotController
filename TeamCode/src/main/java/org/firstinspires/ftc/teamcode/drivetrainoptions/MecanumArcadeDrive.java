@@ -44,7 +44,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
     public void checkButtonPress(){
         Slides slidelift = new Slides(hardwareMap);
         Intake intake = new Intake(hardwareMap);
-        Spatula spatula  = new Spatula();
+        Spatula spatula  = new Spatula(hardwareMap);
         Drone drone = new Drone(hardwareMap);
 
         double x = gamepad2.left_stick_x;

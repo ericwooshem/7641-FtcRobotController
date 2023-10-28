@@ -11,7 +11,7 @@ public class Drone {
 
 
     public Drone(HardwareMap HWMap) {
-        Shooter = HWMap.get(Servo.class, "IntakeServo");
+        Shooter = HWMap.get(Servo.class, "DroneServo");
         Shooter.setPosition(0); }
         //Holds rubber band in place after manually put in by someone and code starts
 
