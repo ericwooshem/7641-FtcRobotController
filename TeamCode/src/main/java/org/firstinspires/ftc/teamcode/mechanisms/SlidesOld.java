@@ -14,7 +14,8 @@ public class SlidesOld {
         rightSlidesMotor = hwmap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = hwmap.get(DcMotor.class, "leftSlidesMotor");
     }
-
+    /*   The if statements allow you to check
+    the right button and then set the target o the right number    */
     public void checkButtonPress(double target, char button_keyname) {
 
         if (target < 0) {
@@ -30,6 +31,8 @@ public class SlidesOld {
         }
     }
 
+    /* This function allows the slide to go up and down with a difference variable.
+    * There is a current position when it is started up*/
     public void slide(char button_keyname,
                       double gamepad2_left_stick_x,
                       double gamepad2_right_stick_y
