@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -18,25 +20,10 @@ public class Slides {
         rightSlidesMotor = hwmap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = hwmap.get(DcMotor.class, "leftSlidesMotor");
     }
-   
-    public void checkButtonPress(double targetslides, char button_keyname) {
 
-        if (target < 0) {
-            target = 0;
-        } else if ("a".equals(button_keyname)) {
-            target = 0;
-        } else if ("x".equals(button_keyname)) {
-            target = 1065;
-        } else if ("y".equals(button_keyname)) {
-            target = 2130;
-        } else if (target > 2130) {
-            target = 2130;
-        }
-    }
 
-    public void slide(char button_keyname) {
+    public void slide(int targetslides) {
 
-        double target = 0;
         double current_pos_right = rightSlidesMotor.getCurrentPosition();
         double current_pos_left = leftSlidesMotor.getCurrentPosition();
         double rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
@@ -55,12 +42,17 @@ public class Slides {
 
 
 
-        checkButtonPress(target, button_keyname);
 
+        if (target < 0) {
+            target = 0;
+        } else if (target > 2130) {
+            target = 2130;
+        }
+        else{
+            target = targetslides;
+        }
 
         double difference = target - (current_pos_LplusR) / 2 - initPosition;
-        telemetry.addData("Pos:", (current_pos_LplusR) / 2 - initPosition);
-        telemetry.update();
 
         difference = difference * 0.01;
         leftSlidesMotor.setPower(difference);

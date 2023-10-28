@@ -16,8 +16,8 @@ public class Intake {
 
 
 
-    private double pos1 = 0;
-    private double pos2; //servo position to pick up 2 stack
+    private double pos1 = 0.2;
+    private double pos2 = 0;
     //add more for more stacks
 
     DcMotor Intake;
@@ -36,6 +36,7 @@ public class Intake {
         if(direction.equals("forward")){
             Intake.setDirection(DcMotorSimple.Direction.FORWARD);
             Intake.setPower(1.0);
+
         }
         else if(direction.equals("reverse")) {
             Intake.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -46,12 +47,12 @@ public class Intake {
         }
     }
 
-    public void liftToLevel(int level){
+    public void liftToLevel(double level){
         if(level == 1){
-            Intakelift.setPosition(0);
+           Intakelift.setPosition(0);
         }
         else if(level == 2){
-            Intakelift.setPosition(pos2);
+            Intakelift.setPosition(pos1);
         }
         //add more
 

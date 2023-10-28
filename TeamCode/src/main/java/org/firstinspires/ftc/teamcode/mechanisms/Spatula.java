@@ -18,7 +18,7 @@ public class Spatula {
         RightSpatula = HWMap.get(Servo.class, "RightSpatulaServo");
         LeftSpatula = HWMap.get(Servo.class, "LeftSpatulaServo");
 
-        RightSpatula.setPosition(0);
+        RightSpatula.setPosition(1);
         LeftSpatula.setPosition(0);
         PixelSpinner.setPower(0);
     }
@@ -48,7 +48,6 @@ public class Spatula {
         LeftSpatula.setPosition(0);
         //Brings slot back next to the intake, so the slot can store the newly intaked pixels
     }
-
 
     public void spatulaCommand( String letterCommand){
 

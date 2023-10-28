@@ -12,16 +12,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 
+@TeleOp(name = "IntakeTest")
 public class IntakeTest extends LinearOpMode{
-    Intake intake = new Intake(hardwareMap);
+    HardwareMap hwmap = hardwareMap;
+
+    Intake intake = new Intake(hwmap);
 
     @Override
-    public void runOpMode() throws InterruptedException{
+    public void runOpMode() {
 
         waitForStart();
 
         while(opModeIsActive()){
-            if(gamepad1.dpad_down){
+          /*  if(gamepad1.dpad_down){
                 intake.spin("forward");
             }
             else if(gamepad1.dpad_up){
@@ -29,7 +32,7 @@ public class IntakeTest extends LinearOpMode{
             }
             else{
                 intake.spin("stop");//this can be anything but "forward" and "reverse"
-            }
+            }*/
         }
     }
 

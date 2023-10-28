@@ -47,8 +47,33 @@ public class MecanumArcadeDrive extends LinearOpMode {
         Spatula spatula  = new Spatula(hardwareMap);
         Drone drone = new Drone(hardwareMap);
 
-        double x = gamepad2.left_stick_x;
-        double g2ry = gamepad2.right_stick_y;
+
+
+        if(gamepad1.dpad_down){
+            intake.spin("forward");
+        }
+        else if(gamepad1.dpad_up){
+            intake.spin("reverse");
+        }
+        else if (gamepad1.dpad_left){
+            slidelift.slide(1065);
+        }
+        else if(gamepad1.dpad_right){
+            slidelift.slide(2130);
+        }
+        else if(gamepad1.left_bumper){
+            slidelift.slide(0);
+        }
+        else if(gamepad1.a){
+            intake.spin("stop");
+        }
+        else if(gamepad1.x){
+            intake.liftToLevel(2);
+        }
+        else if(gamepad1.b){
+            intake.liftToLevel(1);
+        }
+
         /*
         if (gamepad2.a){
             slidelift.slide('a', x,g2ry);
@@ -66,9 +91,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
         else if (gamepad2.b){
 
         }
-        else if(gamepad2.left_trigger > 0){
-                drone.Shooter(....)
-        }
+
         else if(gamepad2.left_bumper) {
 
         }*/
