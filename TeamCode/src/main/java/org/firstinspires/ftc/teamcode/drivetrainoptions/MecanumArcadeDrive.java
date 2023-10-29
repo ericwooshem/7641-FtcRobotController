@@ -103,7 +103,8 @@ public class MecanumArcadeDrive extends LinearOpMode {
             spatula.spatulaCommand("forward");
         } else if (gamepad2.left_stick_y < 0.2) {
             spatula.spatulaCommand("backward");
-        } else if (gamepad2.left_stick_button) {
+        }
+        else if (gamepad2.left_stick_button) {
             spatula.spatulaCommand("stop");
         }
 
@@ -113,27 +114,6 @@ public class MecanumArcadeDrive extends LinearOpMode {
 
         slideFineAdjust += gamepad2.right_stick_y; // Fine adjust for slide position for dropping pixels. Added to set line positons.
 
-        /*
-        if (gamepad2.a){
-            slidelift.slide('a', x,g2ry);
-            telemetry.addData("Button", "a");
-        }
-        else if (gamepad2.x){
-            slidelift.slide('x' ,x,g2ry);
-            telemetry.addData("Button", "x");
-
-        }
-        else if (gamepad2.y){
-            slidelift.slide('y' ,x,g2ry);
-            telemetry.addData("Button", "y");
-        }
-        else if (gamepad2.b){
-
-        }
-
-        else if(gamepad2.left_bumper) {
-
-        }*/
 
     }
     @Override

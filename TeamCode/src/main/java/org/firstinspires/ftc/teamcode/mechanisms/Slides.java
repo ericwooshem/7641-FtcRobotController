@@ -23,7 +23,7 @@ public class Slides {
     private double rightCurrentPosition;
     private double leftCurrentPosition;
 
-    private int[] setLinePos = {0, 800, 1600, 1650}; // Unknown values. First value is for slide reset pos. Bad var name, I know.
+    private int[] setSlideLiftPos = {0, 800, 1600, 1650}; // Unknown values. First value is for slide reset pos.
 
     public Slides(HardwareMap HWMap){
         rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
@@ -63,7 +63,7 @@ public class Slides {
     }
 
     public void slideCommands(int setLine, double fineAdjust) { //[0] is slide reset
-        slide(setLinePos[setLine], fineAdjust);
+        slide(setSlideLiftPos[setLine], fineAdjust);
     }
 }
 
