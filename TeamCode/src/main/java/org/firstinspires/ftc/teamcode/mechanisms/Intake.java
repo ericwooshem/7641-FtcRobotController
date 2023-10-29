@@ -14,48 +14,38 @@ import org.firstinspires.ftc.teamcode.util.Encoder;
 
 public class Intake {
 
-
-
-    private double pos1 = 0.2;
-    private double pos2 = 0;
-    //add more for more stacks
+    private double pixelServoHeight = 0.4;
+    private double[] servoPos = {0.2,
+            0.2 - pixelServoHeight * 1,
+            0.2 - pixelServoHeight * 2,
+            0.2 - pixelServoHeight * 3,
+            0.2 - pixelServoHeight * 4,
+            0.2 - 0.04 * 5}; // [0] to [5], 0 is ground, 5 is top. Values may need adjustment. Current pixel height in servo = 0.4
 
     DcMotor Intake;
 
-
     Servo Intakelift;
-    public Intake(HardwareMap HWMap){
 
+    public Intake(HardwareMap HWMap){
         Intake = HWMap.get(DcMotor.class, "Intake");
         Intakelift = HWMap.get(Servo.class, "IntakeServo");
-
-        
+        Intake.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
     public void spin(String direction){ //spin forward or reverse, if none then stop
         if(direction.equals("forward")){
-            Intake.setDirection(DcMotorSimple.Direction.FORWARD);
             Intake.setPower(1.0);
-
         }
         else if(direction.equals("reverse")) {
-            Intake.setDirection(DcMotorSimple.Direction.REVERSE);
-            Intake.setPower(1.0);
+            Intake.setPower(-0.5);
         }
         else{
             Intake.setPower(0.0);
         }
     }
 
-    public void liftToLevel(double level){
-        if(level == 1){
-           Intakelift.setPosition(0);
-        }
-        else if(level == 2){
-            Intakelift.setPosition(pos1);
-        }
-        //add more
-
+    public void liftToLevel(int level){
+        Intakelift.setPosition(servoPos[level]);
     }
       /*Write the mechanism code in this file.
      All functions related to this mechanism should be in this file*/

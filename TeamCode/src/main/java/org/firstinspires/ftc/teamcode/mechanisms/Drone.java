@@ -15,10 +15,14 @@ public class Drone {
         Shooter.setPosition(0); }
         //Holds rubber band in place after manually put in by someone and code starts
 
-    public void shooter() {
-        Shooter.setPosition(1); }
+    public void shooter(String position) {
+        if (position.equals("open")) {
+            Shooter.setPosition(0);
+        } else if (position.equals("closed")) {
+            Shooter.setPosition(1);
+        }
         //When a certain control is pressed (TBD), the servo will move, moving the rubber band,
         //which will launch the drone
-
+    }
   }
 

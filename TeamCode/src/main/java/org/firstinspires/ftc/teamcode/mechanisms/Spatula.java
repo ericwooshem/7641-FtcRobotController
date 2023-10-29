@@ -7,6 +7,8 @@ import java.util.Objects;
 
 public class Spatula {
 
+    private double slotForwardPos = 0.7; // Position where slot is 90 degrees to backboard (verify)
+
     CRServo PixelSpinner;
 
     Servo RightSpatula;
@@ -18,33 +20,34 @@ public class Spatula {
         RightSpatula = HWMap.get(Servo.class, "RightSpatulaServo");
         LeftSpatula = HWMap.get(Servo.class, "LeftSpatulaServo");
 
-        RightSpatula.setPosition(1);
-        LeftSpatula.setPosition(0);
-        PixelSpinner.setPower(0);
+        slotReset();
+        spinWheelStop();
     }
 
-    public void spinWheelForward() { //-1<=x<=1
+    public void spinWheelForward() { //-1<=x<=1 ///Can these be made private?
         PixelSpinner.setPower(1);
-        //Spins pixel into and outside of slot depending on power
+        // Spins pixel into slot
     }
 
     public void spinwheelBackwards(){
         PixelSpinner.setPower(-1);
+        // Spins pixel out of slot
     }
 
     public void spinWheelStop(){
         PixelSpinner.setPower(0);
+        // Stop spinning
     }
 
     public void slotForward() {
-        RightSpatula.setPosition(0.7);
-        LeftSpatula.setPosition(0.7);
+        RightSpatula.setPosition(1-slotForwardPos);
+        LeftSpatula.setPosition(slotForwardPos);
 
         //Bring the slot closer to the backdrop and orients it the right way, so the pixel can fall out
     }
 
     public void slotReset() {
-        RightSpatula.setPosition(0);
+        RightSpatula.setPosition(1);
         LeftSpatula.setPosition(0);
         //Brings slot back next to the intake, so the slot can store the newly intaked pixels
     }

@@ -14,51 +14,57 @@ public class Slides {
     private DcMotor rightSlidesMotor;
     private DcMotor leftSlidesMotor;
 
-    private int target = 0;
+    private int maxTarget = 1800; // Maximum value for slide motors
+    private double target = 0; // should this be double?
 
-    public Slides(HardwareMap hwmap){
-        rightSlidesMotor = hwmap.get(DcMotor.class, "rightSlidesMotor");
-        leftSlidesMotor = hwmap.get(DcMotor.class, "leftSlidesMotor");
-    }
+    private double difference;
+    private double initPosition;
+    private double avgCurrentPos;
+    private double rightCurrentPosition;
+    private double leftCurrentPosition;
 
+    private int[] setLinePos = {0, 800, 1600, 1650}; // Unknown values. First value is for slide reset pos. Bad var name, I know.
 
-    public void slide(int targetslides) {
-
-        double current_pos_right = rightSlidesMotor.getCurrentPosition();
-        double current_pos_left = leftSlidesMotor.getCurrentPosition();
-        double rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
-        double leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
-
-
-        double initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
+    public Slides(HardwareMap HWMap){
+        rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
+        leftSlidesMotor = HWMap.get(DcMotor.class, "leftSlidesMotor");
 
         rightSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
+        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
+        initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
+    }
 
+    public void slide(int targetSlides, double fineAdjust) {
+        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
+        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
 
-        double current_pos_LplusR = current_pos_left + current_pos_right;
+        avgCurrentPos = (rightCurrentPosition + leftCurrentPosition) / 2;
 
+        targetSlides += fineAdjust;
 
-
-
-
-        if (target < 0) {
+        if (targetSlides < 0) {
             target = 0;
-        } else if (target > 2130) {
-            target = 2130;
+        } else if (targetSlides > maxTarget) { //Bound needs to be lowered. Changed from 2130 to 1800
+            target = maxTarget;
         }
         else{
-            target = targetslides;
+            target = targetSlides;
         }
 
-        double difference = target - (current_pos_LplusR) / 2 - initPosition;
+        difference = target - (avgCurrentPos - initPosition);
 
-        difference = difference * 0.01;
+        difference = difference * 0.01; // P on difference to generate power for motor
+
         leftSlidesMotor.setPower(difference);
         rightSlidesMotor.setPower(difference);
     }
 
+    public void slideCommands(int setLine, double fineAdjust) { //[0] is slide reset
+        slide(setLinePos[setLine], fineAdjust);
+    }
 }
 
 //2130 Top Slide Position !!! :D

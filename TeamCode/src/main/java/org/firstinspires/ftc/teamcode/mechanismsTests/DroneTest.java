@@ -27,7 +27,7 @@ public class DroneTest extends LinearOpMode {
         while (opModeIsActive()){
 
             if (gamepad2.a){
-                drone.shooter();
+                drone.shooter("open");
                 telemetry.addData("Button", "a");
             }
 
