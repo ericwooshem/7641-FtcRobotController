@@ -3,17 +3,22 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 import java.util.Objects;
 
 public class Spatula {
 
-    private double slotForwardPos = 0.7; // Position where slot is 90 degrees to backboard (verify)
+    private double slotForwardPos = 0.6; // Position where slot is 90 degrees to backboard (verify)
 
     CRServo PixelSpinner;
 
     Servo RightSpatula;
 
     Servo LeftSpatula;
+    Telemetry telemetry;
+
 
     public Spatula(HardwareMap HWMap) {
         PixelSpinner = HWMap.get(CRServo.class, "PixelServo");
@@ -26,6 +31,7 @@ public class Spatula {
 
     public void spinWheelForward() { //-1<=x<=1 ///Can these be made private?
         PixelSpinner.setPower(1);
+
         // Spins pixel into slot
     }
 
@@ -65,7 +71,7 @@ public class Spatula {
     }
 
     public void wheelCommands(String directioncommand){
-        if (Objects.equals(directioncommand, "forward")){
+        if (directioncommand.equals("forward")){
             spinWheelForward();
         }
         else if(Objects.equals(directioncommand,"backward")){

@@ -14,13 +14,13 @@ import org.firstinspires.ftc.teamcode.util.Encoder;
 
 public class Intake {
 
-    private double pixelServoHeight = 0.4;
+    private double pixelServoHeight = 0.12;
     private double[] servoPos = {0.2,
-            0.2 - pixelServoHeight * 1,
-            0.2 - pixelServoHeight * 2,
-            0.2 - pixelServoHeight * 3,
-            0.2 - pixelServoHeight * 4,
-            0.2 - 0.04 * 5}; // [0] to [5], 0 is ground, 5 is top. Values may need adjustment. Current pixel height in servo = 0.4
+            0.2 - 0.11 * 1,
+            0.2 - 0.8 - pixelServoHeight *1,
+            0.2 - 0.8 -pixelServoHeight*2,
+            0.2 - 0.8 - pixelServoHeight*3,
+            0.2 - 0.8 - pixelServoHeight*4}; // [0] to [5], 0 is ground, 5 is top. Values may need adjustment. Current pixel height in servo = 0.4
 
     DcMotor Intake;
 
@@ -34,10 +34,10 @@ public class Intake {
 
     public void spin(String direction){ //spin forward or reverse, if none then stop
         if(direction.equals("forward")){
-            Intake.setPower(1.0);
+            Intake.setPower(-1.0);
         }
         else if(direction.equals("reverse")) {
-            Intake.setPower(-0.5);
+            Intake.setPower(0.8);
         }
         else{
             Intake.setPower(0.0);

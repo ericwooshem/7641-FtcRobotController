@@ -15,6 +15,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Spatula;
 public class MecanumArcadeDrive extends LinearOpMode {
 
     private double slideFineAdjust = 0;
+    private int setLine = 0;
     /*
         This function is where all of the drivetrain movement is.
         In specific the movement is like getting the joystick
@@ -43,77 +44,65 @@ public class MecanumArcadeDrive extends LinearOpMode {
     It has a lot of if statements to check for the appropriate action from the controller.
     This function will have all of the mechanism modules called and use the functions from it. */
     public void checkButtonPress(Slides slideLift, Intake intake, Spatula spatula, Drone drone){
-        if(gamepad2.dpad_up){
+        if(gamepad1.dpad_up){
             intake.spin("forward");
         }
-        else if(gamepad2.dpad_down){
+        else if(gamepad1.dpad_down){
             intake.spin("reverse");
         }
-        else if(gamepad2.dpad_right){
+        else if(gamepad1.dpad_right){
             intake.spin("stop");
         }
-        if (gamepad2.x){  //break else so if driver controls intake and slides at the same time it can do more than one
-            if (gamepad2.right_trigger == 0) {
-                if (gamepad2.right_bumper) {
-                    intake.liftToLevel(4);
-                } else {
-                    slideFineAdjust = 0;
-                    slideLift.slideCommands(0, slideFineAdjust);
-                }
-            } else {
-                intake.liftToLevel(0);
-            }
+
+        if (gamepad2.dpad_down){  //break else so if driver controls intake and slides at the same time it can do more than one
+            intake.liftToLevel(0);
         }
-        else if (gamepad2.a){   // Slides AND Intake lift, may change how intake lift happens. NEEDS testing my brain is dying
-            if (gamepad2.right_trigger == 0) {
-                if (gamepad2.right_bumper) {
-                    intake.liftToLevel(5);
-                } else {
-                    slideFineAdjust = 0;
-                    slideLift.slideCommands(1, slideFineAdjust);
-                }
-            } else {
-                intake.liftToLevel(1);
-            }
+        else if (gamepad2.dpad_left){   // Slides AND Intake lift, may change how intake lift happens. NEEDS testing my brain is dying
+            intake.liftToLevel(1);
         }
-        else if (gamepad2.b){
-            if (gamepad2.right_trigger == 2) {
-                slideFineAdjust = 0;
-                slideLift.slideCommands(2, slideFineAdjust);
-            } else {
-                intake.liftToLevel(0);
-            }
+        else if (gamepad2.dpad_up){
+            intake.liftToLevel(2);
         }
-        else if (gamepad2.y){
-            if (gamepad2.right_trigger == 3) {
-                slideFineAdjust = 0;
-                slideLift.slideCommands(3, slideFineAdjust);
-            } else {
-                intake.liftToLevel(3);
-            }
+        else if (gamepad2.dpad_right){
+            intake.liftToLevel(3);
+        }
+        else if (gamepad2.left_trigger>0.2){
+            intake.liftToLevel(4);
         }
 
-        if (gamepad2.left_trigger > 0) {  // Slot
+        if (gamepad2.right_trigger > 0) {  // Slot
             spatula.slotForward();
-        } else if (gamepad2.left_bumper) {
+        } else if (gamepad2.right_bumper) {
             spatula.slotReset();
         }
 
         if (gamepad2.left_stick_y > 0.2) {
-            spatula.spatulaCommand("forward");
-        } else if (gamepad2.left_stick_y < 0.2) {
-            spatula.spatulaCommand("backward");
+            spatula.wheelCommands("backward");
+        } else if (gamepad2.left_stick_y < -0.2) {
+            spatula.wheelCommands("forward");
         }
         else if (gamepad2.left_stick_button) {
-            spatula.spatulaCommand("stop");
+            spatula.wheelCommands("stop");
         }
 
         if (gamepad2.dpad_down && gamepad2.dpad_up && gamepad2.dpad_right && gamepad2.dpad_left) {
             drone.shooter("open");
         }
 
+        if (gamepad2.a) {
+            setLine = 0;
+        }
+        else if (gamepad2.x) {
+            setLine = 1;
+        }
+        else if (gamepad2.y) {
+            setLine = 2;
+        }
+        else if (gamepad2.b) {
+            setLine = 3;
+        }
         slideFineAdjust += gamepad2.right_stick_y; // Fine adjust for slide position for dropping pixels. Added to set line positons.
-
+        slideLift.slideCommands(setLine,slideFineAdjust);
 
     }
     @Override
