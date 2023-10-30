@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Slides;
 public class SlidesTest extends LinearOpMode {
     HardwareMap hwmap = hardwareMap;
 
-    Slides slidelift= new Slides(hwmap);
+    Slides slidelift= new Slides(hwmap); // I think you should put hardwareMap directly into here
 
     @Override
     public void runOpMode() {
