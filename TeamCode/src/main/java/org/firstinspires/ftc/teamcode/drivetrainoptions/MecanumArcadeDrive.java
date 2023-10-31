@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.mechanisms.Spatula;
 
 
+
 @TeleOp
 public class MecanumArcadeDrive extends LinearOpMode {
 
@@ -85,23 +86,30 @@ public class MecanumArcadeDrive extends LinearOpMode {
             spatula.wheelCommands("stop");
         }
 
-        if (gamepad2.dpad_down && gamepad2.dpad_up && gamepad2.dpad_right && gamepad2.dpad_left) {
+        if (gamepad1.left_trigger>0) {
             drone.shooter("open");
         }
 
         if (gamepad2.a) {
+            intake.spin("stop");
             setLine = 0;
         }
         else if (gamepad2.x) {
+            intake.spin("stop");
             setLine = 1;
+
         }
         else if (gamepad2.y) {
+            intake.spin("stop");
             setLine = 2;
+
         }
         else if (gamepad2.b) {
+            intake.spin("stop");
             setLine = 3;
+
         }
-        slideFineAdjust += gamepad2.right_stick_y; // Fine adjust for slide position for dropping pixels. Added to set line positons.
+        slideFineAdjust += gamepad2.right_stick_y; // Fine adjust for slide position for dropping pixels. Added to set line positons.,
         slideLift.slideCommands(setLine,slideFineAdjust);
 
     }
