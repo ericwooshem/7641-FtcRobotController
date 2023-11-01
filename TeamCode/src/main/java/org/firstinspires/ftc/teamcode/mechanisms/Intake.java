@@ -14,13 +14,11 @@ import org.firstinspires.ftc.teamcode.util.Encoder;
 
 public class Intake {
 
-    private double pixelServoHeight = 0.12;
-    private double[] servoPos = {0.2,
-            0.2 - 0.11 * 1,
-            0.2 - 0.8 - pixelServoHeight *1,
-            0.2 - 0.8 -pixelServoHeight*2,
-            0.2 - 0.8 - pixelServoHeight*3,
-            0.2 - 0.8 - pixelServoHeight*4}; // [0] to [5], 0 is ground, 5 is top. Values may need adjustment. Current pixel height in servo = 0.4
+    private double[] servoPos = {1,//0.87228696,0.85418 , 0.823556, 0.8001234 // going from top to bottom bc servo aint perfect
+            0.8669, 0.8393649, 0.816341, 0.80043874 // going from bottom to top, its good enough.
+    }; // [0] to [5], 0 is ground, 5 is top. Values may need adjustment. Current pixel height in servo = 0.4
+
+    // {0.8001234, 0.823556, 0.85418, 0.87228696} // reserved
 
     DcMotor Intake;
 
@@ -46,6 +44,9 @@ public class Intake {
 
     public void liftToLevel(int level){
         Intakelift.setPosition(servoPos[level]);
+    }
+    public void liftToTest(double test){
+        Intakelift.setPosition(test);
     }
       /*Write the mechanism code in this file.
      All functions related to this mechanism should be in this file*/

@@ -14,8 +14,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Spatula;
 
 @TeleOp
 public class MecanumArcadeDrive extends LinearOpMode {
-
-    private double slideFineAdjust = 0;
+    private double slideFineAdjust = 0; //use 1 for servo ramp testing
     private int setLine = 0;
     /*
         This function is where all of the drivetrain movement is.
@@ -24,7 +23,6 @@ public class MecanumArcadeDrive extends LinearOpMode {
     */
     public void driveTrain(DcMotor frontLeftMotor, DcMotor backLeftMotor,
                            DcMotor frontRightMotor, DcMotor backRightMotor){
-
         double y = -gamepad1.left_stick_y;
         double x = gamepad1.left_stick_x;
         double rx = gamepad1.right_stick_x;
@@ -109,9 +107,12 @@ public class MecanumArcadeDrive extends LinearOpMode {
             setLine = 3;
 
         }
-        slideFineAdjust += gamepad2.right_stick_y; // Fine adjust for slide position for dropping pixels. Added to set line positons.,
+        slideFineAdjust += gamepad2.right_stick_y; // use /1000 for servo ramp testing // Fine adjust for slide position for dropping pixels. Added to set line positons.,
         slideLift.slideCommands(setLine,slideFineAdjust);
 
+        //intake.liftToTest(slideFineAdjust); //uncomment to find servo positions
+        //telemetry.addData("var",slideFineAdjust);
+        //telemetry.update();
     }
     @Override
     public void runOpMode() throws InterruptedException {
