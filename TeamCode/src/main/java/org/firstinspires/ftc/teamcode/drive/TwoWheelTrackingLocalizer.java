@@ -36,7 +36,7 @@ import java.util.List;
  *
  */
 public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
-    public static double TICKS_PER_REV = 28;
+    public static double TICKS_PER_REV = 8192;
     public static double WHEEL_RADIUS = 1.885; // in
     public static double GEAR_RATIO = 1/15; // output (wheel) speed / input (encoder) speed
 
@@ -49,7 +49,7 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
     // Parallel/Perpendicular to the forward axis
     // Parallel wheel is parallel to the forward axis
     // Perpendicular is perpendicular to the forward axis
-    private DcMotor parallelEncoder, perpendicularEncoder;
+    private Encoder parallelEncoder, perpendicularEncoder;
 
     private SampleMecanumDrive drive;
 
@@ -61,10 +61,11 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
 
         this.drive = drive;
 
-        parallelEncoder = hardwareMap.get(DcMotor.class, "Intake");
-        perpendicularEncoder = hardwareMap.get(DcMotor.class, "perpendicularOdom"));
+        parallelEncoder = new Encoder (hardwareMap.get(DcMotorEx.class, "Intake"));
+        perpendicularEncoder = new Encoder (hardwareMap.get(DcMotorEx.class, "PerpendicularOdom"));
 
         // TODO: reverse any encoders using Encoder.setDirection(Encoder.Direction.REVERSE)
+        perpendicularEncoder.setDirection((Encoder.Direction.REVERSE));
     }
 
     public static double encoderTicksToInches(double ticks) {
