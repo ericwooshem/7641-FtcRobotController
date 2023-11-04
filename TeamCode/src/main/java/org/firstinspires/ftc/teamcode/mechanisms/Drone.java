@@ -12,12 +12,12 @@ public class Drone {
 
     public Drone(HardwareMap HWMap) {
         Shooter = HWMap.get(Servo.class, "DroneServo");
-        Shooter.setPosition(0); }
+        Shooter.setPosition(1); }
         //Holds rubber band in place after manually put in by someone and code starts
 
     public void shooter(String position) {
         if (position.equals("open")) {
-            Shooter.setPosition(0);
+            Shooter.setPosition(0.6);
         } else if (position.equals("closed")) {
             Shooter.setPosition(1);
         }
