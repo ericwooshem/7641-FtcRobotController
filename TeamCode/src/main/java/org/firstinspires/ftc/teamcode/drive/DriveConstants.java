@@ -44,8 +44,8 @@ public class DriveConstants {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 1.885; // in
-    public static double GEAR_RATIO = 1/15; // output (wheel) speed / input (motor) speed
+    public static double WHEEL_RADIUS = 1.8898; // in
+    public static double GEAR_RATIO = 0.067; // output (wheel) speed / input (motor) speed
     public static double TRACK_WIDTH = 14.375; // in
 
     /*
@@ -58,17 +58,17 @@ public class DriveConstants {
     public static double kA = 0;
     public static double kStatic = 0;
 
-    /*
+    /* 
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
      * the constraints should never exceed ~80% of the robot's actual capabilities. While Road
      * Runner is designed to enable faster autonomous motion, it is a good idea for testing to start
      * small and gradually increase them later after everything is working. All distance units are
      * inches.
      */
-    public static double MAX_VEL = 30;
-    public static double MAX_ACCEL = 30;
-    public static double MAX_ANG_VEL = Math.toRadians(60);
-    public static double MAX_ANG_ACCEL = Math.toRadians(60);
+    public static double MAX_VEL = 67.28579369654523;
+    public static double MAX_ACCEL = 67.28579369654523;
+    public static double MAX_ANG_VEL = Math.toRadians(268.1872695652174);
+    public static double MAX_ANG_ACCEL = Math.toRadians(268.1872695652174);
 
     /*
      * Adjust the orientations here to match your robot. See the FTC SDK documentation for details.
