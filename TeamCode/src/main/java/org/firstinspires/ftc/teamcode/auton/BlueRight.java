@@ -30,9 +30,7 @@
 package org.firstinspires.ftc.teamcode.drive.opmode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
@@ -58,7 +56,7 @@ import java.util.List;
  */
 @Autonomous(name = "Blue Right", group = "Concept")
 
-public class BlueLeftAutonOption2 extends LinearOpMode {
+public class BlueRight extends LinearOpMode {
 
     private int tagID;
     private double tagX;
