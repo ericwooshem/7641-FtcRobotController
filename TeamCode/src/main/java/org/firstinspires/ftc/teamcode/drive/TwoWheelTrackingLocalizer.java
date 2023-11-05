@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -35,15 +36,15 @@ import java.util.List;
  *
  */
 public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
-    public static double TICKS_PER_REV = 28;
-    public static double WHEEL_RADIUS = 1.885; // in
-    public static double GEAR_RATIO = 1/15; // output (wheel) speed / input (encoder) speed
+    public static double TICKS_PER_REV = 8192;
+    public static double WHEEL_RADIUS = 0.7; // in
+    public static double GEAR_RATIO = 1.25; // output (wheel) speed / input (encoder) speed
 
-    public static double PARALLEL_X = 6.406; // X is the up and down direction
+    public static double PARALLEL_X = -6.406; // X is the up and down direction
     public static double PARALLEL_Y = 2.813; // Y is the strafe direction
 
-    public static double PERPENDICULAR_X = 5.849;
-    public static double PERPENDICULAR_Y = 1.375;
+    public static double PERPENDICULAR_X = -5.849;
+    public static double PERPENDICULAR_Y = -1.375;
 
     // Parallel/Perpendicular to the forward axis
     // Parallel wheel is parallel to the forward axis
@@ -60,10 +61,11 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
 
         this.drive = drive;
 
-        parallelEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "parallelEncoder"));
-        perpendicularEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "perpendicularEncoder"));
+        parallelEncoder = new Encoder (hardwareMap.get(DcMotorEx.class, "Intake"));
+        perpendicularEncoder = new Encoder (hardwareMap.get(DcMotorEx.class, "PerpendicularOdom"));
 
         // TODO: reverse any encoders using Encoder.setDirection(Encoder.Direction.REVERSE)
+        //perpendicularEncoder.setDirection((Encoder.Direction.REVERSE));
     }
 
     public static double encoderTicksToInches(double ticks) {
