@@ -5,6 +5,7 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gam
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -23,7 +24,7 @@ public class Slides {
     private double rightCurrentPosition;
     private double leftCurrentPosition;
 
-    private int[] setSlideLiftPos = {0, 800, 800, 800}; // Unknown values. First value is for slide reset pos.
+    private int[] setSlideLiftPos = {0, 600, 800, 1000}; // Unknown values. First value is for slide reset pos.
 
     public Slides(HardwareMap HWMap){
         rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
@@ -37,7 +38,7 @@ public class Slides {
         initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
     }
 
-    public void slide(int targetSlides, double fineAdjust) {
+    public void slide(int targetSlides, double fineAdjust, int setLine) {
         rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
         leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
 
@@ -56,16 +57,16 @@ public class Slides {
 
         difference = target - (avgCurrentPos - initPosition);
 
-        difference = difference * 0.01; // P on difference to generate power for motor
-        if (difference > .7) {
-            difference = 0.7;
-        }
+        difference = difference * 0.03; // P on difference to generate power for motor
+
         leftSlidesMotor.setPower(difference);
         rightSlidesMotor.setPower(difference);
+
+
     }
 
     public void slideCommands(int setLine, double fineAdjust) { //[0] is slide reset
-        slide(setSlideLiftPos[setLine], fineAdjust);
+        slide(setSlideLiftPos[setLine], fineAdjust, setLine);
     }
 }
 
