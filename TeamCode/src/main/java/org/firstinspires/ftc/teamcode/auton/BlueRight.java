@@ -30,9 +30,7 @@
 package org.firstinspires.ftc.teamcode.drive.opmode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
@@ -56,9 +54,9 @@ import java.util.List;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
-@Autonomous(name = "BlueLeftAutonOption1", group = "Autons")
+@Autonomous(name = "Blue Right", group = "Concept")
 
-public class BlueLeftAutonOption1 extends LinearOpMode {
+public class BlueRight extends LinearOpMode {
 
     private int tagID;
     private double tagX;
@@ -81,7 +79,7 @@ public class BlueLeftAutonOption1 extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
+        vision.setDetectedColor("red"); //red or blue, VERY IMPORTANT FOR VISION
 
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -99,12 +97,7 @@ public class BlueLeftAutonOption1 extends LinearOpMode {
 
             }
         });
-/*
 
-
-rr here
-
- */
 
 
 
@@ -126,7 +119,6 @@ rr here
         while(telemetryAprilTag()==0&&opModeIsActive()){//delete the left argument for it to show detection, currently it exits when it sees a valid apriltag
             telemetryAprilTag();
             telemetry.update();
-            //call rr thingy
         }
 
         visionPortal.close();

@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Test" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="org.firstinspires.ftc.meepmeeptesting.MeepMeepTestingDriver" />
+    <module name="7641-FtcRobotController.MeepMeepTesting.main" />
+    <option name="PROGRAM_PARAMETERS" value="1" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
