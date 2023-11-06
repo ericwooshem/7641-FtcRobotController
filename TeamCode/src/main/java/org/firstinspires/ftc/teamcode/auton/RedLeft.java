@@ -119,7 +119,15 @@ public class RedLeft extends LinearOpMode {
 rr here
 
  */
-        TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d());
+        TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d())
+                .forward(59)
+                .strafeRight(76)
+                .strafeLeft(90)
+                .back(25)
+                .strafeLeft(13)
+                .turn(Math.toRadians(270))
+
+                .build()
 
 
 
