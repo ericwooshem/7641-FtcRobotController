@@ -37,6 +37,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDir
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.auton.visiontest2;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
@@ -78,6 +79,19 @@ public class BlueLeft extends LinearOpMode {
     OpenCvWebcam camera;
     @Override
     public void runOpMode() {
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d())
+                .forward(59)
+                .strafeRight(76)
+                .strafeLeft(90)
+                .back(25)
+                .strafeLeft(13)
+                .turn(Math.toRadians(270))
+
+                .build()
+
+
+
 
         vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
 
