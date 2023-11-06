@@ -85,7 +85,13 @@ public class BlueRight extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d())
 
-                        .
+                .forward(24)
+                .waitSeconds(3)
+                .turn(Math.toRadians(90))
+                .forward(84)
+                .waitSeconds(3)
+                .strafeRight(12)
+                .build();
 
 
         vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
