@@ -83,12 +83,15 @@ public class BlueLeft extends LinearOpMode {
     public void runOpMode() {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d())
-                .forward(24)
+                //.forward(24)
+                .lineToLinearHeading(new Pose2d(0, 24, 0))
                 .waitSeconds(3)
-                .turn(Math.toRadians(90))
-                .forward(-36)
+                //.turn(Math.toRadians(90))
+                //.forward(-36)
+                .lineToLinearHeading(new Pose2d(-36, 0, Math.toRadians(90)))
                 .waitSeconds(3)
-                .strafeRight(12)
+                //.strafeRight(12)
+                .lineToLinearHeading(new Pose2d(12, 0, 0))
                 .build();
 
 
