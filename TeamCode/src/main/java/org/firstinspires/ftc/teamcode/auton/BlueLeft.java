@@ -79,6 +79,19 @@ public class BlueLeft extends LinearOpMode {
     OpenCvWebcam camera;
     @Override
     public void runOpMode() {
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d())
+                .forward(59)
+                .strafeRight(76)
+                .strafeLeft(90)
+                .back(25)
+                .strafeLeft(13)
+                .turn(Math.toRadians(270))
+
+                .build()
+
+
+
 
         vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
 
