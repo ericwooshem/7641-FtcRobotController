@@ -88,10 +88,10 @@ public class BlueLeft extends LinearOpMode {
                 .waitSeconds(3)
                 //.turn(Math.toRadians(90))
                 //.forward(-36)
-                .lineToLinearHeading(new Pose2d(-36, 0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-36, 24, Math.toRadians(90)))
                 .waitSeconds(3)
                 //.strafeRight(12)
-                .lineToLinearHeading(new Pose2d(12, 0, 0))
+                .lineToLinearHeading(new Pose2d(-48, 24, 90))
                 .build();
 
 
