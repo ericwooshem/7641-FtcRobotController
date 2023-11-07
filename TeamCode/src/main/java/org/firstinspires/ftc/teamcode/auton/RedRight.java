@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.auton;
 
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -10,6 +11,8 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 //import org.firstinspires.ftc.teamcode.drive.opmode.visiontest2;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
@@ -44,6 +47,24 @@ public class RedRight extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+
+        TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d())
+
+                .forward(24)
+                .waitSeconds(3)//vision time
+                .turn(Math.toRadians(90))
+                .forward(84)
+                .waitSeconds(3)//vision time
+                .strafeRight(12)
+                .build();
+        /* .lineToLinearHeading(new Pose2d(0, 24, 0))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-84, 24, Math.toRadians(90)))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-84, 12, 90))
+         */
+
         vision.setDetectedColor("red"); //red or blue, VERY IMPORTANT FOR VISION
 
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
@@ -69,6 +90,7 @@ public class RedRight extends LinearOpMode {
 
         //compare x value to determine where to put pixel
         waitForStart();
+        drive.followTrajectorySequence(cycle);
 
         camera.closeCameraDevice();
 

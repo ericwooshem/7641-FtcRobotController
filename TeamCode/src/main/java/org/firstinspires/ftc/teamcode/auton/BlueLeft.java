@@ -127,6 +127,7 @@ rr here
 
         //compare x value to determine where to put pixel
         waitForStart();
+        drive.followTrajectorySequence(cycle);
 
         camera.closeCameraDevice();
 
