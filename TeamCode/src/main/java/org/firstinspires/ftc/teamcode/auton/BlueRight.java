@@ -86,10 +86,10 @@ public class BlueRight extends LinearOpMode {
         TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d())
 
                 .forward(24)
-                .waitSeconds(3)
+                .waitSeconds(3)//vision time
                 .turn(Math.toRadians(90))
                 .forward(84)
-                .waitSeconds(3)
+                .waitSeconds(3)//vision time
                 .strafeRight(12)
                 .build();
 
@@ -120,6 +120,7 @@ public class BlueRight extends LinearOpMode {
         //compare x value to determine where to put pixel
         waitForStart();
 
+        
         camera.closeCameraDevice();
 
         telemetry.addData("e",12);
