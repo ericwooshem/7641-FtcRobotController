@@ -40,7 +40,12 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.Drone;
+import org.firstinspires.ftc.teamcode.mechanisms.Intake;
+import org.firstinspires.ftc.teamcode.mechanisms.Slides;
+import org.firstinspires.ftc.teamcode.mechanisms.Spatula;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
@@ -58,7 +63,7 @@ import java.util.List;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
-@Autonomous(name = "Blue Right", group = "Concept")
+@Autonomous(name = "Blue Right", group = "Meet 1 autons")
 
 public class BlueRight extends LinearOpMode {
 
@@ -80,20 +85,28 @@ public class BlueRight extends LinearOpMode {
 
     private visiontest2 vision = new visiontest2(telemetry);
     OpenCvWebcam camera;
+
+
     @Override
     public void runOpMode() {
+        Slides slideLift = new Slides(hardwareMap);
+        Intake intake = new Intake(hardwareMap);
+        Spatula spatula  = new Spatula(hardwareMap);
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d())
+        TrajectorySequence moveToVision = drive.trajectorySequenceBuilder(new Pose2d())
 
-                .forward(24)
-                .waitSeconds(3)//vision time
-                .turn(Math.toRadians(90))
-                .forward(84)
-                .waitSeconds(3)//vision time
-                .strafeRight(12)
+                .forward(36)
                 .build();
+
+//        TrajectorySequence vision1 = drive.trajectorySequenceBuilder(new Pose2d())
+
+//                .turn(Math.toRadians(90))
+//                .forward(84)
+//                .waitSeconds(3)//vision time
+//                .strafeRight(12)
+//                .build();
         /* .lineToLinearHeading(new Pose2d(0, 24, 0))
                 .waitSeconds(3)
                 .lineToLinearHeading(new Pose2d(-84, 24, Math.toRadians(90)))
@@ -128,7 +141,12 @@ public class BlueRight extends LinearOpMode {
         //compare x value to determine where to put pixel
         waitForStart();
 
-        drive.followTrajectorySequence(cycle);
+        drive.followTrajectorySequence(moveToVision);
+        if(vision.getLocation()== visiontest2.Location.Centerr){
+            intake.liftToLevel(1);
+            intake.spin("autondrop");
+        }
+
         
         camera.closeCameraDevice();
 

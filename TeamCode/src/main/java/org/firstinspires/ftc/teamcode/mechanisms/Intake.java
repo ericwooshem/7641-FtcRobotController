@@ -37,6 +37,9 @@ public class Intake {
         else if(direction.equals("reverse")) {
             Intake.setPower(0.8);
         }
+        else if(direction.equals("autondrop")) {
+            Intake.setPower(0.4);
+        }
         else{
             Intake.setPower(0.0);
         }
