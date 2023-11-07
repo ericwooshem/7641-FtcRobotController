@@ -92,6 +92,12 @@ public class BlueRight extends LinearOpMode {
                 .waitSeconds(3)
                 .strafeRight(12)
                 .build();
+        /* .lineToLinearHeading(new Pose2d(0, 24, 0))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-84, 24, Math.toRadians(90)))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-84, 12, 90))
+         */
 
 
         vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
