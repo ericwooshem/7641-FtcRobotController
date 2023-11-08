@@ -100,8 +100,9 @@ public class BlueRight extends LinearOpMode {
                 .forward(36)
                 .build();
 
-//        TrajectorySequence vision1 = drive.trajectorySequenceBuilder(new Pose2d())
-
+        TrajectorySequence visionC = drive.trajectorySequenceBuilder(new Pose2d())
+                .forward(-12)
+                .build();
 //                .turn(Math.toRadians(90))
 //                .forward(84)
 //                .waitSeconds(3)//vision time
@@ -142,10 +143,14 @@ public class BlueRight extends LinearOpMode {
         waitForStart();
 
         drive.followTrajectorySequence(moveToVision);
-        if(vision.getLocation()== visiontest2.Location.Centerr){
+        if(vision.getLocation()==2){
             intake.liftToLevel(1);
             intake.spin("autondrop");
+            sleep(500);
+            intake.spin("stop");
+            drive.followTrajectorySequence(visionC);
         }
+
 
         
         camera.closeCameraDevice();

@@ -13,13 +13,13 @@ public class visiontest2 extends OpenCvPipeline {
     Telemetry telemetry;
     private String detectedColor;
     Mat mat = new Mat();
-    public enum Location {
-        Leftt,
-        Rightt,
-        Centerr,
-        Not_Found
-    }
-    private Location location;
+//    public enum Location {
+//        Leftt,
+//        Rightt,
+//        Centerr,
+//        Not_Found
+//    }
+    private int location;
     static final Rect left = new Rect(
             new Point(575, 40),
             new Point(600, 100));
@@ -29,10 +29,10 @@ public class visiontest2 extends OpenCvPipeline {
 //            new Point(637, 150));
 
     static final Rect center = new Rect(
-            new Point(225, 75),
-            new Point(275, 125));
+            new Point(125, 75),
+            new Point(175, 125));
 
-    static double Percent_Color_Threshhold = 0.3;
+    static double Percent_Color_Threshhold = 0.15;
 
     public visiontest2(Telemetry t) {
         telemetry = t;
@@ -89,14 +89,14 @@ public class visiontest2 extends OpenCvPipeline {
 
         if (isLeft) {
             //left
-            location = Location.Leftt;
+            location = 1;
         }
         else if (isCenter) {
             //center
-            location = Location.Centerr;
+            location = 2;
         }
         else{
-          location = Location.Rightt;
+          location = 3;
         }
         telemetry.addData("location", location);
         telemetry.update();
@@ -106,19 +106,21 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
             Scalar colorstone = new Scalar (255,0,0);
             Scalar colorSkystone = new Scalar (0,255,0);
 
-            Imgproc.rectangle(mat, left, location == Location.Leftt? colorSkystone: colorstone);
+            Imgproc.rectangle(mat, left, location == 1? colorSkystone: colorstone);
 //            Imgproc.rectangle(mat, right, location == Location.Rightt? colorSkystone: colorstone);
-            Imgproc.rectangle(mat, center, location == Location.Centerr? colorSkystone: colorstone);
+            Imgproc.rectangle(mat, center, location == 2? colorSkystone: colorstone);
 
-            for(int i = 0;i<13;i++){
-                for(int j = 0;j<10;j++){
-                    Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
-                }
-            }
+
+        telemetry.addData("v", getLocation());
+//            for(int i = 0;i<13;i++){
+//                for(int j = 0;j<10;j++){
+//                    Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
+//                }
+//            }
 
             return mat;
         }
-        public Location getLocation() {
+        public int getLocation() {
             return location;
         }
 
