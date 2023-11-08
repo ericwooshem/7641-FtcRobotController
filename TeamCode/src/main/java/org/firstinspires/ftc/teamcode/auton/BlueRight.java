@@ -99,14 +99,15 @@ public class BlueRight extends LinearOpMode {
 
                 .lineToLinearHeading(new Pose2d(76, 0, Math.toRadians(0)))
 //                .forward(76)
-//                .turn(Math.toRadians(180))
+                .turn(Math.toRadians(180))
 //                .forward(5)
+                .lineToLinearHeading(new Pose2d(72, 0, Math.toRadians(180)))
                 .build();
 
         TrajectorySequence visionC = drive.trajectorySequenceBuilder(new Pose2d())
 
-                .turn(Math.toRadians(90))
-                .forward(100)
+                .turn(Math.toRadians(-90))
+                .lineToLinearHeading(new Pose2d(72, -100, Math.toRadians(90)))
                 .build();
 //                .turn(Math.toRadians(90))
 //                .forward(84)
@@ -159,7 +160,7 @@ public class BlueRight extends LinearOpMode {
         } else if (vision.getLocation() == 2) {
             intake.liftToLevel(1);
             intake.spin("autondrop");
-            sleep(200);
+            sleep(500);
             intake.spin("stop");
             drive.followTrajectorySequence(visionC);
         }
