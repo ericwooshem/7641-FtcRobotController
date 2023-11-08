@@ -21,16 +21,16 @@ public class visiontest2 extends OpenCvPipeline {
     }
     private Location location;
     static final Rect left = new Rect(
-            new Point(50, 225),
-            new Point(75, 325));
+            new Point(575, 40),
+            new Point(600, 100));
 
 //    static final Rect right = new Rect(
 //            new Point(600, 1),
 //            new Point(637, 150));
 
     static final Rect center = new Rect(
-            new Point(350, 250),
-            new Point(425, 325));
+            new Point(225, 75),
+            new Point(275, 125));
 
     static double Percent_Color_Threshhold = 0.3;
 
@@ -110,11 +110,11 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 //            Imgproc.rectangle(mat, right, location == Location.Rightt? colorSkystone: colorstone);
             Imgproc.rectangle(mat, center, location == Location.Centerr? colorSkystone: colorstone);
 
-//            for(int i = 0;i<13;i++){
-//                for(int j = 0;j<10;j++){
-//                    Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
-//                }
-//            }
+            for(int i = 0;i<13;i++){
+                for(int j = 0;j<10;j++){
+                    Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
+                }
+            }
 
             return mat;
         }
