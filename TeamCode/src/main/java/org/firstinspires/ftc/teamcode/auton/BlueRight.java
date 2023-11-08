@@ -97,11 +97,16 @@ public class BlueRight extends LinearOpMode {
 
         TrajectorySequence moveToVision = drive.trajectorySequenceBuilder(new Pose2d())
 
-                .forward(36)
+                .lineToLinearHeading(new Pose2d(76, 0, Math.toRadians(0)))
+//                .forward(76)
+//                .turn(Math.toRadians(180))
+//                .forward(5)
                 .build();
 
         TrajectorySequence visionC = drive.trajectorySequenceBuilder(new Pose2d())
-                .forward(-12)
+
+                .turn(Math.toRadians(90))
+                .forward(100)
                 .build();
 //                .turn(Math.toRadians(90))
 //                .forward(84)
@@ -142,11 +147,19 @@ public class BlueRight extends LinearOpMode {
         //compare x value to determine where to put pixel
         waitForStart();
 
+        camera.closeCameraDevice();
+
         drive.followTrajectorySequence(moveToVision);
-        if(vision.getLocation()==2){
+        if(vision.getLocation()==1){
+//            intake.liftToLevel(1);
+//            intake.spin("autondrop");
+//            sleep(500);
+//            intake.spin("stop");
+//            drive.followTrajectorySequence(visionC);
+        } else if (vision.getLocation() == 2) {
             intake.liftToLevel(1);
             intake.spin("autondrop");
-            sleep(500);
+            sleep(200);
             intake.spin("stop");
             drive.followTrajectorySequence(visionC);
         }
