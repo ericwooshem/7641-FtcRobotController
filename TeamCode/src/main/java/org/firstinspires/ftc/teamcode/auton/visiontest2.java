@@ -21,16 +21,16 @@ public class visiontest2 extends OpenCvPipeline {
 //    }
     private int location;
     static final Rect left = new Rect(
-            new Point(575, 40),
-            new Point(600, 100));
+            new Point(425, 25),
+            new Point(475, 75));
 
 //    static final Rect right = new Rect(
 //            new Point(600, 1),
 //            new Point(637, 150));
 
     static final Rect center = new Rect(
-            new Point(125, 75),
-            new Point(175, 125));
+            new Point(25, 75),
+            new Point(75, 125));
 
     static double Percent_Color_Threshhold = 0.15;
 
@@ -112,11 +112,11 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 
 
         telemetry.addData("v", getLocation());
-//            for(int i = 0;i<13;i++){
-//                for(int j = 0;j<10;j++){
-//                    Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
-//                }
-//            }
+            for(int i = 0;i<13;i++){
+                for(int j = 0;j<10;j++){
+                    Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
+                }
+            }
 
             return mat;
         }
