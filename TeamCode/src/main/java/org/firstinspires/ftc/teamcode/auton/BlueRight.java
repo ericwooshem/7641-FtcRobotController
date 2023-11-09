@@ -128,14 +128,14 @@ public class BlueRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(60, 0, Math.toRadians(0)))
                 .turn(Math.toRadians(180))
                 .lineToLinearHeading(new Pose2d(56, 0, Math.toRadians(180)))
-                .waitSeconds(1.15)
-                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.liftToLevel(1))
-                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("autondrop"))
+                .waitSeconds(1.4)
+//                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.liftToLevel(2))
+                .UNSTABLE_addTemporalMarkerOffset(-1.25, () -> intake.spin("autondrop"))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
                 .lineToLinearHeading(new Pose2d(65, 0, Math.toRadians(180)))
                 .build();
 
-        intake.liftToLevel(5);
+        intake.liftToLevel(1);
         vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
 
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
