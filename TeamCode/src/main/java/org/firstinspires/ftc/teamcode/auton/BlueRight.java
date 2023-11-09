@@ -30,11 +30,13 @@
 package org.firstinspires.ftc.teamcode.auton;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.checkerframework.checker.units.qual.C;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -46,6 +48,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.mechanisms.Spatula;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
@@ -94,21 +97,21 @@ public class BlueRight extends LinearOpMode {
         Spatula spatula  = new Spatula(hardwareMap);
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+//        TrajectorySequence moveToVision = drive.trajectorySequenceBuilder(new Pose2d())
+//
+//                .lineToLinearHeading(new Pose2d(60, 0, Math.toRadians(0)))
+////                .forward(76)
+//                .turn(Math.toRadians(180))
+////                .forward(5)
+//                .lineToLinearHeading(new Pose2d(56, 0, Math.toRadians(180)))
+//                .build();
+//
+//        TrajectorySequence visionC = drive.trajectorySequenceBuilder(new Pose2d())
+//                .lineToLinearHeading(new Pose2d(60, 0, Math.toRadians(180)))
+//                // .turn(Math.toRadians(-90))
+//                // .lineToLinearHeading(new Pose2d(72, -100, Math.toRadians(90)))
+//                .build();
 
-        TrajectorySequence moveToVision = drive.trajectorySequenceBuilder(new Pose2d())
-
-                .lineToLinearHeading(new Pose2d(76, 0, Math.toRadians(0)))
-//                .forward(76)
-                .turn(Math.toRadians(180))
-//                .forward(5)
-                .lineToLinearHeading(new Pose2d(72, 0, Math.toRadians(180)))
-                .build();
-
-        TrajectorySequence visionC = drive.trajectorySequenceBuilder(new Pose2d())
-
-                .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(72, -100, Math.toRadians(90)))
-                .build();
 //                .turn(Math.toRadians(90))
 //                .forward(84)
 //                .waitSeconds(3)//vision time
@@ -121,7 +124,18 @@ public class BlueRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-84, 12, 90))
          */
 
+        TrajectorySequence centervision = drive.trajectorySequenceBuilder(new Pose2d())
+                .lineToLinearHeading(new Pose2d(60, 0, Math.toRadians(0)))
+                .turn(Math.toRadians(180))
+                .lineToLinearHeading(new Pose2d(56, 0, Math.toRadians(180)))
+                .waitSeconds(1.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.liftToLevel(1))
+                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("autondrop"))
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
+                .lineToLinearHeading(new Pose2d(65, 0, Math.toRadians(180)))
+                .build();
 
+        intake.liftToLevel(5);
         vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
 
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
@@ -150,7 +164,6 @@ public class BlueRight extends LinearOpMode {
 
         camera.closeCameraDevice();
 
-        drive.followTrajectorySequence(moveToVision);
         if(vision.getLocation()==1){
 //            intake.liftToLevel(1);
 //            intake.spin("autondrop");
@@ -158,11 +171,7 @@ public class BlueRight extends LinearOpMode {
 //            intake.spin("stop");
 //            drive.followTrajectorySequence(visionC);
         } else if (vision.getLocation() == 2) {
-            intake.liftToLevel(1);
-            intake.spin("autondrop");
-            sleep(500);
-            intake.spin("stop");
-            drive.followTrajectorySequence(visionC);
+            drive.followTrajectorySequence(centervision);
         }
 
 
