@@ -133,6 +133,7 @@ public class BlueRight extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(-1.25, () -> intake.spin("autondrop"))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
                 .lineToLinearHeading(new Pose2d(65, 0, Math.toRadians(180)))
+                .turn(Math.toRadians(90))
                 .build();
 
         intake.liftToLevel(1);
