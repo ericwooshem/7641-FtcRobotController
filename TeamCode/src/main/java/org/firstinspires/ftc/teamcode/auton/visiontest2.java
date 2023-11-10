@@ -13,26 +13,26 @@ public class visiontest2 extends OpenCvPipeline {
     Telemetry telemetry;
     private String detectedColor;
     Mat mat = new Mat();
-    public enum Location {
-        Leftt,
-        Rightt,
-        Centerr,
-        Not_Found
-    }
-    private Location location;
+//    public enum Location {
+//        Leftt,
+//        Rightt,
+//        Centerr,
+//        Not_Found
+//    }
+    private int location;
     static final Rect left = new Rect(
-            new Point(1, 1),
-            new Point(213, 479));
+            new Point(425, 25),
+            new Point(475, 75));
 
-    static final Rect right = new Rect(
-            new Point(214, 1),
-            new Point(426, 479));
+//    static final Rect right = new Rect(
+//            new Point(600, 1),
+//            new Point(637, 150));
 
     static final Rect center = new Rect(
-            new Point(427, 1),
-            new Point(637, 479));
+            new Point(25, 75),
+            new Point(75, 125));
 
-    static double Percent_Color_Threshhold = 0.4;
+    static double Percent_Color_Threshhold = 0.15;
 
     public visiontest2(Telemetry t) {
         telemetry = t;
@@ -46,17 +46,17 @@ public class visiontest2 extends OpenCvPipeline {
 
         telemetry.addData("Color detecting: ", detectedColor);
         if(detectedColor.equals("red")){
-            lowHSV = new Scalar(-10, 50, 50);
+            lowHSV = new Scalar(-10, 25, 25);
             highHSV = new Scalar(10, 255, 255);
             telemetry.addData("e",0);
         }
         else if(detectedColor.equals("blue")){
-            lowHSV = new Scalar(90, 50, 50);
+            lowHSV = new Scalar(90, 75, 75);
             highHSV = new Scalar(110, 255, 255);
             telemetry.addData("e",1);
         }
         else{ //default to red
-            lowHSV = new Scalar(-10, 50, 50);
+            lowHSV = new Scalar(-10, 25, 25);
             highHSV = new Scalar(10, 255, 255);
             telemetry.addData("e",2);
         }
@@ -65,41 +65,38 @@ public class visiontest2 extends OpenCvPipeline {
 
         Core.inRange(mat, lowHSV, highHSV, mat);
         Mat leftside = mat.submat(left);
-        Mat rightside = mat.submat(right);
+//        Mat rightside = mat.submat(right);
         Mat centerside = mat.submat(center);
 
         double leftValue = Core.sumElems(leftside).val[0] / left.area() / 255;
-        double rightValue = Core.sumElems(rightside).val[0] / right.area() / 255;
-        double centerValue = Core.sumElems(centerside).val[0] / right.area() / 255;
+//        double rightValue = Core.sumElems(rightside).val[0] / right.area() / 255;
+        double centerValue = Core.sumElems(centerside).val[0] / center.area() / 255;
 
 
         leftside.release();
-        rightside.release();
+        centerside.release();
+//        rightside.release();
         telemetry.addData("Left raw value", (int) Core.sumElems(leftside).val[0]);
-        telemetry.addData("Right raw value", (int) Core.sumElems(rightside).val[0]);
+//        telemetry.addData("Right raw value", (int) Core.sumElems(rightside).val[0]);
         telemetry.addData("Left percentage", Math.round(leftValue * 100) + "%");
-        telemetry.addData("Right percentage", Math.round(rightValue * 100) + "%");
+//        telemetry.addData("Right percentage", Math.round(rightValue * 100) + "%");
         telemetry.addData("Center percentage", Math.round(centerValue * 100) + "%");
         telemetry.addData("Center percentage", Math.round(centerValue * 100) + "%");
 
-        boolean stoneleft = leftValue > Percent_Color_Threshhold;
-        boolean stoneright = rightValue > Percent_Color_Threshhold;
-        boolean stonecenter = centerValue > Percent_Color_Threshhold;
+        boolean isLeft = leftValue > Percent_Color_Threshhold;
+//        boolean stoneright = rightValue > Percent_Color_Threshhold;
+        boolean isCenter = centerValue > Percent_Color_Threshhold;
 
-        if (stoneleft) {
+        if (isLeft) {
             //left
-            location = Location.Leftt;
+            location = 1;
         }
-        else if (stonecenter) {
+        else if (isCenter) {
             //center
-            location = Location.Centerr;
-        }
-        else if(stoneright){
-                //right
-            location = Location.Rightt;
+            location = 2;
         }
         else{
-          location = Location.Not_Found;
+          location = 3;
         }
         telemetry.addData("location", location);
         telemetry.update();
@@ -109,13 +106,21 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
             Scalar colorstone = new Scalar (255,0,0);
             Scalar colorSkystone = new Scalar (0,255,0);
 
-            Imgproc.rectangle(mat, left, location == Location.Leftt? colorSkystone: colorstone);
-            Imgproc.rectangle(mat, right, location == Location.Rightt? colorSkystone: colorstone);
-            Imgproc.rectangle(mat, center, location == Location.Centerr? colorSkystone: colorstone);
+            Imgproc.rectangle(mat, left, location == 1? colorSkystone: colorstone);
+//            Imgproc.rectangle(mat, right, location == Location.Rightt? colorSkystone: colorstone);
+            Imgproc.rectangle(mat, center, location == 2? colorSkystone: colorstone);
+
+
+        telemetry.addData("v", getLocation());
+            for(int i = 0;i<13;i++){
+                for(int j = 0;j<10;j++){
+                    Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
+                }
+            }
 
             return mat;
         }
-        public Location getLocation() {
+        public int getLocation() {
             return location;
         }
 

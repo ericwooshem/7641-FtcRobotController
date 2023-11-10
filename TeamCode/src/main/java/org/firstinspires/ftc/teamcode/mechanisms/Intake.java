@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.util.Encoder;
 public class Intake {
 
     private double[] servoPos = {1,//0.87228696,0.85418 , 0.823556, 0.8001234 // going from top to bottom bc servo aint perfect
-            0.8669, 0.8393649, 0.816341, 0.80043874 // going from bottom to top, its good enough.
+            0.8669, 0.8393649, 0.816341, 0.80043874, 0.92 // going from bottom to top, its good enough.
     }; // [0] to [5], 0 is ground, 5 is top. Values may need adjustment. Current pixel height in servo = 0.4
 
     // {0.8001234, 0.823556, 0.85418, 0.87228696} // reserved
@@ -37,6 +37,9 @@ public class Intake {
         else if(direction.equals("reverse")) {
             Intake.setPower(0.8);
         }
+        else if(direction.equals("autondrop")) {
+            Intake.setPower(0.3);
+        }
         else{
             Intake.setPower(0.0);
         }
@@ -44,7 +47,7 @@ public class Intake {
 
     public void liftToLevel(int level){
         Intakelift.setPosition(servoPos[level]);
-    }
+    }//5 for auton lift
     public void liftToTest(double test){
         Intakelift.setPosition(test);
     }

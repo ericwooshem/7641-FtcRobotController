@@ -12,7 +12,7 @@ public class BlueLeftAutonOption1 extends MeepMeepTestingTemplate{
         myDefaultBot = this.buildBot(meepMeep);
         this.myBot = myDefaultBot.followTrajectorySequence(drive ->
                 drive.trajectorySequenceBuilder(new Pose2d(-70, 20, 0))
-                        .forward(59)
+                        .forward(48)
                         .strafeRight(76)
                         .strafeLeft(90)
                         .back(25)
