@@ -42,8 +42,8 @@ public class RedRight extends LinearOpMode {
      */
     private VisionPortal visionPortal;
 
-//    private visiontest2 vision = new visiontest2(telemetry);
-//    OpenCvWebcam camera;
+    private visiontest2 vision = new visiontest2(telemetry);
+    OpenCvWebcam camera;
     @Override
     public void runOpMode() {
 
@@ -65,24 +65,24 @@ public class RedRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-84, 12, 90))
          */
 
-//        vision.setDetectedColor("red"); //red or blue, VERY IMPORTANT FOR VISION
-//
-//        WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
-//        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-//        camera = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
-//        camera.setPipeline(vision);
-//        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
-//            @Override
-//            public void onOpened() {
-//                camera.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
-//            }
-//
-//
-//            @Override
-//            public void onError(int errorCode) {
-//
-//            }
-//        });
+        vision.setDetectedColor("red"); //red or blue, VERY IMPORTANT FOR VISION
+
+        WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        camera = OpenCvCameraFactory.getInstance().createWebcam(webcamName, cameraMonitorViewId);
+        camera.setPipeline(vision);
+        camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+            @Override
+            public void onOpened() {
+                camera.startStreaming(640, 480, OpenCvCameraRotation.UPRIGHT);
+            }
+
+
+            @Override
+            public void onError(int errorCode) {
+
+            }
+        });
 
 
 
@@ -150,7 +150,7 @@ public class RedRight extends LinearOpMode {
 
         // Set the camera (webcam vs. built-in RC phone camera).
         if (USE_WEBCAM) {
-//            builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"));
+            builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"));
         } else {
             builder.setCamera(BuiltinCameraDirection.BACK);
         }

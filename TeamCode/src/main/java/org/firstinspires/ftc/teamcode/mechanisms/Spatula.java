@@ -51,6 +51,12 @@ public class Spatula {
 
         //Bring the slot closer to the backdrop and orients it the right way, so the pixel can fall out
     }
+    public void slot(double ang) {
+        RightSpatula.setPosition(1-ang);
+        LeftSpatula.setPosition(ang);
+
+        //Bring the slot closer to the backdrop and orients it the right way, so the pixel can fall out
+    }
 
     public void slotReset() {
         RightSpatula.setPosition(1);
