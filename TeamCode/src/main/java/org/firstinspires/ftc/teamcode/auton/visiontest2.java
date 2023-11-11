@@ -12,7 +12,11 @@ import org.openftc.easyopencv.OpenCvPipeline;
 public class visiontest2 extends OpenCvPipeline {
     Telemetry telemetry;
     private String detectedColor;
+    private String leftOrRight;
     Mat mat = new Mat();
+
+    static Rect left;
+    static Rect center;
 //    public enum Location {
 //        Leftt,
 //        Rightt,
@@ -20,19 +24,38 @@ public class visiontest2 extends OpenCvPipeline {
 //        Not_Found
 //    }
     private int location;
-    static final Rect left = new Rect(
-            new Point(525, 250),
-            new Point(575, 300));
+
+    public void setrectangles(){
+        if(leftOrRight.equals("left")){
+            left = new Rect(
+                    new Point(350, 275),
+                    new Point(400, 325));
+            center = new Rect(
+                    new Point(25, 300),
+                    new Point(75, 350));
+        }
+        else{
+            left = new Rect(
+                    new Point(575, 250),
+                    new Point(625, 300));
+            center = new Rect(
+                    new Point(150, 300),
+                    new Point(200, 350));
+        }
+    }
+//    static final Rect left = new Rect(
+//            new Point(575, 250),
+//            new Point(625, 300));
 
 //    static final Rect right = new Rect(
 //            new Point(600, 1),
 //            new Point(637, 150));
+//
+//    static final Rect center = new Rect(
+//            new Point(150, 300),
+//            new Point(200, 350));
 
-    static final Rect center = new Rect(
-            new Point(150, 300),
-            new Point(200, 350));
-
-    static double Percent_Color_Threshhold = 0.15;
+    static double Percent_Color_Threshhold = 0.1;
 
     public visiontest2(Telemetry t) {
         telemetry = t;
@@ -112,11 +135,11 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
 
 
         telemetry.addData("v", getLocation());
-            for(int i = 0;i<13;i++){
-                for(int j = 0;j<10;j++){
-                    Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
-                }
-            }
+//            for(int i = 0;i<13;i++){
+//                for(int j = 0;j<10;j++){
+//                    Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
+//                }
+//            }
 
             return mat;
         }
@@ -127,6 +150,9 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
         public void setDetectedColor(String color){
             this.detectedColor = color;
         }
+    public void setside(String side){
+        this.leftOrRight = side;
+    }
 
     }
 

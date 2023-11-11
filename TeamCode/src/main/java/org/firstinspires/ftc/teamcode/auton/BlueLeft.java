@@ -30,16 +30,25 @@
 package org.firstinspires.ftc.teamcode.auton;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.checkerframework.checker.units.qual.C;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.mechanisms.Drone;
+import org.firstinspires.ftc.teamcode.mechanisms.Intake;
+import org.firstinspires.ftc.teamcode.mechanisms.Slides;
+import org.firstinspires.ftc.teamcode.mechanisms.Spatula;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceBuilder;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequenceRunner;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
@@ -57,7 +66,7 @@ import java.util.List;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
-@Autonomous(name = "BlueLeft", group = "Autons")
+@Autonomous(name = "Blue Left", group = "Meet 1 autons", preselectTeleOp= "MecanumArcadeDrive")
 
 public class BlueLeft extends LinearOpMode {
 
@@ -79,25 +88,168 @@ public class BlueLeft extends LinearOpMode {
 
     private visiontest2 vision = new visiontest2(telemetry);
     OpenCvWebcam camera;
+
+
     @Override
     public void runOpMode() {
+        Slides slideLift = new Slides(hardwareMap);
+        Intake intake = new Intake(hardwareMap);
+        Spatula spatula  = new Spatula(hardwareMap);
+
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d())
-                //.forward(24)
-                .lineToLinearHeading(new Pose2d(0, 24, 0))
+//        TrajectorySequence moveToVision = drive.trajectorySequenceBuilder(new Pose2d())
+//
+//                .lineToLinearHeading(new Pose2d(60, 0, Math.toRadians(0)))
+////                .forward(76)
+//                .turn(Math.toRadians(180))
+////                .forward(5)
+//                .lineToLinearHeading(new Pose2d(56, 0, Math.toRadians(180)))
+//                .build();
+//
+//        TrajectorySequence visionC = drive.trajectorySequenceBuilder(new Pose2d())
+//                .lineToLinearHeading(new Pose2d(60, 0, Math.toRadians(180)))
+//                // .turn(Math.toRadians(-90))
+//                // .lineToLinearHeading(new Pose2d(72, -100, Math.toRadians(90)))
+//                .build();
+
+//                .turn(Math.toRadians(90))
+//                .forward(84)
+//                .waitSeconds(3)//vision time
+//                .strafeRight(12)
+//                .build();
+        /* .lineToLinearHeading(new Pose2d(0, 24, 0))
                 .waitSeconds(3)
-                //.turn(Math.toRadians(90))
-                //.forward(-36)
-                .lineToLinearHeading(new Pose2d(-36, 24, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-84, 24, Math.toRadians(90)))
                 .waitSeconds(3)
-                //.strafeRight(12)
-                .lineToLinearHeading(new Pose2d(-48, 24, 90))
+                .lineToLinearHeading(new Pose2d(-84, 12, 90))
+         */
+
+        TrajectorySequence centervision = drive.trajectorySequenceBuilder(new Pose2d())
+                .lineToLinearHeading(new Pose2d(0, 4, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(61, 4, Math.toRadians(0)))
+                .turn(Math.toRadians(180))
+                .lineToLinearHeading(new Pose2d(59, 0, Math.toRadians(180)))
+                .waitSeconds(1)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+//                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.liftToLevel(2))
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(1))
+                .waitSeconds(0.5)
+                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("reverse"))
+                .waitSeconds(1)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> intake.spin("autondrop"))
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
+                .lineToLinearHeading(new Pose2d(65, 0, Math.toRadians(180)))
+                .turn(Math.toRadians(100))
+                .lineToLinearHeading(new Pose2d(65, 90-50, Math.toRadians(270)))
+                .turn(Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(35, 106-50, Math.toRadians(0)))
+                .waitSeconds(1)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinWheelForward())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .turn(Math.toRadians(-90))
+                .lineToLinearHeading(new Pose2d(37, 106-50, Math.toRadians(270)))
+                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
+                .lineToLinearHeading(new Pose2d(32, 117-60, Math.toRadians(270)))
+                .UNSTABLE_addTemporalMarkerOffset(-1.5, () -> slideLift.slideCommands(4,0))
+                .waitSeconds(2)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .waitSeconds(1)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.slotReset())
                 .build();
 
+        TrajectorySequence rightvision = drive.trajectorySequenceBuilder(new Pose2d())
+                .lineToLinearHeading(new Pose2d(0, 4, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(36, 4, Math.toRadians(0)))
+                .turn(Math.toRadians(-90))
+                //.lineToLinearHeading(new Pose2d(36, 4, Math.toRadians(-90)))
+                .waitSeconds(1)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(1))
+                .waitSeconds(0.5)
+                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("reverse"))
+                .waitSeconds(1)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> intake.spin("autondrop"))
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
+                .lineToLinearHeading(new Pose2d(65, 0, Math.toRadians(180)))
+                .turn(Math.toRadians(100))
+                .lineToLinearHeading(new Pose2d(65, 90-50, Math.toRadians(270)))
+                .turn(Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(35, 106-50, Math.toRadians(0)))
+                .waitSeconds(1)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinWheelForward())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .turn(Math.toRadians(-90))
+                .lineToLinearHeading(new Pose2d(37, 106-50, Math.toRadians(270)))
+                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
+                .lineToLinearHeading(new Pose2d(38, 117-60, Math.toRadians(270)))
+                .UNSTABLE_addTemporalMarkerOffset(-1.5, () -> slideLift.slideCommands(4,0))
+                .waitSeconds(2)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .waitSeconds(1)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.slotReset())
+                .build();
 
-
+        TrajectorySequence leftvision = drive.trajectorySequenceBuilder(new Pose2d())
+                .lineToLinearHeading(new Pose2d(0, 4, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(36, 4, Math.toRadians(0)))
+                .turn(Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(36, -1, Math.toRadians(90)))
+                .waitSeconds(1)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(1))
+                .waitSeconds(0.5)
+                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("reverse"))
+                .waitSeconds(1)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> intake.spin("autondrop"))
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
+                .turn(Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(65, 0, Math.toRadians(180)))
+                .turn(Math.toRadians(100))
+                .lineToLinearHeading(new Pose2d(65, 90-50, Math.toRadians(270)))
+                .turn(Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(35, 106-50, Math.toRadians(0)))
+                .waitSeconds(1)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinWheelForward())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .turn(Math.toRadians(-90))
+                .lineToLinearHeading(new Pose2d(37, 106-60, Math.toRadians(270)))
+                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
+                .lineToLinearHeading(new Pose2d(28, 117-50, Math.toRadians(270)))
+                .UNSTABLE_addTemporalMarkerOffset(-1.5, () -> slideLift.slideCommands(4,0))
+                .waitSeconds(2)
+                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .waitSeconds(1)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.slotReset())
+                .build();
+        intake.liftToLevel(5);
 
         vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
+        vision.setside("left"); //left or right, VERY IMPORTANT FOR VISION
+        vision.setrectangles();
 
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -115,19 +267,29 @@ public class BlueLeft extends LinearOpMode {
 
             }
         });
-/*
 
-
-rr here
-
- */
 
 
 
 
         //compare x value to determine where to put pixel
         waitForStart();
-        drive.followTrajectorySequence(cycle);
+        slideLift.slideCommands(0,0);
+        camera.closeCameraDevice();
+
+        if(vision.getLocation()==1){
+            drive.followTrajectorySequence(leftvision);
+        } else if (vision.getLocation() == 2) {
+            drive.followTrajectorySequence(centervision);
+        } else if (vision.getLocation() == 3) {
+            drive.followTrajectorySequence(rightvision);
+        }
+
+        slideLift.slideonoff(true);
+
+        sleep(3000);
+        slideLift.slideonoff(false);
+
 
         camera.closeCameraDevice();
 
@@ -143,7 +305,6 @@ rr here
         while(telemetryAprilTag()==0&&opModeIsActive()){//delete the left argument for it to show detection, currently it exits when it sees a valid apriltag
             telemetryAprilTag();
             telemetry.update();
-            //call rr thingy
         }
 
         visionPortal.close();
