@@ -21,8 +21,8 @@ public class visiontest2 extends OpenCvPipeline {
 //    }
     private int location;
     static final Rect left = new Rect(
-            new Point(525, 200),
-            new Point(575, 250));
+            new Point(525, 250),
+            new Point(575, 300));
 
 //    static final Rect right = new Rect(
 //            new Point(600, 1),

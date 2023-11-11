@@ -68,6 +68,16 @@ public class Slides {
 
     }
 
+    public void slideonoff(boolean hmm) {
+        if (hmm) {
+            leftSlidesMotor.setPower(-0.3);
+            rightSlidesMotor.setPower((-0.3));
+        } else {
+            leftSlidesMotor.setPower(0);
+            rightSlidesMotor.setPower(0);
+        }
+    }
+
     public void slideCommands(int setLine, double fineAdjust) { //[0] is slide reset
         slide(setSlideLiftPos[setLine], fineAdjust, setLine);
     }
