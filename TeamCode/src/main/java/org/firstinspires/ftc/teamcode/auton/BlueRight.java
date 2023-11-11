@@ -125,16 +125,16 @@ public class BlueRight extends LinearOpMode {
          */
 
         TrajectorySequence centervision = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(60, 0, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(61, 0, Math.toRadians(0)))
                 .turn(Math.toRadians(180))
-                .lineToLinearHeading(new Pose2d(57, 0, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(59, 0, Math.toRadians(180)))
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
                 .waitSeconds(0.15)
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
 //                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.liftToLevel(2))
                 .waitSeconds(0.15)
-                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(1))
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.35)
                 .UNSTABLE_addTemporalMarkerOffset(-0.35, () -> intake.spin("reverse"))
                 .waitSeconds(1)
@@ -151,14 +151,17 @@ public class BlueRight extends LinearOpMode {
                 .waitSeconds(0.15)
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
                 .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(35, 104, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(37, 105, Math.toRadians(270)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.spatulaCommand("slotForward"))
-                .lineToLinearHeading(new Pose2d(35, 110, Math.toRadians(270)))
-                .UNSTABLE_addTemporalMarkerOffset(-3, () -> slideLift.slideCommands(1,0))
+                .lineToLinearHeading(new Pose2d(31, 115, Math.toRadians(270)))
+                .UNSTABLE_addTemporalMarkerOffset(-1.5, () -> slideLift.slideCommands(4,0))
                 .waitSeconds(2)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
                 .waitSeconds(0.15)
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .waitSeconds(1)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> slideLift.slideCommands(0,0))
                 .build();
 
         TrajectorySequence rightvision = drive.trajectorySequenceBuilder(new Pose2d())
@@ -185,20 +188,23 @@ public class BlueRight extends LinearOpMode {
                 .turn(Math.toRadians(100))
                 .lineToLinearHeading(new Pose2d(65, 90, Math.toRadians(270)))
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(41, 90, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(35, 90, Math.toRadians(0)))
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinWheelForward())
                 .waitSeconds(0.15)
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
                 .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(41, 104, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(37, 105, Math.toRadians(270)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.spatulaCommand("slotForward"))
-                .lineToLinearHeading(new Pose2d(41, 110, Math.toRadians(270)))
-                .UNSTABLE_addTemporalMarkerOffset(-3, () -> slideLift.slideCommands(1,0))
+                .lineToLinearHeading(new Pose2d(30, 115, Math.toRadians(270)))
+                .UNSTABLE_addTemporalMarkerOffset(-1.5, () -> slideLift.slideCommands(4,0))
                 .waitSeconds(2)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
                 .waitSeconds(0.15)
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .waitSeconds(1)
+                .waitSeconds(0.15)
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> slideLift.slideCommands(0,0))
                 .build();
 
         TrajectorySequence leftvision = drive.trajectorySequenceBuilder(new Pose2d())
@@ -222,22 +228,25 @@ public class BlueRight extends LinearOpMode {
                 .turn(Math.toRadians(0))
                 .lineToLinearHeading(new Pose2d(65, 0, Math.toRadians(0)))
                 .turn(Math.toRadians(100))
-                .lineToLinearHeading(new Pose2d(65, 90, Math.toRadians(270)))
-                .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(29, 90, Math.toRadians(0)))
+//                .lineToLinearHeading(new Pose2d(65, 90, Math.toRadians(270)))
+//                .turn(Math.toRadians(90))
+//                .lineToLinearHeading(new Pose2d(29, 90, Math.toRadians(0)))
+//                .waitSeconds(1)
+//                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinWheelForward())
+//                .waitSeconds(0.15)
+//                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+//                .turn(Math.toRadians(-90))
+//                .lineToLinearHeading(new Pose2d(29, 104, Math.toRadians(270)))
+//                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.spatulaCommand("slotForward"))
+//                .lineToLinearHeading(new Pose2d(29, 110, Math.toRadians(270)))
+//                .UNSTABLE_addTemporalMarkerOffset(-3, () -> slideLift.slideCommands(1,0))
+//                .waitSeconds(2)
+//                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
+//                .waitSeconds(0.15)
+//                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
                 .waitSeconds(1)
-                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinWheelForward())
                 .waitSeconds(0.15)
-                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
-                .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(29, 104, Math.toRadians(270)))
-                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.spatulaCommand("slotForward"))
-                .lineToLinearHeading(new Pose2d(29, 110, Math.toRadians(270)))
-                .UNSTABLE_addTemporalMarkerOffset(-3, () -> slideLift.slideCommands(1,0))
-                .waitSeconds(2)
-                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
-                .waitSeconds(0.15)
-                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> slideLift.slideCommands(0,0))
                 .build();
         intake.liftToLevel(5);
         vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
@@ -276,7 +285,9 @@ public class BlueRight extends LinearOpMode {
             drive.followTrajectorySequence(rightvision);
         }
 
-        slideLift.slideCommands(0,0);
+        spatula.slotReset();
+        sleep(1000);
+
         
         camera.closeCameraDevice();
 
