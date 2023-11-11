@@ -107,7 +107,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
             setLine = 3;
 
         }
-        slideFineAdjust += gamepad2.right_stick_y*50; // use /1000 for servo ramp testing // Fine adjust for slide position for dropping pixels. Added to set line positons.,
+        slideFineAdjust += gamepad2.right_stick_y*5*-1; // use /1000 for servo ramp testing // Fine adjust for slide position for dropping pixels. Added to set line positons.,
         slideLift.slideCommands(setLine,slideFineAdjust);
 
         //intake.liftToTest(slideFineAdjust); //uncomment to find servo positions

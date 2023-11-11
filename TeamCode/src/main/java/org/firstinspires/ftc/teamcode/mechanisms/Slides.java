@@ -57,8 +57,11 @@ public class Slides {
 
         difference = target - (avgCurrentPos - initPosition);
 
-        difference = difference * 0.04; // P on difference to generate power for motor
-
+        if (difference > 0) {
+            difference = difference * 0.1; // P on difference to generate power for motor
+        } else {
+            difference = difference * 0.005;
+        }
         leftSlidesMotor.setPower(difference);
         rightSlidesMotor.setPower(difference);
 
