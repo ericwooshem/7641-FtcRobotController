@@ -24,7 +24,7 @@ public class Slides {
     private double rightCurrentPosition;
     private double leftCurrentPosition;
 
-    private int[] setSlideLiftPos = {0, 600, 800, 1000, 420}; // Unknown values. First value is for slide reset pos.
+    private int[] setSlideLiftPos = {0, 600, 800, 1000, 200}; // Unknown values. First value is for slide reset pos.
 
     public Slides(HardwareMap HWMap){
         rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
@@ -58,7 +58,7 @@ public class Slides {
         difference = target - (avgCurrentPos - initPosition);
 
         if (difference > 0) {
-            difference = difference * 0.13; // P on difference to generate power for motor
+            difference = difference * 0.2; // P on difference to generate power for motor
         } else {
             difference = difference * 0.005;
         }
