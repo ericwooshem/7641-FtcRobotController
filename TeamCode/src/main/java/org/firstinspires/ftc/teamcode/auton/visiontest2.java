@@ -55,7 +55,7 @@ public class visiontest2 extends OpenCvPipeline {
 //            new Point(150, 300),
 //            new Point(200, 350));
 
-    static double Percent_Color_Threshhold = 0.1;
+    static double Percent_Color_Threshhold = 0.2;
 
     public visiontest2(Telemetry t) {
         telemetry = t;
@@ -75,7 +75,7 @@ public class visiontest2 extends OpenCvPipeline {
         }
         else if(detectedColor.equals("blue")){
             lowHSV = new Scalar(90, 75, 75);
-            highHSV = new Scalar(110, 255, 255);
+            highHSV = new Scalar(111, 255, 255);
             telemetry.addData("e",1);
         }
         else{ //default to red
