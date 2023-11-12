@@ -255,7 +255,7 @@ public class BlueRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(37, 106, Math.toRadians(270)))
                 .UNSTABLE_addTemporalMarkerOffset(-2, () -> slideLift.slideuhhyayonoff(400))
                 .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAutoMore())
-                .lineToLinearHeading(new Pose2d(26, 117, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(26+2, 117, Math.toRadians(270)))
                 .waitSeconds(2)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
                 .waitSeconds(0.15)
