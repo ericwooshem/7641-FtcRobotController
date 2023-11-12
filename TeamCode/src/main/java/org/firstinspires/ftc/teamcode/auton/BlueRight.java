@@ -141,9 +141,9 @@ public class BlueRight extends LinearOpMode {
 //                .UNSTABLE_addTemporalMarkerOffset(-2, () -> intake.spin("autondrop"))
 //                .waitSeconds(0.15)
 //                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
-                .lineToLinearHeading(new Pose2d(46, -12.0, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(46+4, -12.0, Math.toRadians(0)))
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(50, -12.0, Math.toRadians(90)))
+
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
                 .waitSeconds(0.15)
@@ -173,7 +173,7 @@ public class BlueRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(37, 106, Math.toRadians(270)))
                 .UNSTABLE_addTemporalMarkerOffset(-2, () -> slideLift.slideuhhyayonoff(400))
                 .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
-                .lineToLinearHeading(new Pose2d(32, 117, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(32+3, 117, Math.toRadians(270)))
 
                 .waitSeconds(2)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
@@ -212,8 +212,8 @@ public class BlueRight extends LinearOpMode {
                 .turn(Math.toRadians(-90))
                 .lineToLinearHeading(new Pose2d(37, 106, Math.toRadians(270)))
                 .UNSTABLE_addTemporalMarkerOffset(-2, () -> slideLift.slideuhhyayonoff(400))
-                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
-                .lineToLinearHeading(new Pose2d(38, 117, Math.toRadians(270)))
+                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAutoMore())
+                .lineToLinearHeading(new Pose2d(38+3, 117, Math.toRadians(270)))
 
                 .waitSeconds(2)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
@@ -226,7 +226,7 @@ public class BlueRight extends LinearOpMode {
         TrajectorySequence leftvision = drive.trajectorySequenceBuilder(new Pose2d())
                 .lineToLinearHeading(new Pose2d(36, 0, Math.toRadians(0)))
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(36, 2, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(36, 2-3, Math.toRadians(90)))
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
                 .waitSeconds(0.15)
@@ -240,7 +240,7 @@ public class BlueRight extends LinearOpMode {
                 .waitSeconds(0.15)
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
                 .waitSeconds(0.1)
-                .lineToLinearHeading(new Pose2d(36, 0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(36, -4, Math.toRadians(90)))
                 .turn(Math.toRadians(90))
                 .lineToLinearHeading(new Pose2d(65, 0, Math.toRadians(180)))
                 .turn(Math.toRadians(100))
@@ -305,7 +305,7 @@ vision.setrectangles();
         slideLift.slideresetpls(true);
         slideLift.slideonoff(true);
 
-        sleep(3000);
+        sleep(2000);
         slideLift.slideonoff(false);
 
 
