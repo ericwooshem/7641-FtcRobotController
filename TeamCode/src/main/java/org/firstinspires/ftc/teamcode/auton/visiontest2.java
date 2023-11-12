@@ -55,7 +55,7 @@ public class visiontest2 extends OpenCvPipeline {
 //            new Point(150, 300),
 //            new Point(200, 350));
 
-    static double Percent_Color_Threshhold = 0.2;
+    static double Percent_Color_Threshhold = 0.1;
 
     public visiontest2(Telemetry t) {
         telemetry = t;
@@ -69,7 +69,7 @@ public class visiontest2 extends OpenCvPipeline {
 
         telemetry.addData("Color detecting: ", detectedColor);
         if(detectedColor.equals("red")){
-            lowHSV = new Scalar(-10, 25, 25);
+            lowHSV = new Scalar(0, 25, 25);
             highHSV = new Scalar(10, 255, 255);
             telemetry.addData("e",0);
         }

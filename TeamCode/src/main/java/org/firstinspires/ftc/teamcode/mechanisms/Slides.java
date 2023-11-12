@@ -27,8 +27,13 @@ public class Slides {
     private int[] setSlideLiftPos = {0, 600, 800, 1000, 200}; // Unknown values. First value is for slide reset pos.
 
     public Slides(HardwareMap HWMap){
+
         rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = HWMap.get(DcMotor.class, "leftSlidesMotor");
+        rightSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         rightSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -39,6 +44,8 @@ public class Slides {
     }
 
     public void slide(int targetSlides, double fineAdjust, int setLine) {
+        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
         leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
 
@@ -70,12 +77,28 @@ public class Slides {
 
     public void slideonoff(boolean hmm) {
         if (hmm) {
-            leftSlidesMotor.setPower(-0.3);
-            rightSlidesMotor.setPower((-0.3));
+            leftSlidesMotor.setPower(-0.2);
+            rightSlidesMotor.setPower((-0.2));
         } else {
             leftSlidesMotor.setPower(0);
             rightSlidesMotor.setPower(0);
         }
+    }
+
+    public void slideresetpls(boolean hmm) {
+        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void slideuhhyayonoff(int hmm) {
+
+        rightSlidesMotor.setTargetPosition(hmm);
+        leftSlidesMotor.setTargetPosition(hmm);
+        rightSlidesMotor.setPower(1);
+        leftSlidesMotor.setPower(1);
+        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
     }
 
     public void slideCommands(int setLine, double fineAdjust) { //[0] is slide reset
