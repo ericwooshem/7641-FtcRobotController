@@ -58,7 +58,7 @@ public class Slides {
         difference = target - (avgCurrentPos - initPosition);
 
         if (difference > 0) {
-            difference = difference * 0.2; // P on difference to generate power for motor
+            difference = difference * 0.12; // P on difference to generate power for motor
         } else {
             difference = difference * 0.005;
         }
