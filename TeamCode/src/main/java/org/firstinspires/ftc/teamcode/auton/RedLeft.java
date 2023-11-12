@@ -217,7 +217,7 @@ public class RedLeft extends LinearOpMode {
                 .waitSeconds(2)
                 .UNSTABLE_addTemporalMarkerOffset(-2, () -> intake.spin("autondrop"))
                 .waitSeconds(0.15)
-                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
+                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("7stop"))
                 .waitSeconds(0.1)
                 .lineToLinearHeading(new Pose2d(36, 0, Math.toRadians(-90)))
                 .turn(Math.toRadians(-90))
@@ -244,7 +244,10 @@ public class RedLeft extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.slotReset())
                 .build();
         intake.liftToLevel(5);
-        vision.setDetectedColor("blue"); //red or blue, VERY IMPORTANT FOR VISION
+        vision.setDetectedColor("red"); //red or blue, VERY IMPORTANT FOR VISION
+        vision.setside("left"); //left or right, VERY IMPORTANT FOR VISION
+        vision.setrectangles();
+
 
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
