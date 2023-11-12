@@ -210,7 +210,7 @@ public class RedRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(33, -40.0, Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
                 .UNSTABLE_addTemporalMarkerOffset(-2, () -> slideLift.slideuhhyayonoff(400))
-                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
+                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto()) // Is this More? HELP MY BRAIN
                 .lineToLinearHeading(new Pose2d(39.5, -55, Math.toRadians(90)))
 
                 .waitSeconds(2)
@@ -298,11 +298,11 @@ public class RedRight extends LinearOpMode {
             drive.followTrajectorySequence(rightvision);
         }
 
-//        slideLift.slideonoff(true);
-//
-//        sleep(3000);
-//        slideLift.slideonoff(false);
-        slideLift.slideuhhyayonoff(0);
+        slideLift.slideonoff(true);
+
+        sleep(2000);
+        slideLift.slideonoff(false);
+//        slideLift.slideuhhyayonoff(0);
 
         camera.closeCameraDevice();
 

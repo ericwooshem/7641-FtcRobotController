@@ -32,8 +32,8 @@ public class Slides {
         leftSlidesMotor = HWMap.get(DcMotor.class, "leftSlidesMotor");
         rightSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         rightSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -44,8 +44,8 @@ public class Slides {
     }
 
     public void slide(int targetSlides, double fineAdjust, int setLine) {
-        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
         leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
 
@@ -86,8 +86,8 @@ public class Slides {
     }
 
     public void slideresetpls(boolean hmm) {
-        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void slideuhhyayonoff(int hmm) {

@@ -193,7 +193,7 @@ public class RedLeft extends LinearOpMode {
                 .turn(Math.toRadians(90))
                 .lineToLinearHeading(new Pose2d(37, -106, Math.toRadians(-270)))
                 .UNSTABLE_addTemporalMarkerOffset(-2, () -> slideLift.slideuhhyayonoff(400))
-                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
+                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto()) // Check if this is More
                 .lineToLinearHeading(new Pose2d(40, -120, Math.toRadians(-270)))
 
                 //.UNSTABLE_addTemporalMarkerOffset(-2, () -> slideLift.slideCommands(4,0))
@@ -287,12 +287,12 @@ public class RedLeft extends LinearOpMode {
         } else if (vision.getLocation() == 3) {
             drive.followTrajectorySequence(rightvision);
         }
-        //slideLift.slideresetpls(true);
-        //slideLift.slideonoff(true);
+        slideLift.slideresetpls(true);
+        slideLift.slideonoff(true);
 
-        //sleep(3000);
-        //slideLift.slideonoff(false);
-        slideLift.slideuhhyayonoff(0);
+        sleep(2000);
+        slideLift.slideonoff(false);
+//        slideLift.slideuhhyayonoff(0);
         camera.closeCameraDevice();
 
         telemetry.addData("e",12);
