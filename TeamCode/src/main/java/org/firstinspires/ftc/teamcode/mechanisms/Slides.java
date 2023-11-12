@@ -24,7 +24,7 @@ public class Slides {
     private double rightCurrentPosition;
     private double leftCurrentPosition;
 
-    private int[] setSlideLiftPos = {0, 600, 800, 1000, 200}; // Unknown values. First value is for slide reset pos.
+    private int[] setSlideLiftPos = {0, 500, 700, 1000, 200}; // Unknown values. First value is for slide reset pos.
 
     public Slides(HardwareMap HWMap){
 

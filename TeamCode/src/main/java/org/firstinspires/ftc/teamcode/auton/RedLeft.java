@@ -279,7 +279,7 @@ public class RedLeft extends LinearOpMode {
         waitForStart();
 
         camera.closeCameraDevice();
-
+        //auton.pray_to_the_auton_gods(true);
         if(vision.getLocation()==1){
             drive.followTrajectorySequence(leftvision);
         } else if (vision.getLocation() == 2) {

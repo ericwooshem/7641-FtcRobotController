@@ -145,9 +145,9 @@ public class RedRight extends LinearOpMode {
                 .turn(Math.toRadians(-100))
 
                  */
-                .lineToLinearHeading(new Pose2d(61-13-2-2-3-4, -24+2, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(61-13-2-2-3-4-6, -24+2, Math.toRadians(0)))
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(58-13, -12, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(58-13-6, -12, Math.toRadians(90)))
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
                 .waitSeconds(0.15)

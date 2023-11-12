@@ -224,9 +224,9 @@ public class BlueRight extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.slotReset())
                 .build();
         TrajectorySequence leftvision = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(36, 0, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(34, 0, Math.toRadians(0)))
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(36, 2-3+2, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(34, 2-3+2, Math.toRadians(90)))
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
                 .waitSeconds(0.15)
