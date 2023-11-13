@@ -36,11 +36,11 @@ public class visiontest2 extends OpenCvPipeline {
         }
         else if(leftOrRight.equals("redRight")){
             left = new Rect(
-                    new Point(550, 325),
+                    new Point(500, 325),
                     new Point(600, 375));
             center = new Rect(
-                    new Point(200, 300),
-                    new Point(250, 350));
+                    new Point(150, 300),
+                    new Point(200, 350));
         }
         else if(leftOrRight.equals("blueLeft")){
 //            left = new Rect(
@@ -56,7 +56,7 @@ public class visiontest2 extends OpenCvPipeline {
                     new Point(200, 300),
                     new Point(250, 350));
         }
-        else{
+        else{ //blue right rectangles default
 //            left = new Rect(
 //                    new Point(200, 250),
 //                    new Point(625, 300));
@@ -64,11 +64,11 @@ public class visiontest2 extends OpenCvPipeline {
 //                    new Point(150, 300),
 //                    new Point(500, 350));
             left = new Rect(
-                    new Point(400, 300), //400, 300
-                    new Point(450, 350)); //450
+                    new Point(550, 300), //400, 300
+                    new Point(600, 350)); //450
             center = new Rect(
-                    new Point(0, 325),
-                    new Point(100, 375));
+                    new Point(200, 300),
+                    new Point(250 ,350));
         }
     }
 //    static final Rect left = new Rect(

@@ -172,7 +172,7 @@ public class BlueLeft extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
                 //.turn(Math.toRadians(-90))
                 .lineToLinearHeading(new Pose2d(37, 40, Math.toRadians(-90)))
-                .UNSTABLE_addTemporalMarkerOffset(-2, () -> slideLift.slideuhhyayonoff(400))
+                .UNSTABLE_addTemporalMarkerOffset(-2.5, () -> slideLift.slideuhhyayonoff(430))
                 .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
                 .lineToLinearHeading(new Pose2d(32.5+3, 52, Math.toRadians(-90)))
 
@@ -209,7 +209,7 @@ public class BlueLeft extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
 
                 .lineToLinearHeading(new Pose2d(37, 40, Math.toRadians(-90)))
-                .UNSTABLE_addTemporalMarkerOffset(-2, () -> slideLift.slideuhhyayonoff(400))
+                .UNSTABLE_addTemporalMarkerOffset(-2.5, () -> slideLift.slideuhhyayonoff(430))
                 .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
                 .lineToLinearHeading(new Pose2d(32-4+6+6, 52, Math.toRadians(-90)))
 
@@ -245,7 +245,7 @@ public class BlueLeft extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
 
                 .lineToLinearHeading(new Pose2d(37, 40, Math.toRadians(-90)))
-                .UNSTABLE_addTemporalMarkerOffset(-2, () -> slideLift.slideuhhyayonoff(400))
+                .UNSTABLE_addTemporalMarkerOffset(-2.5, () -> slideLift.slideuhhyayonoff(430))
                 .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAutoMore())
                 .lineToLinearHeading(new Pose2d(32-4+2, 52, Math.toRadians(-90)))
 
@@ -296,10 +296,11 @@ public class BlueLeft extends LinearOpMode {
         } else if (vision.getLocation() == 3) {
             drive.followTrajectorySequence(rightvision);
         }
+        sleep(1000);
         slideLift.slideresetpls(true);
         slideLift.slideonoff(true);
 
-        sleep(2000);
+        sleep(3000);
         slideLift.slideonoff(false);
         //slideLift.slideuhhyayonoff(10);
 

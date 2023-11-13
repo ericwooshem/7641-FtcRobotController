@@ -130,6 +130,8 @@ public class MecanumArcadeDrive extends LinearOpMode {
         Spatula spatula  = new Spatula(hardwareMap);
         Drone drone = new Drone(hardwareMap);
 
+        intake.liftToLevel(2);
+
         waitForStart();
 
         if (isStopRequested()) return;
