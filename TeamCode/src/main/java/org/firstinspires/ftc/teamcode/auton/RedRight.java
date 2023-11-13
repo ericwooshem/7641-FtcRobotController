@@ -261,7 +261,7 @@ public class RedRight extends LinearOpMode {
         intake.liftToLevel(5);
 
         vision.setDetectedColor("red"); //red or blue, VERY IMPORTANT FOR VISION
-        vision.setside("left"); //left or right, VERY IMPORTANT FOR VISION
+        vision.setside("redRight"); //left or right, VERY IMPORTANT FOR VISION
         vision.setrectangles();
 
         WebcamName webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");

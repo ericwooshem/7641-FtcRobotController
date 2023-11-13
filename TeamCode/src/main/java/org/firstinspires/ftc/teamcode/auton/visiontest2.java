@@ -26,21 +26,49 @@ public class visiontest2 extends OpenCvPipeline {
     private int location;
 
     public void setrectangles(){
-        if(leftOrRight.equals("left")){
+        if(leftOrRight.equals("redLeft")){
             left = new Rect(
-                    new Point(350, 275),
-                    new Point(400, 325));
+                    new Point(400, 300), //400, 300
+                    new Point(450, 350)); //450
             center = new Rect(
-                    new Point(25, 300),
-                    new Point(75, 350));
+                    new Point(0, 325),
+                    new Point(100, 375));
+        }
+        else if(leftOrRight.equals("redRight")){
+            left = new Rect(
+                    new Point(550, 325),
+                    new Point(600, 375));
+            center = new Rect(
+                    new Point(200, 300),
+                    new Point(250, 350));
+        }
+        else if(leftOrRight.equals("blueLeft")){
+//            left = new Rect(
+//                    new Point(350, 275),
+//                    new Point(400, 325));
+//            center = new Rect(
+//                    new Point(25, 300),
+//                    new Point(75, 350));
+            left = new Rect(
+                    new Point(550, 325),
+                    new Point(600, 375));
+            center = new Rect(
+                    new Point(200, 300),
+                    new Point(250, 350));
         }
         else{
+//            left = new Rect(
+//                    new Point(200, 250),
+//                    new Point(625, 300));
+//            center = new Rect(
+//                    new Point(150, 300),
+//                    new Point(500, 350));
             left = new Rect(
-                    new Point(575, 250),
-                    new Point(625, 300));
+                    new Point(400, 300), //400, 300
+                    new Point(450, 350)); //450
             center = new Rect(
-                    new Point(150, 300),
-                    new Point(200, 350));
+                    new Point(0, 325),
+                    new Point(100, 375));
         }
     }
 //    static final Rect left = new Rect(
@@ -129,17 +157,19 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
             Scalar colorstone = new Scalar (255,0,0);
             Scalar colorSkystone = new Scalar (0,255,0);
 
+        for(int i = 0;i<13;i++){
+            for(int j = 0;j<10;j++){
+                Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
+            }
+        }
+
             Imgproc.rectangle(mat, left, location == 1? colorSkystone: colorstone);
 //            Imgproc.rectangle(mat, right, location == Location.Rightt? colorSkystone: colorstone);
             Imgproc.rectangle(mat, center, location == 2? colorSkystone: colorstone);
 
 
         telemetry.addData("v", getLocation());
-//            for(int i = 0;i<13;i++){
-//                for(int j = 0;j<10;j++){
-//                    Imgproc.rectangle(mat, new Rect(new Point(i*50, j*50), new Point((i+1)*50 , (j+1)*50)), new Scalar(255,255,255)) ;
-//                }
-//            }
+
 
             return mat;
         }

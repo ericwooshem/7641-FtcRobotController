@@ -250,7 +250,7 @@ public class RedLeft extends LinearOpMode {
                 .build();
         intake.liftToLevel(5);
         vision.setDetectedColor("red"); //red or blue, VERY IMPORTANT FOR VISION
-        vision.setside("left"); //left or right, VERY IMPORTANT FOR VISION
+        vision.setside("redLeft"); //left or right, VERY IMPORTANT FOR VISION
         vision.setrectangles();
 
 
