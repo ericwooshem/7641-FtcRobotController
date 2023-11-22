@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.drivetrainoptions;
 
+import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -29,18 +31,18 @@ public class MecanumArcadeDrive extends LinearOpMode {
         double x = gamepad1.left_stick_x;
         double rx = gamepad1.right_stick_x;
 
-        TA = drive.driveRobot( y, x, 0, rx, TA); // rice is cooking
+        //TA = drive.driveRobot( y, x, 0, rx, TA); // rice is cooking
 //          Old reliable drive code
-//        double demominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-//        double frontLeftPower = (y + x + rx) / demominator;
-//        double backLeftPower = (y - x + rx) / demominator;
-//        double frontRightPower = (y - x - rx) / demominator;
-//        double backRightPower = (y + x - rx) / demominator;
-//
-//        frontLeftMotor.setPower(frontLeftPower);
-//        backLeftMotor.setPower(backLeftPower);
-//        frontRightMotor.setPower(frontRightPower);
-//        backRightMotor.setPower(backRightPower);
+        double demominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+        double frontLeftPower = (y + x*0.9 + rx) / demominator;
+        double backLeftPower = (y - x + rx) / demominator;
+        double frontRightPower = (y - x*0.9 - rx) / demominator;
+        double backRightPower = (y + x - rx) / demominator;
+
+        frontLeftMotor.setPower(frontLeftPower);
+        backLeftMotor.setPower(backLeftPower);
+        frontRightMotor.setPower(frontRightPower);
+        backRightMotor.setPower(backRightPower);
     }
 
     /* It checks the button press from the controller.
@@ -125,7 +127,10 @@ public class MecanumArcadeDrive extends LinearOpMode {
         DcMotor backLeftMotor = hardwareMap.get(DcMotor.class,"backLeftMotor");
         DcMotor frontRightMotor = hardwareMap.get(DcMotor.class,"frontRightMotor");
         DcMotor backRightMotor = hardwareMap.get(DcMotor.class,"backRightMotor");
-
+        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 

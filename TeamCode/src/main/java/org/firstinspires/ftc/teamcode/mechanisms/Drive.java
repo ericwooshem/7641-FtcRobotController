@@ -20,20 +20,21 @@ public class Drive {
     public double TA = 0;
 
     public double deltaangle(double h, double t){
-        if (Math.abs(t-h)<180){
-            return (t-h);
-        } else if (Math.abs(t-h-360)<180){
-            return (t-h-360);
-        } else {
-            return (t-h+360);
+        double tempAng = t-h;
+        while (tempAng > 180) {
+            tempAng -= 360;
         }
+        while (tempAng < -180) {
+            tempAng += 360;
+        }
+        return tempAng;
     }
     // Function to return the difference between Current angle and Target angle
     public Drive (HardwareMap HWMap) {
-        BRM = HWMap.get(DcMotor.class, "BRM"); // Back Right Motor
-        FRM = HWMap.get(DcMotor.class, "FRM"); // Front Right Motor
-        FLM = HWMap.get(DcMotor.class, "FLM"); // Front Left Motor
-        BLM = HWMap.get(DcMotor.class, "BLM"); // Back Left Motor
+        BRM = HWMap.get(DcMotor.class, "backRightMotor"); // Back Right Motor
+        FRM = HWMap.get(DcMotor.class, "frontRightMotor"); // Front Right Motor
+        FLM = HWMap.get(DcMotor.class, "frontLeftMotor"); // Front Left Motor
+        BLM = HWMap.get(DcMotor.class, "backLeftMotor"); // Back Left Motor
         BRM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FRM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FLM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -54,6 +55,9 @@ public class Drive {
         imu.initialize(imuParameters);
     }
     public double driveRobot(double C1RY, double C1RX, double C1LY, double C1LX, double TA) {
+//        C1RY = C1RY;
+//        C1RX = C1RX;
+        C1LX = -C1LX;
         //double C1RY, C1RX, C1LY, C1LX; // Controler 1 Left/Right joystick X/Y
         double C2RX, C2RY; // Controler 2 Right joystick X/Y (Unused currently)
         double FRMP, FLMP, BRMP, BLMP; // Motor powers (P)
@@ -78,7 +82,7 @@ public class Drive {
             FLMP=0;
             BRMP=0;
             BLMP=0;
-            headless = 1;
+            headless = 0;
             speed = 1;
             // Set Variables to values
 
@@ -104,6 +108,9 @@ public class Drive {
                 if (headless == 1){
                     rotate = -CA;
                 }
+                if (headless == 0){
+                    rotate = 0;
+                }
 //                if (gamepad1.x == true){
 //                    rotate =  0;
 //                }
@@ -122,10 +129,10 @@ public class Drive {
 
                 delta = deltaangle(CA,TA); // Get difference in Current Angle and Target Angle
 
-                FRMP = rY + rX * -1-(delta) / 35;
-                FLMP = rY + rX * 1+(delta) / 35;
-                BRMP = rY + rX * 1-(delta) / 35;
-                BLMP = rY + rX * -1+(delta) / 35;
+                FRMP = rY + rX * -1+(delta) / 35;
+                FLMP = rY + rX * 1-(delta) / 35;
+                BRMP = rY + rX * 1+(delta) / 35;
+                BLMP = rY + rX * -1-(delta) / 35;
                 // Above: Get motor powers
 
                 if (Math.abs(FRMP)>0.018){
