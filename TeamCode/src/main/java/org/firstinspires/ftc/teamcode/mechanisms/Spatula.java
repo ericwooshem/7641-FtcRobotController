@@ -10,13 +10,13 @@ import java.util.Objects;
 
 public class Spatula {
 
-    private double slotForwardPos = 0.6; // Position where slot is 90 degrees to backboard (verify)
-    private double slotForwardPosAuton = 0.63; //wa 0.63
+    private double slotForwardPos = 0.4; // Position where slot is 90 degrees to backboard (verify)
+    private double slotForwardPosAuton = 0.43; //wa 0.63
     CRServo PixelSpinner;
 
-    Servo RightSpatula;
+    public Servo RightSpatula;
 
-    Servo LeftSpatula;
+    public Servo LeftSpatula;
     Telemetry telemetry;
 
 
@@ -100,6 +100,7 @@ public class Spatula {
             spinWheelStop();
         }
     }
+
 
 
 

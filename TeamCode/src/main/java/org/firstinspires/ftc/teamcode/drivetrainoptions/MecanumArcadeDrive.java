@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.Drone;
 import org.firstinspires.ftc.teamcode.mechanisms.Intake;
 import org.firstinspires.ftc.teamcode.mechanisms.Slides;
 import org.firstinspires.ftc.teamcode.mechanisms.Spatula;
+import org.firstinspires.ftc.teamcode.mechanisms.Drive;
 
 
 
@@ -16,27 +17,30 @@ import org.firstinspires.ftc.teamcode.mechanisms.Spatula;
 public class MecanumArcadeDrive extends LinearOpMode {
     private double slideFineAdjust = 0; //use 1 for servo ramp testing
     private int setLine = 0;
+    private double TA = 0;
     /*
         This function is where all of the drivetrain movement is.
         In specific the movement is like getting the joystick
         values and executing it to make it move in that direction
     */
     public void driveTrain(DcMotor frontLeftMotor, DcMotor backLeftMotor,
-                           DcMotor frontRightMotor, DcMotor backRightMotor){
+                           DcMotor frontRightMotor, DcMotor backRightMotor, Drive drive){
         double y = -gamepad1.left_stick_y;
         double x = gamepad1.left_stick_x;
         double rx = gamepad1.right_stick_x;
 
-        double demominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-        double frontLeftPower = (y + x + rx) / demominator;
-        double backLeftPower = (y - x + rx) / demominator;
-        double frontRightPower = (y - x - rx) / demominator;
-        double backRightPower = (y + x - rx) / demominator;
-
-        frontLeftMotor.setPower(frontLeftPower);
-        backLeftMotor.setPower(backLeftPower);
-        frontRightMotor.setPower(frontRightPower);
-        backRightMotor.setPower(backRightPower);
+        TA = drive.driveRobot( y, x, 0, rx, TA); // rice is cooking
+//          Old reliable drive code
+//        double demominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+//        double frontLeftPower = (y + x + rx) / demominator;
+//        double backLeftPower = (y - x + rx) / demominator;
+//        double frontRightPower = (y - x - rx) / demominator;
+//        double backRightPower = (y + x - rx) / demominator;
+//
+//        frontLeftMotor.setPower(frontLeftPower);
+//        backLeftMotor.setPower(backLeftPower);
+//        frontRightMotor.setPower(frontRightPower);
+//        backRightMotor.setPower(backRightPower);
     }
 
     /* It checks the button press from the controller.
@@ -129,6 +133,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
         Intake intake = new Intake(hardwareMap);
         Spatula spatula  = new Spatula(hardwareMap);
         Drone drone = new Drone(hardwareMap);
+        Drive drive = new Drive(hardwareMap);
 
         intake.liftToLevel(2);
 
@@ -138,8 +143,9 @@ public class MecanumArcadeDrive extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            driveTrain(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+            driveTrain(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor, drive);
             checkButtonPress(slideLift, intake, spatula, drone);
+
 
         }
 
