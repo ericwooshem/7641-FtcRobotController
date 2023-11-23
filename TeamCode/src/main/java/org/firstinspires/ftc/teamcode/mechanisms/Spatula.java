@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class Spatula {
 
-    private double slotForwardPos = 0.4; // Position where slot is 90 degrees to backboard (verify)
+    private double slotForwardPos = 0.55; // Position where slot is 90 degrees to backboard (verify)
     private double slotForwardPosAuton = 0.43; //wa 0.63
     CRServo PixelSpinner;
 
@@ -47,7 +47,7 @@ public class Spatula {
 
     public void slotForward() {
         RightSpatula.setPosition(1-slotForwardPos);
-        LeftSpatula.setPosition(slotForwardPos);
+        LeftSpatula.setPosition(slotForwardPos+0.13);
 
         //Bring the slot closer to the backdrop and orients it the right way, so the pixel can fall out
     }

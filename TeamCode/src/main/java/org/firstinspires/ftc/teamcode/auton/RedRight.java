@@ -34,6 +34,7 @@ import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.checkerframework.checker.units.qual.C;
@@ -95,7 +96,8 @@ public class RedRight extends LinearOpMode {
         Slides slideLift = new Slides(hardwareMap);
         Intake intake = new Intake(hardwareMap);
         Spatula spatula  = new Spatula(hardwareMap);
-
+        Servo PurpleClaw;
+        PurpleClaw = hardwareMap.get(Servo.class, "PurpleServo");
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 //        TrajectorySequence moveToVision = drive.trajectorySequenceBuilder(new Pose2d())
 //
@@ -145,43 +147,47 @@ public class RedRight extends LinearOpMode {
                 .turn(Math.toRadians(-100))
 
                  */
-                .lineToLinearHeading(new Pose2d(61-13-2-2-3-4-6, -24+2, Math.toRadians(0)))
-                .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(58-13-6, -12, Math.toRadians(90)))
-                .waitSeconds(1)
-                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
-                .waitSeconds(0.15)
-                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
-//                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.liftToLevel(2))
-                .waitSeconds(0.15)
-                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
-                .waitSeconds(0.5)
-                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("reverse"))
-                .waitSeconds(2)
-                .UNSTABLE_addTemporalMarkerOffset(-2, () -> intake.spin("autondrop"))
-                .waitSeconds(0.15)
-
-
-                .lineToLinearHeading(new Pose2d(58-12, -40.0, Math.toRadians(90)))
-                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
-                .turn(Math.toRadians(0))
-                .lineToLinearHeading(new Pose2d(35, -40.0, Math.toRadians(0)))
-                .waitSeconds(1)
-                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinWheelForward())
-                .waitSeconds(0.15)
-                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
-                .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(37, -40.0, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(33-3, -59.0, Math.toRadians(90)))
-                .UNSTABLE_addTemporalMarkerOffset(-2.5, () -> slideLift.slideuhhyayonoff(430))
-                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
-                .waitSeconds(2)
-                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
-                .waitSeconds(0.15)
-                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
-                .waitSeconds(1)
-                .waitSeconds(0.15)
-                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotReset())
+//                .lineToLinearHeading(new Pose2d(61-13-2-2-3-4-6, -24+2, Math.toRadians(0)))
+//                .turn(Math.toRadians(90))
+//                .lineToLinearHeading(new Pose2d(58-13-6, -12, Math.toRadians(90)))
+//                .waitSeconds(1)
+//                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
+//                .waitSeconds(0.15)
+//                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+////                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.liftToLevel(2))
+//                .waitSeconds(0.15)
+//                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
+//                .waitSeconds(0.5)
+//                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("reverse"))
+//                .waitSeconds(2)
+//                .UNSTABLE_addTemporalMarkerOffset(-2, () -> intake.spin("autondrop"))
+//                .waitSeconds(0.15)
+//
+//
+//                .lineToLinearHeading(new Pose2d(58-12, -40.0, Math.toRadians(90)))
+//                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.spin("stop"))
+//                .turn(Math.toRadians(0))
+//                .lineToLinearHeading(new Pose2d(35, -40.0, Math.toRadians(0)))
+//                .waitSeconds(1)
+//                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinWheelForward())
+//                .waitSeconds(0.15)
+//                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+//                .turn(Math.toRadians(90))
+//                .lineToLinearHeading(new Pose2d(37, -40.0, Math.toRadians(90)))
+//                .lineToLinearHeading(new Pose2d(33-3, -59.0, Math.toRadians(90)))
+//                .UNSTABLE_addTemporalMarkerOffset(-2.5, () -> slideLift.slideuhhyayonoff(430))
+//                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotForwardAuto())
+//                .waitSeconds(2)
+//                .UNSTABLE_addTemporalMarkerOffset(-1, () -> spatula.spinwheelBackwards())
+//                .waitSeconds(0.15)
+//                .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> spatula.spinWheelStop())
+//                .waitSeconds(1)
+//                .waitSeconds(0.15)
+//                .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotReset())
+                .lineToLinearHeading(new Pose2d(0, -24, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(24, -24, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(24, 0, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(0, 0, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence leftvision = drive.trajectorySequenceBuilder(new Pose2d())
@@ -259,7 +265,7 @@ public class RedRight extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(-0.01, () -> spatula.slotReset())
                 .build();
         intake.liftToLevel(5);
-
+        PurpleClaw.setPosition(0.2);
         vision.setDetectedColor("red"); //red or blue, VERY IMPORTANT FOR VISION
         vision.setside("redRight"); //left or right, VERY IMPORTANT FOR VISION
         vision.setrectangles();
@@ -291,11 +297,11 @@ public class RedRight extends LinearOpMode {
         camera.closeCameraDevice();
 
         if(vision.getLocation()==1){
-            drive.followTrajectorySequence(leftvision);
+            drive.followTrajectorySequence(rightvision);
         } else if (vision.getLocation() == 2) {
             drive.followTrajectorySequence(centervision);
         } else if (vision.getLocation() == 3) {
-            drive.followTrajectorySequence(rightvision);
+            drive.followTrajectorySequence(leftvision);
         }
         sleep(2000);
         slideLift.slideresetpls(true);

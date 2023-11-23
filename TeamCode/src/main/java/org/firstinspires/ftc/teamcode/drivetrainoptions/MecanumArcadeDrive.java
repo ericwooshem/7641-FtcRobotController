@@ -20,6 +20,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
     private double slideFineAdjust = 0; //use 1 for servo ramp testing
     private int setLine = 0;
     private double TA = 0;
+    private double drivemode = 0;
     /*
         This function is where all of the drivetrain movement is.
         In specific the movement is like getting the joystick
@@ -30,19 +31,24 @@ public class MecanumArcadeDrive extends LinearOpMode {
         double y = -gamepad1.left_stick_y;
         double x = gamepad1.left_stick_x;
         double rx = gamepad1.right_stick_x;
+        if (drivemode==1) {
+            TA = drive.driveRobot( y, x, 0, rx, TA); // rice is cooking
+        }
 
-        //TA = drive.driveRobot( y, x, 0, rx, TA); // rice is cooking
 //          Old reliable drive code
-        double demominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-        double frontLeftPower = (y + x*0.9 + rx) / demominator;
-        double backLeftPower = (y - x + rx) / demominator;
-        double frontRightPower = (y - x*0.9 - rx) / demominator;
-        double backRightPower = (y + x - rx) / demominator;
+        if (drivemode==0){
+            double demominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
+            double frontLeftPower = (y + x*0.9 + rx) / demominator;
+            double backLeftPower = (y - x + rx) / demominator;
+            double frontRightPower = (y - x*0.9 - rx) / demominator;
+            double backRightPower = (y + x - rx) / demominator;
 
-        frontLeftMotor.setPower(frontLeftPower);
-        backLeftMotor.setPower(backLeftPower);
-        frontRightMotor.setPower(frontRightPower);
-        backRightMotor.setPower(backRightPower);
+            frontLeftMotor.setPower(frontLeftPower);
+            backLeftMotor.setPower(backLeftPower);
+            frontRightMotor.setPower(frontRightPower);
+            backRightMotor.setPower(backRightPower);
+        }
+
     }
 
     /* It checks the button press from the controller.
@@ -113,6 +119,15 @@ public class MecanumArcadeDrive extends LinearOpMode {
             setLine = 3;
 
         }
+
+        if (gamepad1.a) {
+            drivemode = 0;
+        }
+        else if (gamepad1.b) {
+            intake.spin("stop");
+            drivemode = 1;
+        }
+
         slideFineAdjust += gamepad2.right_stick_y*5*-1; // use /1000 for servo ramp testing // Fine adjust for slide position for dropping pixels. Added to set line positons.,
         slideLift.slideCommands(setLine,slideFineAdjust);
 

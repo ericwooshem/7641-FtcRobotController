@@ -93,7 +93,7 @@ public class Drive {
 
 
                 // Get joystick inputs above
-                TA=TA+C1LX*1.6; // Adjust 1.6 to make turning faster or slower
+                TA=TA+C1LX*4; // Adjust 1.6 to make turning faster or slower //3 is slow? says lucius
                 CA=angles.firstAngle; // (rotation about Z)
 
         //fix below if i have a life
@@ -129,10 +129,10 @@ public class Drive {
 
                 delta = deltaangle(CA,TA); // Get difference in Current Angle and Target Angle
 
-                FRMP = rY + rX * -1+(delta) / 35;
-                FLMP = rY + rX * 1-(delta) / 35;
-                BRMP = rY + rX * 1+(delta) / 35;
-                BLMP = rY + rX * -1-(delta) / 35;
+                FRMP = rY + rX * -1+(delta) / 45;
+                FLMP = rY + rX * 1-(delta) / 45;
+                BRMP = rY + rX * 1+(delta) / 45;
+                BLMP = rY + rX * -1-(delta) / 45;
                 // Above: Get motor powers
 
                 if (Math.abs(FRMP)>0.018){
