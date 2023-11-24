@@ -99,6 +99,7 @@ public class RedRight extends LinearOpMode {
         Servo PurpleClaw;
         PurpleClaw = hardwareMap.get(Servo.class, "PurpleServo");
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+
 //        TrajectorySequence moveToVision = drive.trajectorySequenceBuilder(new Pose2d())
 //
 //                .lineToLinearHeading(new Pose2d(60, 0, Math.toRadians(0)))

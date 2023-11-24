@@ -15,7 +15,7 @@ public class visiontest2 extends OpenCvPipeline {
     private String leftOrRight;
     Mat mat = new Mat();
 
-    static Rect left;
+    static Rect right;
     static Rect center;
 //    public enum Location {
 //        Leftt,
@@ -27,7 +27,7 @@ public class visiontest2 extends OpenCvPipeline {
 
     public void setrectangles(){
         if(leftOrRight.equals("redLeft")){
-            left = new Rect(
+            right = new Rect(
                     new Point(400, 300), //400, 300
                     new Point(450, 350)); //450
             center = new Rect(
@@ -35,7 +35,7 @@ public class visiontest2 extends OpenCvPipeline {
                     new Point(100, 375));
         }
         else if(leftOrRight.equals("redRight")){
-            left = new Rect(
+            right = new Rect(
                     new Point(500, 100),
                     new Point(600, 150));
             center = new Rect(
@@ -49,7 +49,7 @@ public class visiontest2 extends OpenCvPipeline {
 //            center = new Rect(
 //                    new Point(25, 300),
 //                    new Point(75, 350));
-            left = new Rect(
+            right = new Rect(
                     new Point(550, 325),
                     new Point(600, 375));
             center = new Rect(
@@ -63,7 +63,7 @@ public class visiontest2 extends OpenCvPipeline {
 //            center = new Rect(
 //                    new Point(150, 300),
 //                    new Point(500, 350));
-            left = new Rect(
+            right = new Rect(
                     new Point(550, 300), //400, 300
                     new Point(600, 350)); //450
             center = new Rect(
@@ -115,31 +115,31 @@ public class visiontest2 extends OpenCvPipeline {
 
 
         Core.inRange(mat, lowHSV, highHSV, mat);
-        Mat leftside = mat.submat(left);
+        Mat rightside = mat.submat(right);
 //        Mat rightside = mat.submat(right);
         Mat centerside = mat.submat(center);
 
-        double leftValue = Core.sumElems(leftside).val[0] / left.area() / 255;
+        double rightValue = Core.sumElems(rightside).val[0] / right.area() / 255;
 //        double rightValue = Core.sumElems(rightside).val[0] / right.area() / 255;
         double centerValue = Core.sumElems(centerside).val[0] / center.area() / 255;
 
 
-        leftside.release();
+        rightside.release();
         centerside.release();
 //        rightside.release();
-        telemetry.addData("Left raw value", (int) Core.sumElems(leftside).val[0]);
+        telemetry.addData("RIght raw value", (int) Core.sumElems(rightside).val[0]);
 //        telemetry.addData("Right raw value", (int) Core.sumElems(rightside).val[0]);
-        telemetry.addData("Left percentage", Math.round(leftValue * 100) + "%");
+        telemetry.addData("Right percentage", Math.round(rightValue * 100) + "%");
 //        telemetry.addData("Right percentage", Math.round(rightValue * 100) + "%");
         telemetry.addData("Center percentage", Math.round(centerValue * 100) + "%");
         telemetry.addData("Center percentage", Math.round(centerValue * 100) + "%");
 
-        boolean isLeft = leftValue > Percent_Color_Threshhold;
+        boolean isRight = rightValue > Percent_Color_Threshhold;
 //        boolean stoneright = rightValue > Percent_Color_Threshhold;
         boolean isCenter = centerValue > Percent_Color_Threshhold;
 
-        if (isLeft) {
-            //left
+        if (isRight) {
+            //right
             location = 1;
         }
         else if (isCenter) {
@@ -163,7 +163,7 @@ Imgproc.cvtColor(mat, mat, Imgproc.COLOR_GRAY2RGB);
             }
         }
 
-            Imgproc.rectangle(mat, left, location == 1? colorSkystone: colorstone);
+            Imgproc.rectangle(mat, right, location == 1? colorSkystone: colorstone);
 //            Imgproc.rectangle(mat, right, location == Location.Rightt? colorSkystone: colorstone);
             Imgproc.rectangle(mat, center, location == 2? colorSkystone: colorstone);
 

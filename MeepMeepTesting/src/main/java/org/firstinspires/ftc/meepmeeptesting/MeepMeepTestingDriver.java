@@ -26,6 +26,8 @@ public class MeepMeepTestingDriver {
                 return (new BlueLeftAutonOption1(meepMeep));
             case "4":
                 return (new BlueLeftAutonOption2(meepMeep));
+            case "5":
+                return (new Testing(meepMeep));
         }
 
 
@@ -39,7 +41,7 @@ public class MeepMeepTestingDriver {
         MeepMeep meepMeep = new MeepMeep(800);
 
 
-        MeepMeepTestingTemplate m = MeepMeepTestingDriver.mapToClass(args[0], meepMeep);
+        MeepMeepTestingTemplate m = MeepMeepTestingDriver.mapToClass(args[1], meepMeep);
         m.moveOnPath();
 
 
@@ -47,7 +49,9 @@ public class MeepMeepTestingDriver {
 
         RoadRunnerBotEntity myBot = m.getRobot();
         try {
-            img = ImageIO.read(new File("/Users/rahulkalra/AndroidStudioProjects/FtcRobotController/road-runner-quickstart/MeepTEst/lib/src/main/java/org/firstinspires/ftc/lib/field-2023-official.png"));
+            String pathname = "/Users/rahulkalra/AndroidStudioProjects/FtcRobotController/road-runner-quickstart/MeepTEst/lib/src/main/java/org/firstinspires/ftc/lib/field-2023-official.png";
+            //String pathname = "/Users/Oso/Documents/GitHub/7641-FtcRobotController/MeepMeepTesting/src/main/java/org/firstinspires/ftc/meepmeeptesting/field-2023-official.png";
+            img = ImageIO.read(new File(pathname));
         } catch (IOException e) {
         }
         meepMeep.setBackground(img)

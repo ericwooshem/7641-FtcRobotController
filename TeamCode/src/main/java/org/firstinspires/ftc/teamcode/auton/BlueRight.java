@@ -123,6 +123,23 @@ public class BlueRight extends LinearOpMode {
                 .waitSeconds(3)
                 .lineToLinearHeading(new Pose2d(-84, 12, 90))
          */
+        TrajectorySequence centerPurple = drive.trajectorySequenceBuilder(new Pose2d())
+                .lineToLinearHeading(new Pose2d(-39, 0.0, Math.toRadians(180))) // Center
+                .lineToLinearHeading(new Pose2d(-48, 18, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-48, 20, Math.toRadians(-90)))
+                .build();
+        TrajectorySequence rightPurple = drive.trajectorySequenceBuilder(new Pose2d())
+                .lineToLinearHeading(new Pose2d(-33.0, 6, Math.toRadians(180))) // Right
+                .lineToLinearHeading(new Pose2d(-48, 18, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-48, 20, Math.toRadians(-90)))
+                .build();
+        TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d())
+                .lineToLinearHeading(new Pose2d(-33.0, 0.0, Math.toRadians(90))) // Left
+                .lineToLinearHeading(new Pose2d(-33.0, -9.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-33.0, 0.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-48, 18, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-48, 20, Math.toRadians(-90)))
+                .build();
 
         TrajectorySequence centervision = drive.trajectorySequenceBuilder(new Pose2d())
 //                .lineToLinearHeading(new Pose2d(61, 0, Math.toRadians(0)))
