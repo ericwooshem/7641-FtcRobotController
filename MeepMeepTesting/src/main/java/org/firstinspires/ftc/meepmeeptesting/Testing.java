@@ -12,7 +12,7 @@ public class Testing extends MeepMeepTestingTemplate{
     public void moveOnPath() {
         myDefaultBot = this.buildBot(meepMeep);
         this.myBot = myDefaultBot.followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(0, 0, Math.PI))//new Pose2d(-70, 20, 0))
+                        drive.trajectorySequenceBuilder(new Pose2d(0, 0, 0))//new Pose2d(-70, 20, 0))
 
 //                                .lineToLinearHeading(new Pose2d(-33.0, 0.0, Math.toRadians(90))) // Left
 //                                .lineToLinearHeading(new Pose2d(-33.0, -9.0, Math.toRadians(90)))
@@ -24,9 +24,13 @@ public class Testing extends MeepMeepTestingTemplate{
 //                                .lineToLinearHeading(new Pose2d(-48, 18, Math.toRadians(-90)))
 //                                .lineToLinearHeading(new Pose2d(-48, 20, Math.toRadians(-90)))
 
-                                .lineToLinearHeading(new Pose2d(-39, 0.0, Math.toRadians(180))) // Center
-                                .lineToLinearHeading(new Pose2d(-48, 18, Math.toRadians(-90)))
-                                .lineToLinearHeading(new Pose2d(-48, 20, Math.toRadians(-90)))
+//                                .lineToLinearHeading(new Pose2d(-39, 0.0, Math.toRadians(180))) // Center
+//                                .lineToLinearHeading(new Pose2d(-48, 18, Math.toRadians(-90)))
+//                                .lineToLinearHeading(new Pose2d(-48, 20, Math.toRadians(-90)))
+                                .splineTo(new Vector2d(30, 0), 0)
+                                .splineToConstantHeading(new Vector2d(40, 20),0)
+                                .forward(10)
+                                .back(10)
                                 .build()
         );
 

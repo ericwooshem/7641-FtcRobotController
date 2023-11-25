@@ -64,11 +64,11 @@ public class visiontest2 extends OpenCvPipeline {
 //                    new Point(150, 300),
 //                    new Point(500, 350));
             right = new Rect(
-                    new Point(550, 300), //400, 300
-                    new Point(600, 350)); //450
+                    new Point(600, 100), //400, 300
+                    new Point(625, 200)); //450
             center = new Rect(
-                    new Point(200, 300),
-                    new Point(250 ,350));
+                    new Point(200, 50),
+                    new Point(250 ,100));
         }
     }
 //    static final Rect left = new Rect(
