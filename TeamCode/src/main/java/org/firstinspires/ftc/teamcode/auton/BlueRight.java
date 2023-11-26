@@ -133,27 +133,27 @@ public class BlueRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-84, 12, 90))
          */
         TrajectorySequence centerPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-54.5, -12, Math.toRadians(0))) // Center
+                .lineToLinearHeading(new Pose2d(-51, -8, Math.toRadians(0))) // Center
                 .build();
         TrajectorySequence rightPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-45, 0.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-45, 3, Math.toRadians(0))) // Right
                 .build();
         TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-28.0, 0.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-26.0, 0.0, Math.toRadians(0))) // Right
                 .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(-28.0, -18, Math.toRadians(-90)))
-                .lineToLinearHeading(new Pose2d(-28.0, -4, Math.toRadians(-90)))
-                .lineToLinearHeading(new Pose2d(-38.0, -4, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-26.0, -18, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-26.0, -3, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-38.0, -3, Math.toRadians(-90)))
                 .build();
 
         TrajectorySequence leftStack = drive.trajectorySequenceBuilder(leftPurple.end())
                 .lineToLinearHeading(new Pose2d(-32.0, 0.0, Math.toRadians(0))) // Right
 
-                .lineToLinearHeading(new Pose2d(-53, -0, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-50, -0, Math.toRadians(0)))
 
 
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(-53, 21, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-50, 20, Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -161,11 +161,11 @@ public class BlueRight extends LinearOpMode {
                 //.lineToLinearHeading(new Pose2d(-52, 22, Math.toRadians(90)))
                 .build();
         TrajectorySequence rightStack = drive.trajectorySequenceBuilder(rightPurple.end())
-                .lineToLinearHeading(new Pose2d(-53, 0.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-50, 3, Math.toRadians(0))) // Right
 
 
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(-53, 21, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-50, 20, Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -173,11 +173,11 @@ public class BlueRight extends LinearOpMode {
                 //.lineToLinearHeading(new Pose2d(-52, 24, Math.toRadians(90)))
                 .build();
         TrajectorySequence centerStack = drive.trajectorySequenceBuilder(centerPurple.end())
-                .lineToLinearHeading(new Pose2d(-53, 0.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-50, 0.0, Math.toRadians(0))) // Right
 
 
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(-53, 21, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-50, 20, Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -185,26 +185,32 @@ public class BlueRight extends LinearOpMode {
                 //.lineToLinearHeading(new Pose2d(-52, 24, Math.toRadians(90)))
                 .build();
 
-        Trajectory centerYellow = drive.trajectoryBuilder(centerStack.end())
-                .splineToConstantHeading(new Vector2d(-52, -84), Math.toRadians(90))
+        TrajectorySequence centerYellow = drive.trajectorySequenceBuilder(centerStack.end())
+                .lineToLinearHeading(new Pose2d(-53, -84, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
-                    slideLift.slideuhhyayonoff(430);
+                    slideLift.slideuhhyayonoff(550);
+                    intake.spin("stop");
                 })
-                .splineToConstantHeading(new Vector2d(-35, -90),Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(-22, -84, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-22, -91, Math.toRadians(90)))
                 .build();
         TrajectorySequence rightYellow = drive.trajectorySequenceBuilder(rightStack.end())
-                .splineToConstantHeading(new Vector2d(-52, -86), Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(-53, -84, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
-                    slideLift.slideuhhyayonoff(430);
+                    slideLift.slideuhhyayonoff(550);
+                    intake.spin("stop");
                 })
-                .splineToConstantHeading(new Vector2d(-41, -90),Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(-32, -84, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-32, -91, Math.toRadians(90)))
                 .build();
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftStack.end())
-                .splineToConstantHeading(new Vector2d(-52, -84), Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(-53, -84, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
-                    slideLift.slideuhhyayonoff(430);
+                    slideLift.slideuhhyayonoff(550);
+                    intake.spin("stop");
                 })
-                .splineToConstantHeading(new Vector2d(0, -100),Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(-16.5, -84, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-16.5, -91, Math.toRadians(90)))
                 .build();
 
         intake.liftToLevel(5);
@@ -249,7 +255,7 @@ vision.setrectangles();
             PurpleClaw.setPosition(0.55);
             sleep(3000);
             drive.followTrajectorySequence(centerStack);
-            drive.followTrajectory(centerYellow);
+            drive.followTrajectorySequence(centerYellow);
         } else if (vision.getLocation() == 3) {
             drive.followTrajectorySequence(leftPurple);
             PurpleClaw.setPosition(0.55);
@@ -267,7 +273,7 @@ vision.setrectangles();
 //            drive.followTrajectorySequence(leftYellow);
 //        }
         sleep(1000);
-        spatula.spatulaCommand("slotForward");
+        spatula.slotForwardAutoMore();
         sleep(1000);
         spatula.wheelCommands("backward");
         sleep(2000);
