@@ -192,7 +192,7 @@ public class BlueRight extends LinearOpMode {
                     intake.spin("stop");
                 })
                 .lineToLinearHeading(new Pose2d(-22, -84, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-22, -91, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-22, -92, Math.toRadians(90)))
                 .build();
         TrajectorySequence rightYellow = drive.trajectorySequenceBuilder(rightStack.end())
                 .lineToLinearHeading(new Pose2d(-53, -84, Math.toRadians(90)))
@@ -201,7 +201,7 @@ public class BlueRight extends LinearOpMode {
                     intake.spin("stop");
                 })
                 .lineToLinearHeading(new Pose2d(-32, -84, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-32, -91, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-32, -92, Math.toRadians(90)))
                 .build();
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftStack.end())
                 .lineToLinearHeading(new Pose2d(-53, -84, Math.toRadians(90)))
@@ -210,7 +210,7 @@ public class BlueRight extends LinearOpMode {
                     intake.spin("stop");
                 })
                 .lineToLinearHeading(new Pose2d(-16.5, -84, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-16.5, -91, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-16.5, -92, Math.toRadians(90)))
                 .build();
 
         intake.liftToLevel(5);
