@@ -136,7 +136,7 @@ public class BlueRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-51, -8, Math.toRadians(0))) // Center
                 .build();
         TrajectorySequence rightPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-45, 3, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-45, 0, Math.toRadians(0))) // Right
                 .build();
         TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d())
                 .lineToLinearHeading(new Pose2d(-26.0, 0.0, Math.toRadians(0))) // Right
@@ -247,20 +247,26 @@ vision.setrectangles();
         if(vision.getLocation()==1){
             drive.followTrajectorySequence(rightPurple);
             PurpleClaw.setPosition(0.55);
-            sleep(3000);
+            sleep(2000);
             drive.followTrajectorySequence(rightStack);
+            sleep(500);
+            intake.spin("reverse");
             drive.followTrajectorySequence(rightYellow);
         } else if (vision.getLocation() == 2) {
             drive.followTrajectorySequence(centerPurple);
             PurpleClaw.setPosition(0.55);
-            sleep(3000);
+            sleep(2000);
             drive.followTrajectorySequence(centerStack);
+            sleep(500);
+            intake.spin("reverse");
             drive.followTrajectorySequence(centerYellow);
         } else if (vision.getLocation() == 3) {
             drive.followTrajectorySequence(leftPurple);
             PurpleClaw.setPosition(0.55);
-            sleep(3000);
+            sleep(2000);
             drive.followTrajectorySequence(leftStack);
+            sleep(500);
+            intake.spin("reverse");
             drive.followTrajectorySequence(leftYellow);
         }
 //        drive.followTrajectorySequence(whiteStack);

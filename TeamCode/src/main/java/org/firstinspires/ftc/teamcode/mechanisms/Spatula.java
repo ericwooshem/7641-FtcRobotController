@@ -59,8 +59,8 @@ public class Spatula {
     }
 
     public void slotForwardAutoMore() {
-        RightSpatula.setPosition(1-(slotForwardPos+0.08));
-        LeftSpatula.setPosition(slotForwardPos+0.08);
+        RightSpatula.setPosition(1-(slotForwardPos+0.1));
+        LeftSpatula.setPosition(slotForwardPos+0.1);
 
         //Bring the slot closer to the backdrop and orients it the right way, so the pixel can fall out
     }
