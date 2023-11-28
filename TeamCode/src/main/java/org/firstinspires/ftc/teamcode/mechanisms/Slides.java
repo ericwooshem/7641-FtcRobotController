@@ -24,10 +24,10 @@ public class Slides {
     private double rightCurrentPosition;
     private double leftCurrentPosition;
 
-    private int[] setSlideLiftPos = {0, 500, 700, 1000, 200}; // Unknown values. First value is for slide reset pos.
-
+    private int[] setSlideLiftPos = {0, 12288, 20480, 28672}; // encoder pos //{0, 500, 700, 1000, 200}; // Unknown values. First value is for slide reset pos.
+    DcMotor Intake;
     public Slides(HardwareMap HWMap){
-
+        Intake = HWMap.get(DcMotor.class, "Intake"); // this is goofy
         rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = HWMap.get(DcMotor.class, "leftSlidesMotor");
         rightSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -50,6 +50,8 @@ public class Slides {
         leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
 
         avgCurrentPos = (rightCurrentPosition + leftCurrentPosition) / 2;
+
+        avgCurrentPos = Intake.getCurrentPosition(); // bypass dw aobut it
 
         targetSlides += fineAdjust;
 
