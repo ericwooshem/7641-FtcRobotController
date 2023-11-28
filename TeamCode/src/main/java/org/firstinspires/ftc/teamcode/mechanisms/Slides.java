@@ -41,6 +41,7 @@ public class Slides {
         rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
         leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
         initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
+        initPosition = Intake.getCurrentPosition();
     }
 
     public void slide(int targetSlides, double fineAdjust, int setLine) {
@@ -67,9 +68,9 @@ public class Slides {
         difference = target - (avgCurrentPos - initPosition);
 
         if (difference > 0) {
-            difference = difference * 0.25;//0.09; // P on difference to generate power for motor
+            difference = difference * 2;//0.5;//0.09; // P on difference to generate power for motor
         } else {
-            difference = difference * 0.015;//0.005;
+            difference = difference * 2;//  0.03;//0.005;
         }
 
         leftSlidesMotor.setPower(difference);
