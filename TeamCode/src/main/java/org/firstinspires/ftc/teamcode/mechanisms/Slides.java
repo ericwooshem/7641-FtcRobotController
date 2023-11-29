@@ -47,7 +47,7 @@ public class Slides {
 //        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
 //        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
 //        initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
-        initPosition = SlidesEncoder.getCurrentPosition();
+        initPosition = - SlidesEncoder.getCurrentPosition();
     }
 
     public void slide(int targetSlides, double fineAdjust, int setLine) {
@@ -58,7 +58,7 @@ public class Slides {
 //
 //        avgCurrentPos = (rightCurrentPosition + leftCurrentPosition) / 2;
 
-        avgCurrentPos = Math.abs(SlidesEncoder.getCurrentPosition()); // bypass dw aobut it
+        avgCurrentPos = - SlidesEncoder.getCurrentPosition(); // bypass dw aobut it
 
         targetSlides += fineAdjust;
 
