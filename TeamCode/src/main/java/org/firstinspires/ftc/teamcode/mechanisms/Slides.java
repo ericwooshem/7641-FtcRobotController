@@ -19,7 +19,7 @@ public class Slides {
     private DcMotor rightSlidesMotor;
     private DcMotor leftSlidesMotor;
 
-    private int maxTarget = 1800; // Maximum value for slide motors
+    private int maxTarget = 28672; // Maximum value for slide motors
     private double target = 0; // should this be double?
 
     private double difference;
@@ -31,7 +31,7 @@ public class Slides {
     private int[] setSlideLiftPos = {0, 12288, 20480, 28672}; //{-20, 500, 700, 1000, 200}// encoder pos //{0, 12288, 20480, 28672}; // Unknown values. First value is for slide reset pos.
     DcMotor SlidesEncoder;
     public Slides(HardwareMap HWMap){
-        SlidesEncoder = HWMap.get(DcMotor.class, "backLeftMotor"); // this is goofy
+        SlidesEncoder = HWMap.get(DcMotor.class, "backRightMotor"); // this is goofy
         rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = HWMap.get(DcMotor.class, "leftSlidesMotor");
         rightSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -41,6 +41,8 @@ public class Slides {
 
         rightSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        SlidesEncoder.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 //        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
 //        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
@@ -56,7 +58,7 @@ public class Slides {
 //
 //        avgCurrentPos = (rightCurrentPosition + leftCurrentPosition) / 2;
 
-        avgCurrentPos = SlidesEncoder.getCurrentPosition(); // bypass dw aobut it
+        avgCurrentPos = Math.abs(SlidesEncoder.getCurrentPosition()); // bypass dw aobut it
 
         targetSlides += fineAdjust;
 
@@ -72,13 +74,17 @@ public class Slides {
         difference = target - (avgCurrentPos - initPosition);
 
         if (difference > 0) {
-            difference = difference * 1;//0.5;//0.09; // P on difference to generate power for motor
+            difference = difference * 1.0 /36000;//0.5;//0.09; // P on difference to generate power for motor
         } else {
-            difference = difference * 0.0045;//  0.03;//0.005;
+            difference = difference * 0.0045 /36000;//  0.03;//0.005;
         }
 
-//        leftSlidesMotor.setPower(difference);
-//        rightSlidesMotor.setPower(difference);
+
+        if(difference>0.8){ difference=0.8;}
+        else if(difference<-0.8){difference=-0.8;}
+
+        leftSlidesMotor.setPower(difference);
+        rightSlidesMotor.setPower(difference);
 
 
     }
@@ -120,6 +126,9 @@ public class Slides {
 
     public double getEncoder(){
         return (SlidesEncoder.getCurrentPosition());
+    }
+    public double getDifference(){
+        return difference;
     }
 
 }

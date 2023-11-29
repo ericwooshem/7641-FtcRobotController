@@ -49,9 +49,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
             backRightMotor.setPower(backRightPower);
         }
 
-        telemetry.addData("slide encoder", backLeftMotor.getCurrentPosition());
 
-        telemetry.update();
 
 
     }
@@ -176,6 +174,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
             checkButtonPress(slideLift, intake, spatula, drone);
 
             telemetry.addData("slide encoder", slideLift.getinit());
+            telemetry.addData("differece", slideLift.getDifference());
             telemetry.update();
 
 
