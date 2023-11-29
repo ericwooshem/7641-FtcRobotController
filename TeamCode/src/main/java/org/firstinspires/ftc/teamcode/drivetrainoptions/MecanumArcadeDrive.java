@@ -49,6 +49,10 @@ public class MecanumArcadeDrive extends LinearOpMode {
             backRightMotor.setPower(backRightPower);
         }
 
+        telemetry.addData("slide encoder", backLeftMotor.getCurrentPosition());
+
+        telemetry.update();
+
 
     }
 
@@ -132,8 +136,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
         slideFineAdjust += gamepad2.right_stick_y*5*-1; // use /1000 for servo ramp testing // Fine adjust for slide position for dropping pixels. Added to set line positons.,
         slideLift.slideCommands(setLine,slideFineAdjust);
 
-        telemetry.addData("slide encoder", slideLift.getinit());
-        telemetry.update();
+
 
 
 
@@ -161,8 +164,6 @@ public class MecanumArcadeDrive extends LinearOpMode {
         Drone drone = new Drone(hardwareMap);
         Drive drive = new Drive(hardwareMap);
 
-        slideLift.resetEncoders();
-
         intake.liftToLevel(2);
 
         waitForStart();
@@ -174,6 +175,8 @@ public class MecanumArcadeDrive extends LinearOpMode {
             driveTrain(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor, drive);
             checkButtonPress(slideLift, intake, spatula, drone);
 
+            telemetry.addData("slide encoder", slideLift.getinit());
+            telemetry.update();
 
         }
 

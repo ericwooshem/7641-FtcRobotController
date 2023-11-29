@@ -28,7 +28,7 @@ public class Slides {
     private double rightCurrentPosition;
     private double leftCurrentPosition;
 
-    private int[] setSlideLiftPos = {0, 12288, 20480, 28672}; // encoder pos //{0, 500, 700, 1000, 200}; // Unknown values. First value is for slide reset pos.
+    private int[] setSlideLiftPos = {0, 12288, 20480, 28672}; //{-20, 500, 700, 1000, 200}// encoder pos //{0, 12288, 20480, 28672}; // Unknown values. First value is for slide reset pos.
     Encoder SlidesEncoder;
     public Slides(HardwareMap HWMap){
         SlidesEncoder = new Encoder (HWMap.get(DcMotorEx.class, "backLeftMotor")); // this is goofy
@@ -51,10 +51,10 @@ public class Slides {
     public void slide(int targetSlides, double fineAdjust, int setLine) {
         rightSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
-        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
-
-        avgCurrentPos = (rightCurrentPosition + leftCurrentPosition) / 2;
+//        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
+//        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
+//
+//        avgCurrentPos = (rightCurrentPosition + leftCurrentPosition) / 2;
 
         avgCurrentPos = SlidesEncoder.getCurrentPosition(); // bypass dw aobut it
 
@@ -72,9 +72,9 @@ public class Slides {
         difference = target - (avgCurrentPos - initPosition);
 
         if (difference > 0) {
-            difference = difference * 2;//0.5;//0.09; // P on difference to generate power for motor
+            difference = difference * 1;//0.5;//0.09; // P on difference to generate power for motor
         } else {
-            difference = difference * 2;//  0.03;//0.005;
+            difference = difference * 0.0045;//  0.03;//0.005;
         }
 
 //        leftSlidesMotor.setPower(difference);
@@ -114,13 +114,10 @@ public class Slides {
     }
 
     public double getinit(){
-        //return SlidesEncoder.getCurrentPosition();
-        return 10.0;
+        return SlidesEncoder.getCurrentPosition();
     }
 
-    public void resetEncoders(){
-        SlidesEncoder
-    }
+
 }
 
 //2130 Top Slide Position !!! :D
