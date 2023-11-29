@@ -19,7 +19,7 @@ public class Slides {
     private DcMotor rightSlidesMotor;
     private DcMotor leftSlidesMotor;
 
-    private int maxTarget = 28672; // Maximum value for slide motors
+    private int maxTarget = 30000; // Maximum value for slide motors
     private double target = 0; // should this be double?
 
     private double difference;
@@ -74,14 +74,15 @@ public class Slides {
         difference = target - (avgCurrentPos - initPosition);
 
         if (difference > 0) {
-            difference = difference * 1.0 /36000;//0.5;//0.09; // P on difference to generate power for motor
+            difference = difference * 2.0 /2000;//0.5;//0.09; // P on difference to generate power for motor
         } else {
-            difference = difference * 0.0045 /36000;//  0.03;//0.005;
+            difference = difference * 0.008 /10  ;//  0.03;//0.005;
         }
 
 
-        if(difference>0.8){ difference=0.8;}
-        else if(difference<-0.8){difference=-0.8;}
+        if(difference>1){ difference=1;}
+        else if(difference<-0.5){difference=-0.5;}
+
 
         leftSlidesMotor.setPower(difference);
         rightSlidesMotor.setPower(difference);
