@@ -29,9 +29,9 @@ public class Slides {
     private double leftCurrentPosition;
 
     private int[] setSlideLiftPos = {0, 12288, 20480, 28672}; //{-20, 500, 700, 1000, 200}// encoder pos //{0, 12288, 20480, 28672}; // Unknown values. First value is for slide reset pos.
-    Encoder SlidesEncoder;
+    DcMotor SlidesEncoder;
     public Slides(HardwareMap HWMap){
-        SlidesEncoder = new Encoder (HWMap.get(DcMotorEx.class, "backLeftMotor")); // this is goofy
+        SlidesEncoder = HWMap.get(DcMotor.class, "backLeftMotor"); // this is goofy
         rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = HWMap.get(DcMotor.class, "leftSlidesMotor");
         rightSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
