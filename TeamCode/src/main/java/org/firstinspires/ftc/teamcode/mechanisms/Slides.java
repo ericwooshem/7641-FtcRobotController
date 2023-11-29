@@ -4,11 +4,15 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gam
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad2;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
+import android.transition.Slide;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.util.Encoder;
 
 
 public class Slides {
@@ -25,9 +29,9 @@ public class Slides {
     private double leftCurrentPosition;
 
     private int[] setSlideLiftPos = {0, 12288, 20480, 28672}; // encoder pos //{0, 500, 700, 1000, 200}; // Unknown values. First value is for slide reset pos.
-    DcMotor Intake;
+    Encoder SlidesEncoder;
     public Slides(HardwareMap HWMap){
-        Intake = HWMap.get(DcMotor.class, "Intake"); // this is goofy
+        SlidesEncoder = new Encoder (HWMap.get(DcMotorEx.class, "backLeftMotor")); // this is goofy
         rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = HWMap.get(DcMotor.class, "leftSlidesMotor");
         rightSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -38,10 +42,10 @@ public class Slides {
         rightSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
-        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
-        initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
-        initPosition = Intake.getCurrentPosition();
+//        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
+//        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
+//        initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
+        initPosition = SlidesEncoder.getCurrentPosition();
     }
 
     public void slide(int targetSlides, double fineAdjust, int setLine) {
@@ -52,7 +56,7 @@ public class Slides {
 
         avgCurrentPos = (rightCurrentPosition + leftCurrentPosition) / 2;
 
-        avgCurrentPos = Intake.getCurrentPosition(); // bypass dw aobut it
+        avgCurrentPos = SlidesEncoder.getCurrentPosition(); // bypass dw aobut it
 
         targetSlides += fineAdjust;
 
@@ -73,8 +77,8 @@ public class Slides {
             difference = difference * 2;//  0.03;//0.005;
         }
 
-        leftSlidesMotor.setPower(difference);
-        rightSlidesMotor.setPower(difference);
+//        leftSlidesMotor.setPower(difference);
+//        rightSlidesMotor.setPower(difference);
 
 
     }
@@ -107,6 +111,15 @@ public class Slides {
 
     public void slideCommands(int setLine, double fineAdjust) { //[0] is slide reset
         slide(setSlideLiftPos[setLine], fineAdjust, setLine);
+    }
+
+    public double getinit(){
+        //return SlidesEncoder.getCurrentPosition();
+        return 10.0;
+    }
+
+    public void resetEncoders(){
+        SlidesEncoder
     }
 }
 
