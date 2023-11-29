@@ -84,9 +84,13 @@ public class Slides {
         else if(difference<-0.5){difference=-0.5;}
 
 
-        leftSlidesMotor.setPower(difference);
-        rightSlidesMotor.setPower(difference);
+//        leftSlidesMotor.setPower(difference);
+//        rightSlidesMotor.setPower(difference);
 
+        while(difference>0){
+            leftSlidesMotor.setPower(1);
+            rightSlidesMotor.setPower(1);
+        }
 
     }
 
