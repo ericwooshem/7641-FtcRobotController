@@ -178,6 +178,9 @@ public class MecanumArcadeDrive extends LinearOpMode {
             telemetry.addData("slide encoder", slideLift.getinit());
             telemetry.update();
 
+
+
+
         }
 
     }

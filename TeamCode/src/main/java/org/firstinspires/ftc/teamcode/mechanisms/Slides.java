@@ -118,6 +118,10 @@ public class Slides {
     }
 
 
+    public double getEncoder(){
+        return (SlidesEncoder.getCurrentPosition());
+    }
+
 }
 
 //2130 Top Slide Position !!! :D
