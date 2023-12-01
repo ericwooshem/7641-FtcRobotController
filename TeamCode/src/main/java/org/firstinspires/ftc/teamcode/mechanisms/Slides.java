@@ -28,10 +28,10 @@ public class Slides {
     private double rightCurrentPosition;
     private double leftCurrentPosition;
 
-    private int[] setSlideLiftPos = {0, 12288, 20480, 28672}; //{-20, 500, 700, 1000, 200}// encoder pos //{0, 12288, 20480, 28672}; // Unknown values. First value is for slide reset pos.
-    DcMotor SlidesEncoder;
+    private int[] setSlideLiftPos = {0, 800, 1150, 1400, 300};// encoder pos //{0, 12288, 20480, 28672}; // Unknown values. First value is for slide reset pos.
+//    DcMotor SlidesEncoder;
     public Slides(HardwareMap HWMap){
-        SlidesEncoder = HWMap.get(DcMotor.class, "backRightMotor"); // this is goofy
+
         rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = HWMap.get(DcMotor.class, "leftSlidesMotor");
         rightSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -42,23 +42,20 @@ public class Slides {
         rightSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        SlidesEncoder.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
+        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
+        initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
 
-//        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
-//        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
-//        initPosition = (rightCurrentPosition + leftCurrentPosition) / 2;
-        initPosition = - SlidesEncoder.getCurrentPosition();
     }
 
     public void slide(int targetSlides, double fineAdjust, int setLine) {
-        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
-//        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
-//
-//        avgCurrentPos = (rightCurrentPosition + leftCurrentPosition) / 2;
+        rightSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
+        leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
 
-        avgCurrentPos = - SlidesEncoder.getCurrentPosition(); // bypass dw aobut it
+        avgCurrentPos = (rightCurrentPosition + leftCurrentPosition) / 2;
+
 
         targetSlides += fineAdjust;
 
@@ -74,23 +71,18 @@ public class Slides {
         difference = target - (avgCurrentPos - initPosition);
 
         if (difference > 0) {
-            difference = difference * 2.0 /2000;//0.5;//0.09; // P on difference to generate power for motor
+            difference = difference * 0.225 ;//0.5;//0.09; // P on difference to generate power for motor
         } else {
-            difference = difference * 0.008 /10  ;//  0.03;//0.005;
+            difference = difference * 0.005  ;//  0.03;//0.005;
         }
 
 
-        if(difference>1){ difference=1;}
-        else if(difference<-0.5){difference=-0.5;}
+        if(difference>0.9){ difference=0.9;}
+        else if(difference<-0.9){difference=-0.9;}
 
 
-//        leftSlidesMotor.setPower(difference);
-//        rightSlidesMotor.setPower(difference);
-
-        while(difference>0){
-            leftSlidesMotor.setPower(1);
-            rightSlidesMotor.setPower(1);
-        }
+        leftSlidesMotor.setPower(difference);
+        rightSlidesMotor.setPower(difference);
 
     }
 
@@ -124,14 +116,10 @@ public class Slides {
         slide(setSlideLiftPos[setLine], fineAdjust, setLine);
     }
 
-    public double getinit(){
-        return SlidesEncoder.getCurrentPosition();
-    }
 
-
-    public double getEncoder(){
-        return (SlidesEncoder.getCurrentPosition());
-    }
+//    public double getEncoder(){
+//        return (SlidesEncoder.getCurrentPosition());
+//    }
     public double getDifference(){
         return difference;
     }
