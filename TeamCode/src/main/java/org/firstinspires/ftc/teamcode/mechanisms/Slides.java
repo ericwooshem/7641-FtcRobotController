@@ -88,8 +88,8 @@ public class Slides {
 
     public void slideonoff(boolean hmm) {
         if (hmm) {
-            leftSlidesMotor.setPower(-0.3);
-            rightSlidesMotor.setPower((-0.3));
+            leftSlidesMotor.setPower(-0.2);
+            rightSlidesMotor.setPower((-0.2));
         } else {
             leftSlidesMotor.setPower(0);
             rightSlidesMotor.setPower(0);
@@ -101,7 +101,7 @@ public class Slides {
         leftSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
-    public void slideuhhyayonoff(int hmm) {
+    public void slideRunToPos(int hmm) {
 
         rightSlidesMotor.setTargetPosition(hmm);
         leftSlidesMotor.setTargetPosition(hmm);

@@ -106,32 +106,9 @@ public class BlueRight extends LinearOpMode {
         Servo PurpleClaw;
         PurpleClaw = hardwareMap.get(Servo.class, "PurpleServo");
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-//        TrajectorySequence moveToVision = drive.trajectorySequenceBuilder(new Pose2d())
-//
-//                .lineToLinearHeading(new Pose2d(60, 0, Math.toRadians(0)))
-////                .forward(76)
-//                .turn(Math.toRadians(180))
-////                .forward(5)
-//                .lineToLinearHeading(new Pose2d(56, 0, Math.toRadians(180)))
-//                .build();
-//
-//        TrajectorySequence visionC = drive.trajectorySequenceBuilder(new Pose2d())
-//                .lineToLinearHeading(new Pose2d(60, 0, Math.toRadians(180)))
-//                // .turn(Math.toRadians(-90))
-//                // .lineToLinearHeading(new Pose2d(72, -100, Math.toRadians(90)))
-//                .build();
 
-//                .turn(Math.toRadians(90))
-//                .forward(84)
-//                .waitSeconds(3)//vision time
-//                .strafeRight(12)
-//                .build();
-        /* .lineToLinearHeading(new Pose2d(0, 24, 0))
-                .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-84, 24, Math.toRadians(90)))
-                .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-84, 12, 90))
-         */
+
+        int liftHeight = 600;
         TrajectorySequence centerPurple = drive.trajectorySequenceBuilder(new Pose2d())
                 .lineToLinearHeading(new Pose2d(-51, -8, Math.toRadians(0))) // Center
                 .build();
@@ -139,21 +116,21 @@ public class BlueRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-45, 0, Math.toRadians(0))) // Right
                 .build();
         TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-26.0, 0.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-24.0, 0.0, Math.toRadians(0))) // Right
                 .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(-26.0, -18, Math.toRadians(-90)))
-                .lineToLinearHeading(new Pose2d(-26.0, -4, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-24.0, -18, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-24.0, -4, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-38.0, -4, Math.toRadians(-90)))
                 .build();
 
         TrajectorySequence leftStack = drive.trajectorySequenceBuilder(leftPurple.end())
                 .lineToLinearHeading(new Pose2d(-32.0, 0.0, Math.toRadians(0))) // Right
 
-                .lineToLinearHeading(new Pose2d(-50, -0, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-49, -0, Math.toRadians(0)))
 
 
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(-50, 20, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-49, 20, Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -161,11 +138,11 @@ public class BlueRight extends LinearOpMode {
                 //.lineToLinearHeading(new Pose2d(-52, 22, Math.toRadians(90)))
                 .build();
         TrajectorySequence rightStack = drive.trajectorySequenceBuilder(rightPurple.end())
-                .lineToLinearHeading(new Pose2d(-50, 3, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-49, 3, Math.toRadians(0))) // Right
 
 
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(-50, 20, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-49, 20, Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -173,11 +150,11 @@ public class BlueRight extends LinearOpMode {
                 //.lineToLinearHeading(new Pose2d(-52, 24, Math.toRadians(90)))
                 .build();
         TrajectorySequence centerStack = drive.trajectorySequenceBuilder(centerPurple.end())
-                .lineToLinearHeading(new Pose2d(-50, 0.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-49, 0.0, Math.toRadians(0))) // Right
 
 
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(-50, 20, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-49, 20, Math.toRadians(90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -186,31 +163,31 @@ public class BlueRight extends LinearOpMode {
                 .build();
 
         TrajectorySequence centerYellow = drive.trajectorySequenceBuilder(centerStack.end())
-                .lineToLinearHeading(new Pose2d(-53, -84, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-53, -74, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
-                    slideLift.slideuhhyayonoff(800);
+                    slideLift.slideRunToPos(liftHeight);
                     intake.spin("stop");
                 })
-                .lineToLinearHeading(new Pose2d(-21, -84, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-21, -92, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-21, -74, Math.toRadians(90))) // y = 84 old vals
+                .lineToLinearHeading(new Pose2d(-21, -80, Math.toRadians(90))) // y = 92
                 .build();
         TrajectorySequence rightYellow = drive.trajectorySequenceBuilder(rightStack.end())
-                .lineToLinearHeading(new Pose2d(-53, -84, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-53, -74, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
-                    slideLift.slideuhhyayonoff(800);
+                    slideLift.slideRunToPos(liftHeight);
                     intake.spin("stop");
                 })
-                .lineToLinearHeading(new Pose2d(-28, -84, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-28, -92, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-28, -74, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-28, -80, Math.toRadians(90)))
                 .build();
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftStack.end())
-                .lineToLinearHeading(new Pose2d(-53, -84, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-53, -74, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
-                    slideLift.slideuhhyayonoff(800);
+                    slideLift.slideRunToPos(liftHeight);
                     intake.spin("stop");
                 })
-                .lineToLinearHeading(new Pose2d(-16.5, -84, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-16.5, -92, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-16.5, -74, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-16.5, -80, Math.toRadians(90)))
                 .build();
 
         intake.liftToLevel(5);
