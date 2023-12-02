@@ -35,12 +35,12 @@ public class visiontest2 extends OpenCvPipeline {
                     new Point(100, 375));
         }
         else if(leftOrRight.equals("redRight")){
-            right = new Rect(
-                    new Point(500, 100),
-                    new Point(600, 150));
             center = new Rect(
-                    new Point(200, 100),
-                    new Point(250, 150));
+                    new Point(525, 100),
+                    new Point(625, 150));
+            right = new Rect(
+                    new Point(250, 100),
+                    new Point(300, 200));
         }
         else if(leftOrRight.equals("blueLeft")){
 //            left = new Rect(
