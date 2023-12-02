@@ -148,9 +148,7 @@ public class RedRight extends LinearOpMode {
         TrajectorySequence leftStack = drive.trajectorySequenceBuilder(leftYellow.end())
                 .lineToLinearHeading(new Pose2d(-50, 0.0, Math.toRadians(-90))) // Right
 
-                .lineToLinearHeading(new Pose2d(-50, -0, Math.toRadians(-90)))
-
-                .lineToLinearHeading(new Pose2d(-50, 100, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, -100, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -160,9 +158,7 @@ public class RedRight extends LinearOpMode {
         TrajectorySequence rightStack = drive.trajectorySequenceBuilder(rightYellow.end())
                 .lineToLinearHeading(new Pose2d(-50, 0.0, Math.toRadians(-90))) // Right
 
-                .lineToLinearHeading(new Pose2d(-50, -0, Math.toRadians(-90)))
-
-                .lineToLinearHeading(new Pose2d(-50, 100, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, -100, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -172,9 +168,7 @@ public class RedRight extends LinearOpMode {
         TrajectorySequence centerStack = drive.trajectorySequenceBuilder(centerYellow.end())
                 .lineToLinearHeading(new Pose2d(-50, 0.0, Math.toRadians(-90))) // Right
 
-                .lineToLinearHeading(new Pose2d(-50, -0, Math.toRadians(-90)))
-
-                .lineToLinearHeading(new Pose2d(-50, 100, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, -100, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
