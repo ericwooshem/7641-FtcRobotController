@@ -103,7 +103,7 @@ public class MecanumArcadeDrive extends LinearOpMode {
             drone.shooter("open");
         }
 
-        if (gamepad1.left_bumper) {
+        if (gamepad2.left_bumper) {
             intake.purpleClaw(true);
         } else {
             intake.purpleClaw(false);
