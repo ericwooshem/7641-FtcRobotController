@@ -28,11 +28,11 @@ public class visiontest2 extends OpenCvPipeline {
     public void setrectangles(){
         if(leftOrRight.equals("redLeft")){
             right = new Rect(
-                    new Point(400, 300), //400, 300
-                    new Point(450, 350)); //450
+                    new Point(0, 100), //400, 300
+                    new Point(50, 200)); //450
             center = new Rect(
-                    new Point(0, 325),
-                    new Point(100, 375));
+                    new Point(425, 50),
+                    new Point(475, 150));
         }
         else if(leftOrRight.equals("redRight")){
             right = new Rect(

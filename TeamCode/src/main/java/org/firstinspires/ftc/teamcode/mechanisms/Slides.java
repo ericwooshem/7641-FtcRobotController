@@ -88,8 +88,8 @@ public class Slides {
 
     public void slideonoff(boolean hmm) {
         if (hmm) {
-            leftSlidesMotor.setPower(-0.2);
-            rightSlidesMotor.setPower((-0.2));
+            leftSlidesMotor.setPower(-0.3);
+            rightSlidesMotor.setPower((-0.3));
         } else {
             leftSlidesMotor.setPower(0);
             rightSlidesMotor.setPower(0);

@@ -21,12 +21,13 @@ public class Intake {
     // {0.8001234, 0.823556, 0.85418, 0.87228696} // reserved
 
     DcMotor Intake;
-
+    Servo PurpleClaw;
     Servo Intakelift;
 
     public Intake(HardwareMap HWMap){
         Intake = HWMap.get(DcMotor.class, "Intake");
         Intakelift = HWMap.get(Servo.class, "IntakeServo");
+        PurpleClaw = HWMap.get(Servo.class, "PurpleServo");
         Intake.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
@@ -42,6 +43,15 @@ public class Intake {
         }
         else{
             Intake.setPower(0.0);
+        }
+    }
+
+    public void purpleClaw(boolean updown){
+        if (updown){
+            PurpleClaw.setPosition(0.55);
+        }
+        else {
+            PurpleClaw.setPosition(1);
         }
     }
 

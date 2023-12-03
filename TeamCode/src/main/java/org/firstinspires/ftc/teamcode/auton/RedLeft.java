@@ -103,17 +103,17 @@ public class RedLeft extends LinearOpMode {
 
         int liftHeight = 600;
         TrajectorySequence centerPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-51, 8.0, Math.toRadians(0))) // Center
+                .lineToLinearHeading(new Pose2d(-51, -8.0, Math.toRadians(0))) // Center
                 .build();
         TrajectorySequence rightPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-45, -0.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-25.0, -0.0, Math.toRadians(0))) // Right
+                .turn(Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(-25.0, 18.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-25.0, 4.0, Math.toRadians(90)))
+                //.lineToLinearHeading(new Pose2d(-25, 4.0, Math.toRadians(90)))
                 .build();
         TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-24.0, -0.0, Math.toRadians(0))) // Right
-                .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(-24.0, 18.0, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-24.0, 4.0, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-38.0, 4.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-40, -14, Math.toRadians(0))) // Right
                 .build();
 
         TrajectorySequence leftStack = drive.trajectorySequenceBuilder(leftPurple.end())
@@ -161,8 +161,8 @@ public class RedLeft extends LinearOpMode {
                     slideLift.slideRunToPos(liftHeight);
                     intake.spin("stop");
                 })
-                .lineToLinearHeading(new Pose2d(-21, 74.0, Math.toRadians(-90))) // y = 84 old vals
-                .lineToLinearHeading(new Pose2d(-21, 80.0, Math.toRadians(-90))) // y = 92
+                .lineToLinearHeading(new Pose2d(-25, 80.0, Math.toRadians(-90))) // y = 84 old vals
+                .lineToLinearHeading(new Pose2d(-25, 86, Math.toRadians(-90))) // y = 92
                 .build();
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(rightStack.end())
                 .lineToLinearHeading(new Pose2d(-53, 74.0, Math.toRadians(-90)))
@@ -222,7 +222,7 @@ public class RedLeft extends LinearOpMode {
         camera.closeCameraDevice();
 
         if(vision.getLocation()==1){
-            drive.followTrajectorySequence(rightPurple);
+            drive.followTrajectorySequence(leftPurple);
             PurpleClaw.setPosition(0.55);
             sleep(2000);
 //            drive.followTrajectorySequence(rightStack);
@@ -238,7 +238,7 @@ public class RedLeft extends LinearOpMode {
 //            intake.spin("reverse");
             drive.followTrajectorySequence(centerYellow);
         } else if (vision.getLocation() == 3) {
-            drive.followTrajectorySequence(leftPurple);
+            drive.followTrajectorySequence(rightPurple);
             PurpleClaw.setPosition(0.55);
             sleep(2000);
 //            drive.followTrajectorySequence(leftStack);
