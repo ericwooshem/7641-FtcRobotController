@@ -119,11 +119,11 @@ public class RedLeft extends LinearOpMode {
         TrajectorySequence leftStack = drive.trajectorySequenceBuilder(leftPurple.end())
                 .lineToLinearHeading(new Pose2d(-32.0, -0.0, Math.toRadians(0))) // Right
 
-                .lineToLinearHeading(new Pose2d(-49, 0.0, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-50, 0.0, Math.toRadians(0)))
 
 
                 .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(-49, -22.0, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, -22.0, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -131,11 +131,11 @@ public class RedLeft extends LinearOpMode {
                 //.lineToLinearHeading(new Pose2d(-52, -22.0, Math.toRadians(-90)))
                 .build();
         TrajectorySequence rightStack = drive.trajectorySequenceBuilder(rightPurple.end())
-                .lineToLinearHeading(new Pose2d(-49, -3.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-50, -3.0, Math.toRadians(0))) // Right
 
 
                 .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(-49, -22.0, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, -22.0, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -143,11 +143,11 @@ public class RedLeft extends LinearOpMode {
                 //.lineToLinearHeading(new Pose2d(-52, -24.0, Math.toRadians(-90)))
                 .build();
         TrajectorySequence centerStack = drive.trajectorySequenceBuilder(centerPurple.end())
-                .lineToLinearHeading(new Pose2d(-49, -0.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-50, -0.0, Math.toRadians(0))) // Right
 
 
                 .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(-49, -22.0, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, -22.0, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
@@ -251,7 +251,7 @@ public class RedLeft extends LinearOpMode {
         if(vision.getLocation()==1){
             drive.followTrajectorySequence(leftPurple);
             PurpleClaw.setPosition(0.55);
-            sleep(2000);
+            sleep(500);
             drive.followTrajectorySequence(rightStack);
             sleep(500);
             intake.spin("reverse");
@@ -259,7 +259,7 @@ public class RedLeft extends LinearOpMode {
         } else if (vision.getLocation() == 2) {
             drive.followTrajectorySequence(centerPurple);
             PurpleClaw.setPosition(0.55);
-            sleep(2000);
+            sleep(500);
             drive.followTrajectorySequence(centerStack);
             sleep(500);
             intake.spin("reverse");
@@ -267,7 +267,7 @@ public class RedLeft extends LinearOpMode {
         } else if (vision.getLocation() == 3) {
             drive.followTrajectorySequence(rightPurple);
             PurpleClaw.setPosition(0.55);
-            sleep(2000);
+            sleep(500);
             drive.followTrajectorySequence(leftStack);
             sleep(500);
             intake.spin("reverse");
@@ -282,14 +282,13 @@ public class RedLeft extends LinearOpMode {
 //        } else if (vision.getLocation() == 3) {
 //            drive.followTrajectorySequence(leftYellow);
 //        }
-        sleep(1000);
         spatula.slotForwardAutoMore();
         sleep(1000);
         spatula.wheelCommands("backward");
-        sleep(2000);
+        sleep(1000);
         spatula.spatulaCommand("slotReset");
         spatula.wheelCommands("stop");
-        sleep(2000);
+        sleep(500);
 
         slideLift.slideresetpls(true);
         slideLift.slideonoff(true);

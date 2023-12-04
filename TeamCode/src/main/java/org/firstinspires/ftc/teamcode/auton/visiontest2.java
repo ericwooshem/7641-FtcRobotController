@@ -50,11 +50,11 @@ public class visiontest2 extends OpenCvPipeline {
 //                    new Point(25, 300),
 //                    new Point(75, 350));
             right = new Rect(
-                    new Point(550, 325),
-                    new Point(600, 375));
+                    new Point(0, 100),
+                    new Point(50, 200));
             center = new Rect(
-                    new Point(200, 300),
-                    new Point(250, 350));
+                    new Point(400, 50),
+                    new Point(450, 150));
         }
         else{ //blue right rectangles default
 //            left = new Rect(
