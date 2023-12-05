@@ -210,6 +210,19 @@ public class RedLeft extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-21, 88.0, Math.toRadians(-90)))
                 .build();
 
+        TrajectorySequence centerPark = drive.trajectorySequenceBuilder(centerYellow.end())
+                .lineToLinearHeading(new Pose2d(-50, 84, Math.toRadians(90)))
+                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.spatulaCommand("slotReset"))
+                .build();
+        TrajectorySequence rightPark = drive.trajectorySequenceBuilder(rightYellow.end())
+                .lineToLinearHeading(new Pose2d(-50, 84, Math.toRadians(90)))
+                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.spatulaCommand("slotReset"))
+                .build();
+        TrajectorySequence leftPark = drive.trajectorySequenceBuilder(leftYellow.end())
+                .lineToLinearHeading(new Pose2d(-50, 84, Math.toRadians(90)))
+                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.spatulaCommand("slotReset"))
+                .build();
+
         intake.liftToLevel(5);
         PurpleClaw.setPosition(1);
 
@@ -286,10 +299,15 @@ public class RedLeft extends LinearOpMode {
         sleep(1000);
         spatula.wheelCommands("backward");
         sleep(1000);
-        spatula.spatulaCommand("slotReset");
-        spatula.wheelCommands("stop");
-        sleep(500);
 
+        if(vision.getLocation()==1){ // This is an untested white pixel cycle. Please be careful, this will likely destroy everything
+            drive.followTrajectorySequence(leftPark);
+        } else if (vision.getLocation() == 2) {
+            drive.followTrajectorySequence(centerPark);
+        } else if (vision.getLocation() == 3) {
+            drive.followTrajectorySequence(rightPark);
+        }
+        spatula.wheelCommands("stop");
         slideLift.slideresetpls(true);
         slideLift.slideonoff(true);
 
