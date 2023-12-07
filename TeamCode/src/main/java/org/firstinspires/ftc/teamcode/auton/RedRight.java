@@ -111,7 +111,7 @@ public class RedRight extends LinearOpMode {
         TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d())
                 .lineToLinearHeading(new Pose2d(-25.0, 0.0, Math.toRadians(0))) // Right
                 .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(-25.0, -18, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-25.0, -10, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-25.0, -4, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-37.0, -4, Math.toRadians(-90)))
                 .build();
@@ -122,15 +122,17 @@ public class RedRight extends LinearOpMode {
                     slideLift.slideRunToPos(liftHeight);
                     intake.spin("stop");
                 })
+                .UNSTABLE_addTemporalMarkerOffset(1.500, () -> spatula.slotForwardAutoMore())
                 .lineToLinearHeading(new Pose2d(-27.5, 30, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-27.5, 35, Math.toRadians(-90)))
                 .build();
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftPurple.end())
-                .lineToLinearHeading(new Pose2d(-50, 30, Math.toRadians(-90)))
+               // .lineToLinearHeading(new Pose2d(-50, 30, Math.toRadians(-90))) omg i goofy
                 .addDisplacementMarker(() -> {
                     slideLift.slideRunToPos(liftHeight);
                     intake.spin("stop");
                 })
+                .UNSTABLE_addTemporalMarkerOffset(1.500, () -> spatula.slotForwardAutoMore())
                 .lineToLinearHeading(new Pose2d(-32, 30, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-32, 35, Math.toRadians(-90)))
                 .build();
@@ -140,6 +142,7 @@ public class RedRight extends LinearOpMode {
                     slideLift.slideRunToPos(liftHeight);
                     intake.spin("stop");
                 })
+                .UNSTABLE_addTemporalMarkerOffset(1.500, () -> spatula.slotForwardAutoMore())
                 .lineToLinearHeading(new Pose2d(-21, 30, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-21, 35, Math.toRadians(-90)))
                 .build();
@@ -220,6 +223,7 @@ public class RedRight extends LinearOpMode {
                     slideLift.slideRunToPos(liftHeight+100);
                     intake.spin("stop");
                 })
+                .UNSTABLE_addTemporalMarkerOffset(1.500, () -> spatula.slotForwardAutoMore())
                 .lineToLinearHeading(new Pose2d(-21, 30, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-21, 34, Math.toRadians(-90)))
                 .build();
@@ -229,6 +233,7 @@ public class RedRight extends LinearOpMode {
                     slideLift.slideRunToPos(liftHeight+100);
                     intake.spin("stop");
                 })
+                .UNSTABLE_addTemporalMarkerOffset(1.500, () -> spatula.slotForwardAutoMore())
                 .lineToLinearHeading(new Pose2d(-21, 30, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-21, 35, Math.toRadians(-90)))
                 .build();
@@ -238,6 +243,7 @@ public class RedRight extends LinearOpMode {
                     slideLift.slideRunToPos(liftHeight+100);
                     intake.spin("stop");
                 })
+                .UNSTABLE_addTemporalMarkerOffset(1.500, () -> spatula.slotForwardAutoMore())
                 .lineToLinearHeading(new Pose2d(-32, 30, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-32, 34.5, Math.toRadians(-90)))
                 .build();
@@ -312,8 +318,7 @@ public class RedRight extends LinearOpMode {
             drive.followTrajectorySequence(leftYellow);
         }
 //
-        spatula.slotForwardAutoMore();
-        sleep(1000);
+
         spatula.wheelCommands("backward");
         sleep(750);
         spatula.spatulaCommand("slotReset");
@@ -323,24 +328,23 @@ public class RedRight extends LinearOpMode {
         slideLift.slideRunToPos(0);
 
         if(vision.getLocation()==1){ // This is an untested white pixel cycle. Please be careful, this will likely destroy everything
-            drive.followTrajectory(rightStackSpline);
+            drive.followTrajectorySequence(rightStack);
             sleep(500);
             intake.spin("reverse");
             drive.followTrajectorySequence(rightWhite);
         } else if (vision.getLocation() == 2) {
-            drive.followTrajectory(centerStackSpline);
+            drive.followTrajectorySequence(centerStack);
             sleep(500);
             intake.spin("reverse");
             drive.followTrajectorySequence(centerWhite);
         } else if (vision.getLocation() == 3) {
-            drive.followTrajectory(leftStackSpline);
+            drive.followTrajectorySequence(leftStack);
             sleep(500);
             intake.spin("reverse");
             drive.followTrajectorySequence(leftWhite);
         }
 
-        spatula.slotForwardAutoMore();
-        sleep(1000);
+
         spatula.wheelCommands("backward");
         sleep(1000);
 

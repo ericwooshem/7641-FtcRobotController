@@ -108,7 +108,7 @@ public class RedLeft extends LinearOpMode {
         TrajectorySequence rightPurple = drive.trajectorySequenceBuilder(new Pose2d())
                 .lineToLinearHeading(new Pose2d(-25.0, -0.0, Math.toRadians(0))) // Right
                 .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(-25.0, 18.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-25.0, 10.0, Math.toRadians(90)))
                 .lineToLinearHeading(new Pose2d(-25.0, 3.0, Math.toRadians(90)))
                 //.lineToLinearHeading(new Pose2d(-25, 4.0, Math.toRadians(90)))
                 .build();

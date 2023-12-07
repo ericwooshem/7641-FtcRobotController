@@ -118,7 +118,7 @@ public class BlueRight extends LinearOpMode {
         TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d())
                 .lineToLinearHeading(new Pose2d(-24.0, 0.0, Math.toRadians(0))) // Right
                 .turn(Math.toRadians(-90))
-                .lineToLinearHeading(new Pose2d(-24.0, -18, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-24.0, -10, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-24.0, -4, Math.toRadians(-90)))
                 .lineToLinearHeading(new Pose2d(-38.0, -4, Math.toRadians(-90)))
                 .build();
