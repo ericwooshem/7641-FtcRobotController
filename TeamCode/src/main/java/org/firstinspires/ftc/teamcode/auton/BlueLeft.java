@@ -131,8 +131,8 @@ public class BlueLeft extends LinearOpMode {
                     intake.spin("stop");
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1.500, () -> spatula.slotForwardAutoMore())
-                .lineToLinearHeading(new Pose2d(-32, -30.0, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-32, -36.5, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-30.5, -30.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-30.5, -36.5, Math.toRadians(90)))
                 .build();
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftPurple.end())
                 .lineToLinearHeading(new Pose2d(-50, -30.0, Math.toRadians(90)))
