@@ -28,8 +28,8 @@ public class visiontest2 extends OpenCvPipeline {
     public void setrectangles(){
         if(leftOrRight.equals("redLeft")){
             right = new Rect(
-                    new Point(0, 100), //400, 300
-                    new Point(50, 200)); //450
+                    new Point(50, 100), //400, 300
+                    new Point(125, 200)); //450
             center = new Rect(
                     new Point(425, 50),
                     new Point(475, 150));
@@ -98,7 +98,7 @@ public class visiontest2 extends OpenCvPipeline {
         telemetry.addData("Color detecting: ", detectedColor);
         if(detectedColor.equals("red")){
 
-            lowHSV = new Scalar(165, 10, 10);
+            lowHSV = new Scalar(150, 10, 10);
             highHSV = new Scalar(179, 140, 190);
             telemetry.addData("e",0);
         }

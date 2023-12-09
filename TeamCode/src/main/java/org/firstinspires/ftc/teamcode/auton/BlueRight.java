@@ -164,19 +164,19 @@ public class BlueRight extends LinearOpMode {
                 .build();
 
         TrajectorySequence leftNoStack = drive.trajectorySequenceBuilder(leftPurple.end())
-                .lineToLinearHeading(new Pose2d(-32.0, 0.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-32.0, 0.0, Math.toRadians(90))) // Right
 
                 .build();
         TrajectorySequence rightNoStack = drive.trajectorySequenceBuilder(rightPurple.end())
-                .lineToLinearHeading(new Pose2d(-50, 3, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-50, 3, Math.toRadians(90))) // Right
 
                 .build();
         TrajectorySequence centerNoStack = drive.trajectorySequenceBuilder(centerPurple.end())
-                .lineToLinearHeading(new Pose2d(-49.5, 0.0, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-49.5, 0.0, Math.toRadians(90))) // Right
 
                 .build();
 
-        TrajectorySequence centerYellow = drive.trajectorySequenceBuilder(centerStack.end())
+        TrajectorySequence centerYellow = drive.trajectorySequenceBuilder(centerNoStack.end())
                 .lineToLinearHeading(new Pose2d(-49, -74, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
                     slideLift.slideRunToPos(liftHeight);
@@ -185,7 +185,7 @@ public class BlueRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-21.25, -84, Math.toRadians(90))) // y = 84 old vals
                 .lineToLinearHeading(new Pose2d(-21.25, -87, Math.toRadians(90))) // y = 92
                 .build();
-        TrajectorySequence rightYellow = drive.trajectorySequenceBuilder(rightStack.end())
+        TrajectorySequence rightYellow = drive.trajectorySequenceBuilder(rightNoStack.end())
                 .lineToLinearHeading(new Pose2d(-49, -74, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
                     slideLift.slideRunToPos(liftHeight);
@@ -194,7 +194,7 @@ public class BlueRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-24.5, -84, Math.toRadians(90)))
                 .lineToLinearHeading(new Pose2d(-24.5, -87, Math.toRadians(90)))
                 .build();
-        TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftStack.end())
+        TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftNoStack.end())
                 .lineToLinearHeading(new Pose2d(-49, -74, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
                     slideLift.slideRunToPos(liftHeight);
