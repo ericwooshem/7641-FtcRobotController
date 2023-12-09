@@ -14,6 +14,7 @@ public class visiontest2 extends OpenCvPipeline {
     private String detectedColor;
     private String leftOrRight;
     Mat mat = new Mat();
+    Mat mat2 = new Mat();
 
     static Rect right;
     static Rect center;
@@ -94,18 +95,16 @@ public class visiontest2 extends OpenCvPipeline {
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
         Scalar lowHSV;
         Scalar highHSV;
-
+        Scalar lowHSV2 = null;
+        Scalar highHSV2 = null;
         telemetry.addData("Color detecting: ", detectedColor);
         if(detectedColor.equals("red")){
 
             lowHSV = new Scalar(150, 10, 10);
             highHSV = new Scalar(179, 140, 190);
+            lowHSV2 = new Scalar(0, 10, 10);
+            highHSV2 = new Scalar(15, 140, 190);
             telemetry.addData("e",0);
-        }
-        else if(detectedColor.equals("red")){
-            lowHSV = new Scalar(0, 10, 10);
-            highHSV = new Scalar(15, 140, 190);
-            telemetry.addData("e", 0);
         }
         else if(detectedColor.equals("blue")){
             lowHSV = new Scalar(90, 75, 75);
@@ -113,16 +112,24 @@ public class visiontest2 extends OpenCvPipeline {
             telemetry.addData("e",1);
         }
         else{ //default to red
-            lowHSV = new Scalar(-10, 25, 25);
-            highHSV = new Scalar(10, 255, 255);
+            lowHSV = new Scalar(150, 10, 10);
+            highHSV = new Scalar(179, 140, 190);
+            lowHSV2 = new Scalar(0, 10, 10);
+            highHSV2 = new Scalar(15, 140, 190);
             telemetry.addData("e",2);
         }
 
 
         Core.inRange(mat, lowHSV, highHSV, mat);
+        
+        if (detectedColor.equals("red")){
+            Core.inRange(mat2, lowHSV2, highHSV2, mat2);
+            Core.bitwise_or(mat, mat2, mat);
+        }
         Mat rightside = mat.submat(right);
 //        Mat rightside = mat.submat(right);
         Mat centerside = mat.submat(center);
+
 
         double rightValue = Core.sumElems(rightside).val[0] / right.area() / 255;
 //        double rightValue = Core.sumElems(rightside).val[0] / right.area() / 255;
