@@ -93,6 +93,7 @@ public class visiontest2 extends OpenCvPipeline {
     @Override
     public Mat processFrame(Mat input) {
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV);
+        Imgproc.cvtColor(input, mat2, Imgproc.COLOR_RGB2HSV);
         Scalar lowHSV;
         Scalar highHSV;
         Scalar lowHSV2 = null;
