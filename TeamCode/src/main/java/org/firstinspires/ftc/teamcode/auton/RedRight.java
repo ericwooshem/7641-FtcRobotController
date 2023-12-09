@@ -112,8 +112,8 @@ public class RedRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-25.0, 0.0, Math.toRadians(0))) // Right
                 .turn(Math.toRadians(-90))
                 .lineToLinearHeading(new Pose2d(-25.0, -10, Math.toRadians(-90)))
-                .lineToLinearHeading(new Pose2d(-25.0, -4, Math.toRadians(-90)))
-                .lineToLinearHeading(new Pose2d(-37.0, -4, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-25.0, -5, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-37.0, -5, Math.toRadians(-90)))
                 .build();
 
         TrajectorySequence centerYellow = drive.trajectorySequenceBuilder(centerPurple.end())
@@ -189,36 +189,36 @@ public class RedRight extends LinearOpMode {
         TrajectorySequence leftStack = drive.trajectorySequenceBuilder(leftYellow.end())
                 .lineToLinearHeading(new Pose2d(-50, 0.0, Math.toRadians(-90))) // Right
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("forward"))
-                .lineToLinearHeading(new Pose2d(-47, -78, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-47, -74, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
-                .waitSeconds(0.5)
+                .waitSeconds(0.25)
                 .UNSTABLE_addTemporalMarkerOffset(-5, () -> spatula.wheelCommands("forward"))
-
-                //.lineToLinearHeading(new Pose2d(-52, 22, Math.toRadians(90)))
+                .UNSTABLE_addTemporalMarkerOffset(-0.1, () -> intake.liftToLevel(6))
+                .waitSeconds(0.5)
                 .build();
         TrajectorySequence rightStack = drive.trajectorySequenceBuilder(rightYellow.end())
                 .lineToLinearHeading(new Pose2d(-50, 0.0, Math.toRadians(-90))) // Right
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("forward"))
-                .lineToLinearHeading(new Pose2d(-47, -78, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-47, -74, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
-                .waitSeconds(0.5)
+                .waitSeconds(0.25)
                 .UNSTABLE_addTemporalMarkerOffset(-5, () -> spatula.wheelCommands("forward"))
-                //.UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("forward"))
-                //.lineToLinearHeading(new Pose2d(-52, 22, Math.toRadians(90)))
+                .UNSTABLE_addTemporalMarkerOffset(-0.1, () -> intake.liftToLevel(6))
+                .waitSeconds(0.5)
                 .build();
         TrajectorySequence centerStack = drive.trajectorySequenceBuilder(centerYellow.end())
                 .lineToLinearHeading(new Pose2d(-50, 10, Math.toRadians(-90))) // Right
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("forward"))
-                .lineToLinearHeading(new Pose2d(-48, -78, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-48, -74, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
-                .waitSeconds(0.5)
+                .waitSeconds(0.25)
                 .UNSTABLE_addTemporalMarkerOffset(-5, () -> spatula.wheelCommands("forward"))
-                //.UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("forward"))
-                //.lineToLinearHeading(new Pose2d(-52, 22, Math.toRadians(90)))
+                .UNSTABLE_addTemporalMarkerOffset(-0.1, () -> intake.liftToLevel(6))
+                .waitSeconds(0.5)
                 .build();
 
         TrajectorySequence centerWhite = drive.trajectorySequenceBuilder(centerStackSpline.end())
-                .lineToLinearHeading(new Pose2d(-50, 30, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-52, 30, Math.toRadians(-90)))
                 .addDisplacementMarker(() -> {
                     slideLift.slideRunToPos(liftHeight+100);
                     intake.spin("stop");
@@ -228,7 +228,7 @@ public class RedRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-21, 34, Math.toRadians(-90)))
                 .build();
         TrajectorySequence leftWhite = drive.trajectorySequenceBuilder(leftStackSpline.end())
-                .lineToLinearHeading(new Pose2d(-50, 30, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-52, 30, Math.toRadians(-90)))
                 .addDisplacementMarker(() -> {
                     slideLift.slideRunToPos(liftHeight+100);
                     intake.spin("stop");
@@ -238,7 +238,7 @@ public class RedRight extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-21, 35, Math.toRadians(-90)))
                 .build();
         TrajectorySequence rightWhite = drive.trajectorySequenceBuilder(rightStackSpline.end())
-                .lineToLinearHeading(new Pose2d(-50, 30, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-52, 30, Math.toRadians(-90)))
                 .addDisplacementMarker(() -> {
                     slideLift.slideRunToPos(liftHeight+100);
                     intake.spin("stop");
@@ -249,15 +249,18 @@ public class RedRight extends LinearOpMode {
                 .build();
 
         TrajectorySequence centerPark = drive.trajectorySequenceBuilder(centerWhite.end())
-                .lineToLinearHeading(new Pose2d(-50, 30.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-21, 24, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, 24, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.spatulaCommand("slotReset"))
                 .build();
         TrajectorySequence rightPark = drive.trajectorySequenceBuilder(rightWhite.end())
-                .lineToLinearHeading(new Pose2d(-50, 30.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-32, 24, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, 24, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.spatulaCommand("slotReset"))
                 .build();
         TrajectorySequence leftPark = drive.trajectorySequenceBuilder(leftWhite.end())
-                .lineToLinearHeading(new Pose2d(-50, 30.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-21, 24, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, 24, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.spatulaCommand("slotReset"))
                 .build();
 

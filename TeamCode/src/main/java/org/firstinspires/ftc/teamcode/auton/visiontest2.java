@@ -36,11 +36,11 @@ public class visiontest2 extends OpenCvPipeline {
         }
         else if(leftOrRight.equals("redRight")){
             right = new Rect(
-                    new Point(575, 100),
-                    new Point(625, 200));
+                    new Point(550, 50),
+                    new Point(600, 100));
             center = new Rect(
-                    new Point(200, 50),
-                    new Point(250, 150));
+                    new Point(150, 50),
+                    new Point(200, 200));
         }
         else if(leftOrRight.equals("blueLeft")){
 //            left = new Rect(
@@ -97,8 +97,9 @@ public class visiontest2 extends OpenCvPipeline {
 
         telemetry.addData("Color detecting: ", detectedColor);
         if(detectedColor.equals("red")){
-            lowHSV = new Scalar(0, 25, 25);
-            highHSV = new Scalar(10, 255, 255);
+
+            lowHSV = new Scalar(165, 10, 10);
+            highHSV = new Scalar(179, 140, 190);
             telemetry.addData("e",0);
         }
         else if(detectedColor.equals("blue")){
@@ -111,7 +112,6 @@ public class visiontest2 extends OpenCvPipeline {
             highHSV = new Scalar(10, 255, 255);
             telemetry.addData("e",2);
         }
-
 
 
         Core.inRange(mat, lowHSV, highHSV, mat);

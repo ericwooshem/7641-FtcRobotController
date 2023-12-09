@@ -103,7 +103,8 @@ public class RedLeft extends LinearOpMode {
 
         int liftHeight = 600;
         TrajectorySequence centerPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-50, -8.0, Math.toRadians(0))) // Center
+                .lineToLinearHeading(new Pose2d(-58, -8.0, Math.toRadians(0))) // Center
+                .lineToLinearHeading(new Pose2d(-42, -12.0, Math.toRadians(0)))
                 .build();
         TrajectorySequence rightPurple = drive.trajectorySequenceBuilder(new Pose2d())
                 .lineToLinearHeading(new Pose2d(-25.0, -0.0, Math.toRadians(0))) // Right
@@ -153,6 +154,19 @@ public class RedLeft extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.wheelCommands("forward"))
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("forward"))
                 //.lineToLinearHeading(new Pose2d(-52, -24.0, Math.toRadians(-90)))
+                .build();
+
+        TrajectorySequence leftNoStack = drive.trajectorySequenceBuilder(leftPurple.end())
+                .lineToLinearHeading(new Pose2d(-53, -0.0, Math.toRadians(0))) // Right
+
+                .build();
+        TrajectorySequence rightNoStack = drive.trajectorySequenceBuilder(rightPurple.end())
+                .lineToLinearHeading(new Pose2d(-53, -3.0, Math.toRadians(0))) // Right
+
+                .build();
+        TrajectorySequence centerNoStack = drive.trajectorySequenceBuilder(centerPurple.end())
+                .lineToLinearHeading(new Pose2d(-53, -0.0, Math.toRadians(0))) // Right
+
                 .build();
         TrajectorySequence centerWhite = drive.trajectorySequenceBuilder(centerStack.end())
                 .lineToLinearHeading(new Pose2d(-53, 74.0, Math.toRadians(-90)))
@@ -211,15 +225,18 @@ public class RedLeft extends LinearOpMode {
                 .build();
 
         TrajectorySequence centerPark = drive.trajectorySequenceBuilder(centerYellow.end())
-                .lineToLinearHeading(new Pose2d(-50, 84, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-25, 84, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, 84, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.spatulaCommand("slotReset"))
                 .build();
         TrajectorySequence rightPark = drive.trajectorySequenceBuilder(rightYellow.end())
-                .lineToLinearHeading(new Pose2d(-50, 84, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-21, 84, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, 84, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.spatulaCommand("slotReset"))
                 .build();
         TrajectorySequence leftPark = drive.trajectorySequenceBuilder(leftYellow.end())
-                .lineToLinearHeading(new Pose2d(-50, 84, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-33, 84, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-50, 84, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> spatula.spatulaCommand("slotReset"))
                 .build();
 
@@ -265,7 +282,7 @@ public class RedLeft extends LinearOpMode {
             drive.followTrajectorySequence(leftPurple);
             PurpleClaw.setPosition(0.55);
             sleep(500);
-            drive.followTrajectorySequence(rightStack);
+            drive.followTrajectorySequence(rightNoStack);
             sleep(500);
             intake.spin("reverse");
             drive.followTrajectorySequence(leftYellow);
@@ -273,7 +290,7 @@ public class RedLeft extends LinearOpMode {
             drive.followTrajectorySequence(centerPurple);
             PurpleClaw.setPosition(0.55);
             sleep(500);
-            drive.followTrajectorySequence(centerStack);
+            drive.followTrajectorySequence(centerNoStack);
             sleep(500);
             intake.spin("reverse");
             drive.followTrajectorySequence(centerYellow);
@@ -281,7 +298,7 @@ public class RedLeft extends LinearOpMode {
             drive.followTrajectorySequence(rightPurple);
             PurpleClaw.setPosition(0.55);
             sleep(500);
-            drive.followTrajectorySequence(leftStack);
+            drive.followTrajectorySequence(leftNoStack);
             sleep(500);
             intake.spin("reverse");
             drive.followTrajectorySequence(rightYellow);
