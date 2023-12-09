@@ -157,9 +157,7 @@ public class RedLeft extends LinearOpMode {
                 .build();
 
         TrajectorySequence leftNoStack = drive.trajectorySequenceBuilder(leftPurple.end())
-                .lineToLinearHeading(new Pose2d(-53, -0.0, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-53, 10, Math.toRadians(-90))) // Right
-
+                .lineToLinearHeading(new Pose2d(-53, -3.0, Math.toRadians(-90)))
 
                 .build();
         TrajectorySequence rightNoStack = drive.trajectorySequenceBuilder(rightPurple.end())
