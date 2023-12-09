@@ -102,6 +102,11 @@ public class visiontest2 extends OpenCvPipeline {
             highHSV = new Scalar(179, 140, 190);
             telemetry.addData("e",0);
         }
+        else if(detectedColor.equals("red")){
+            lowHSV = new Scalar(0, 10, 10);
+            highHSV = new Scalar(15, 140, 190);
+            telemetry.addData("e", 0);
+        }
         else if(detectedColor.equals("blue")){
             lowHSV = new Scalar(90, 75, 75);
             highHSV = new Scalar(111, 255, 255);
