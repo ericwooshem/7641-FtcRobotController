@@ -212,8 +212,8 @@ public class RedLeft extends LinearOpMode {
                     slideLift.slideRunToPos(liftHeight);
                     intake.spin("stop");
                 })
-                .lineToLinearHeading(new Pose2d(-33, 80, Math.toRadians(-90)))
-                .lineToLinearHeading(new Pose2d(-33, 86.5, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-32.75, 80, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-32.75, 86.5, Math.toRadians(-90)))
                 .build();
         TrajectorySequence rightYellow = drive.trajectorySequenceBuilder(rightNoStack.end())
                 .lineToLinearHeading(new Pose2d(-53, 74.0, Math.toRadians(-90)))

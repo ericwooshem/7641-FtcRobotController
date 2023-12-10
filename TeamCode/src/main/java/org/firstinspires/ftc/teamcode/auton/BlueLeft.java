@@ -141,8 +141,8 @@ public class BlueLeft extends LinearOpMode {
                     intake.spin("stop");
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1.500, () -> spatula.slotForwardAutoMore())
-                .lineToLinearHeading(new Pose2d(-21, -30.0, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-21, -36.5, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-21.5, -30.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-21.5, -36.5, Math.toRadians(90)))
                 .build();
 
 

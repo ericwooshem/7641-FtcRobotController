@@ -103,7 +103,7 @@ public class RedRight extends LinearOpMode {
         int liftHeight = 600;
 
         TrajectorySequence centerPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-49, -7.3, Math.toRadians(0))) // Center
+                .lineToLinearHeading(new Pose2d(-46, -7.3, Math.toRadians(0))) // Center
                 .build();
         TrajectorySequence rightPurple = drive.trajectorySequenceBuilder(new Pose2d())
                 .lineToLinearHeading(new Pose2d(-40, -0.5, Math.toRadians(0))) // Right
@@ -123,8 +123,8 @@ public class RedRight extends LinearOpMode {
                     intake.spin("stop");
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1.500, () -> spatula.slotForwardAutoMore())
-                .lineToLinearHeading(new Pose2d(-28.25, 30, Math.toRadians(-90)))
-                .lineToLinearHeading(new Pose2d(-28.25, 35, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-28.5, 30, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-28.5, 35, Math.toRadians(-90)))
                 .build();
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftPurple.end())
                // .lineToLinearHeading(new Pose2d(-50, 30, Math.toRadians(-90))) omg i goofy
@@ -210,13 +210,13 @@ public class RedRight extends LinearOpMode {
         TrajectorySequence centerStack = drive.trajectorySequenceBuilder(centerYellow.end())
                 .lineToLinearHeading(new Pose2d(-50, 10, Math.toRadians(-90))) // Right
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> intake.spin("forward"))
-                .lineToLinearHeading(new Pose2d(-48, -75, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-47, -75, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.15, () -> intake.liftToLevel(5))
                 .waitSeconds(0.25)
                 .UNSTABLE_addTemporalMarkerOffset(-5, () -> spatula.wheelCommands("forward"))
-                .lineToLinearHeading(new Pose2d(-47, -72, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-46, -72, Math.toRadians(-90)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.1, () -> intake.liftToLevel(6))
-                .lineToLinearHeading(new Pose2d(-47, -75, Math.toRadians(-90)))
+                .lineToLinearHeading(new Pose2d(-46, -75, Math.toRadians(-90)))
                 .waitSeconds(0.5)
                 .build();
 
