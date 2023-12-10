@@ -101,10 +101,10 @@ public class Slides {
         leftSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
-    public void slideRunToPos(int hmm) {
-
-        rightSlidesMotor.setTargetPosition(hmm);
-        leftSlidesMotor.setTargetPosition(hmm);
+    public void slideRunToPos(double hmm) {
+        int hmm2 = (int) Math.rint(hmm);
+        rightSlidesMotor.setTargetPosition(hmm2);
+        leftSlidesMotor.setTargetPosition(hmm2);
         rightSlidesMotor.setPower(1);
         leftSlidesMotor.setPower(1);
         rightSlidesMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -113,7 +113,8 @@ public class Slides {
     }
 
     public void slideCommands(int setLine, double fineAdjust) { //[0] is slide reset
-        slide(setSlideLiftPos[setLine], fineAdjust, setLine);
+        //slide(setSlideLiftPos[setLine], fineAdjust, setLine);
+        slideRunToPos((setSlideLiftPos[setLine]+fineAdjust));
     }
 
 

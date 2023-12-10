@@ -102,7 +102,7 @@ public class BlueLeft extends LinearOpMode {
         int liftHeight = 600;
 
         TrajectorySequence centerPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-49, -5, Math.toRadians(0))) // Center
+                .lineToLinearHeading(new Pose2d(-45, -5, Math.toRadians(0))) // Center
                 .build();
         TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d())
                 .lineToLinearHeading(new Pose2d(-39, -15, Math.toRadians(0))) // Right
