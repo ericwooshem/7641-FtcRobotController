@@ -48,7 +48,7 @@ public class Intake {
 
     public void purpleClaw(boolean updown){
         if (updown){
-            PurpleClaw.setPosition(0.55);
+            PurpleClaw.setPosition(0.4);
         }
         else {
             PurpleClaw.setPosition(1);

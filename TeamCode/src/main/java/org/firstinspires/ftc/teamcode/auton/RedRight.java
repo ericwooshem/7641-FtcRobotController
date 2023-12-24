@@ -100,7 +100,7 @@ public class RedRight extends LinearOpMode {
         PurpleClaw = hardwareMap.get(Servo.class, "PurpleServo");
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        int liftHeight = 600;
+        int liftHeight = 400;
 
         TrajectorySequence centerPurple = drive.trajectorySequenceBuilder(new Pose2d())
                 .lineToLinearHeading(new Pose2d(-46, -7.3, Math.toRadians(0))) // Center
@@ -300,28 +300,31 @@ public class RedRight extends LinearOpMode {
 
         if(vision.getLocation()==1){
             drive.followTrajectorySequence(rightPurple);
-            PurpleClaw.setPosition(0.55);
+            intake.purpleClaw(true);
             sleep(500);
 //            drive.followTrajectorySequence(rightStack);
 //            sleep(500);
 //            intake.spin("reverse");
             drive.followTrajectorySequence(rightYellow);
+            intake.purpleClaw(false);
         } else if (vision.getLocation() == 2) {
             drive.followTrajectorySequence(centerPurple);
-            PurpleClaw.setPosition(0.55);
+            intake.purpleClaw(true);
             sleep(500);
 //            drive.followTrajectorySequence(centerStack);
 //            sleep(500);
 //            intake.spin("reverse");
             drive.followTrajectorySequence(centerYellow);
+            intake.purpleClaw(false);
         } else if (vision.getLocation() == 3) {
             drive.followTrajectorySequence(leftPurple);
-            PurpleClaw.setPosition(0.55);
+            intake.purpleClaw(true);
             sleep(500);
 //            drive.followTrajectorySequence(leftStack);
 //            sleep(500);
 //            intake.spin("reverse");
             drive.followTrajectorySequence(leftYellow);
+            intake.purpleClaw(false);
         }
 //
 

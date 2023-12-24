@@ -99,23 +99,23 @@ public class BlueLeft extends LinearOpMode {
         Servo PurpleClaw;
         PurpleClaw = hardwareMap.get(Servo.class, "PurpleServo");
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-        int liftHeight = 600;
+        int liftHeight = 400;
 
         TrajectorySequence centerPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-45, -5, Math.toRadians(0))) // Center
+                .lineToLinearHeading(new Pose2d(-30, -11, Math.toRadians(90))) // Center
                 .build();
         TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-39, -15, Math.toRadians(0))) // Right
+                .lineToLinearHeading(new Pose2d(-19, -20, Math.toRadians(90))) // Right
                 .build();
         TrajectorySequence rightPurple = drive.trajectorySequenceBuilder(new Pose2d())
-                .lineToLinearHeading(new Pose2d(-24.0, -0.0, Math.toRadians(0))) // Right
-                .turn(Math.toRadians(90))
-                .lineToLinearHeading(new Pose2d(-24.0, 8, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(-24.0, 4.0, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-19.0, 1, Math.toRadians(90))) // Right
+                //.turn(Math.toRadians(90))
+//                .lineToLinearHeading(new Pose2d(-24.0, 7, Math.toRadians(90)))
+//                .lineToLinearHeading(new Pose2d(-24.0, 3.0, Math.toRadians(90)))
                 .build();
 
         TrajectorySequence centerYellow = drive.trajectorySequenceBuilder(centerPurple.end())
-                .lineToLinearHeading(new Pose2d(-50, -30.0, Math.toRadians(90)))
+                //.lineToLinearHeading(new Pose2d(-50, -30.0, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
                     slideLift.slideRunToPos(liftHeight);
                     intake.spin("stop");
@@ -135,7 +135,7 @@ public class BlueLeft extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-30.5, -36.5, Math.toRadians(90)))
                 .build();
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftPurple.end())
-                .lineToLinearHeading(new Pose2d(-50, -30.0, Math.toRadians(90)))
+                //.lineToLinearHeading(new Pose2d(-50, -30.0, Math.toRadians(90)))
                 .addDisplacementMarker(() -> {
                     slideLift.slideRunToPos(liftHeight);
                     intake.spin("stop");
@@ -297,28 +297,31 @@ public class BlueLeft extends LinearOpMode {
 
         if(vision.getLocation()==1){
             drive.followTrajectorySequence(leftPurple);
-            PurpleClaw.setPosition(0.55);
+            intake.purpleClaw(true);
             sleep(500);
 //            drive.followTrajectorySequence(rightStack);
 //            sleep(500);
 //            intake.spin("reverse");
             drive.followTrajectorySequence(leftYellow);
+            intake.purpleClaw(false);
         } else if (vision.getLocation() == 2) {
             drive.followTrajectorySequence(centerPurple);
-            PurpleClaw.setPosition(0.55);
+            intake.purpleClaw(true);
             sleep(500);
 //            drive.followTrajectorySequence(centerStack);
 //            sleep(500);
 //            intake.spin("reverse");
             drive.followTrajectorySequence(centerYellow);
+            intake.purpleClaw(false);
         } else if (vision.getLocation() == 3) {
             drive.followTrajectorySequence(rightPurple);
-            PurpleClaw.setPosition(0.55);
+            intake.purpleClaw(true);
             sleep(500);
 //            drive.followTrajectorySequence(leftStack);
 //            sleep(500);
 //            intake.spin("reverse");
             drive.followTrajectorySequence(rightYellow);
+            intake.purpleClaw(false);
         }
 //
 

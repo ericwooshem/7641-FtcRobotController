@@ -29,23 +29,20 @@ public class Slides {
     private double rightCurrentPosition;
     private double leftCurrentPosition;
 
-    private int[] setSlideLiftPos = {0, 800, 1150, 1400, 300};// encoder pos //{0, 12288, 20480, 28672}; // Unknown values. First value is for slide reset pos.
+    private int[] setSlideLiftPos = {0, 600, 850, 1150, 300};// encoder pos //{0, 12288, 20480, 28672}; // Unknown values. First value is for slide reset pos.
 //    DcMotor SlidesEncoder;
     public Slides(HardwareMap HWMap){
 
         rightSlidesMotor = HWMap.get(DcMotor.class, "rightSlidesMotor");
         leftSlidesMotor = HWMap.get(DcMotor.class, "leftSlidesMotor");
-        extraSlidesMotor = HWMap.get(DcMotor.class, "PerpendicularOdom");
         rightSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         leftSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        extraSlidesMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        extraSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         rightSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-       extraSlidesMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
         leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
@@ -56,7 +53,6 @@ public class Slides {
     public void slide(int targetSlides, double fineAdjust, int setLine) {
         rightSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        extraSlidesMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightCurrentPosition = rightSlidesMotor.getCurrentPosition();
         leftCurrentPosition =  leftSlidesMotor.getCurrentPosition();
 
@@ -89,7 +85,7 @@ public class Slides {
 
         leftSlidesMotor.setPower(difference);
         rightSlidesMotor.setPower(difference);
-        extraSlidesMotor.setPower(difference);
+
 
     }
 
@@ -97,31 +93,25 @@ public class Slides {
         if (hmm) {
             leftSlidesMotor.setPower(-0.3);
             rightSlidesMotor.setPower((-0.3));
-            extraSlidesMotor.setPower(-0.3);
         } else {
             leftSlidesMotor.setPower(0);
             rightSlidesMotor.setPower(0);
-            extraSlidesMotor.setPower(0);
         }
     }
 
     public void slideresetpls(boolean hmm) {
         rightSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        extraSlidesMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     public void slideRunToPos(double hmm) {
         int hmm2 = (int) Math.rint(hmm);
-        rightSlidesMotor.setTargetPosition(hmm2);
-        leftSlidesMotor.setTargetPosition(hmm2);
-        extraSlidesMotor.setTargetPosition(hmm2 * 17/22);
+        rightSlidesMotor.setTargetPosition(hmm2*21/17);
+        leftSlidesMotor.setTargetPosition(hmm2*19/17);
         rightSlidesMotor.setPower(1);
         leftSlidesMotor.setPower(1);
-        extraSlidesMotor.setPower(1);
         rightSlidesMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftSlidesMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        extraSlidesMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
     }
 
